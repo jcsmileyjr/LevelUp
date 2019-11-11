@@ -1,17 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-
-import Goal from './screens/GoalScreen.js';
+import GoalScreen from './screens/GoalScreen.js';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Goal />
-    </View>
+    <AppContainer />
   );
 }
+
+const AppNavigator = createStackNavigator({
+  Goal: GoalScreen
+});
+
+const AppContainer = createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
