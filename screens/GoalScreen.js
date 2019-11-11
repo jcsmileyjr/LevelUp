@@ -1,12 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-const Goal = () => {
+import { AppLoading } from 'expo';
+import { Container, Text } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
+
+export default class Goal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+
+  render() {
+
     return (
-        <View>
-            <Text>Goals</Text>
-        </View>
-        );
+      <Container>
+          <Text>Native Base Works</Text>
+      </Container>
+    );
+  }
 }
-
-export default Goal;
