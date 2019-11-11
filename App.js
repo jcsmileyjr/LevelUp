@@ -11,9 +11,12 @@ export default function App() {
   );
 }
 
-const AppNavigator = createStackNavigator({
-  Goal: GoalScreen
-});
+const navigationOptions = {
+  headerMode: 'none'
+}
+
+const AppNavigator = createStackNavigator({Goal: GoalScreen},navigationOptions);
+
 
 const AppContainer = createAppContainer(AppNavigator);
 
