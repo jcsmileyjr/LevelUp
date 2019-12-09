@@ -18,10 +18,10 @@ export default class Goal extends React.Component {
 
     return (
       <Container>
-          <Header style={{marginTop:10, backgroundColor:'#9C08AB', color:'white'}}>
-              <Left><Text style={{color:'white'}}>Goals</Text></Left>
-              <Body><Text style={{color:'white'}}>Git Push You</Text></Body>
-              <Right>
+          <Header style={styles.headerStyles}>
+              <Left style={styles.headerContent}><Text style={styles.headerText}>Goals</Text></Left>
+              <Body style={styles.headerContent, styles.headerSection}><Text style={styles.headerText}>Git Push You</Text></Body>
+              <Right style={styles.headerContent}>
                 <Button transparent>
                     <Icon name='menu' />
                 </Button>
@@ -42,3 +42,27 @@ export default class Goal extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  headerStyles:{
+    marginTop:10, 
+    backgroundColor:'#9C08AB', 
+    color:'white', 
+    display:'flex', 
+    alignItems:"center", 
+    justifyContent:"center"
+  },
+  headerContent:{
+    flex:1,
+  },
+  headerText:{
+    color:"white",
+    fontWeight:"bold",
+    fontSize:20,
+    textAlign:"center",
+  },
+  headerSection:{
+    alignItems:"center",
+    justifyContent:"center",
+  }
+});
