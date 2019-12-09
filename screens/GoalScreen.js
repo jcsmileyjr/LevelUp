@@ -30,9 +30,9 @@ export default class Goal extends React.Component {
           <View>
           <Card transparent>
             <CardItem>
-              <Body>
-                <Text style={{color:'#9C08AB'}}>1</Text>
-                <Text style={{color:'#9C08AB'}}>Learn React.js (Web development)</Text>
+              <Body style={styles.goalStyle}>
+                <Text style={[styles.goalText, styles.goalIndex]}>1</Text>
+                <Text style={[styles.goalText, styles.goalBody]}>Learn React.js (Web development)</Text>
               </Body>
             </CardItem>
           </Card>
@@ -64,5 +64,19 @@ const styles = StyleSheet.create({
   headerSection:{
     alignItems:"center",
     justifyContent:"center",
+  },
+  goalStyle:{
+    display:"flex",
+    flexDirection:"row",
+  },
+  goalText:{
+    color:'#9C08AB',        
+  },
+  goalIndex:{
+    fontSize:50,
+    marginRight:20,
+  },
+  goalBody:{
+    fontSize:30,
   }
 });
