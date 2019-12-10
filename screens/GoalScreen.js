@@ -5,19 +5,14 @@ import { AppLoading } from 'expo';
 import { Container, Text, Header, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
+//1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isReady: false,
-    };
-  }
-
-
+  
   render() {
 
     return (
       <Container>
+        {/*Displays the App's Title, current section, and menu button */}
           <Header style={styles.headerStyles}>
               <Left style={styles.headerContent}><Text style={styles.headerText}>Goals</Text></Left>
               <Body style={styles.headerContent, styles.headerSection}><Text style={styles.headerText}>Git Push You</Text></Body>
@@ -28,6 +23,7 @@ export default class Goal extends React.Component {
               </Right>
           </Header>
           <View>
+            {/**Display a goal's index and statement */}
           <Card transparent>
             <CardItem>
               <Body style={styles.goalStyle}>
@@ -45,38 +41,37 @@ export default class Goal extends React.Component {
 
 const styles = StyleSheet.create({
   headerStyles:{
-    marginTop:10, 
-    backgroundColor:'#9C08AB', 
-    color:'white', 
-    display:'flex', 
+    marginTop:10, //add space above the header
+    backgroundColor:'#9C08AB', //signature purple background
+    color:'white', //white text
+    display:'flex', //center the elements
     alignItems:"center", 
     justifyContent:"center"
   },
   headerContent:{
-    flex:1,
+    flex:1, //equal space among 3 elements
   },
   headerText:{
-    color:"white",
-    fontWeight:"bold",
+    color:"white",  //white text
+    fontWeight:"bold",  //Bigger text
     fontSize:20,
-    textAlign:"center",
   },
   headerSection:{
-    alignItems:"center",
+    alignItems:"center",  //help center the text
     justifyContent:"center",
   },
   goalStyle:{
-    display:"flex",
+    display:"flex", //Ensure the goal id and statement is in a row
     flexDirection:"row",
   },
   goalText:{
-    color:'#9C08AB',        
+    color:'#9C08AB',  //signature purple color        
   },
   goalIndex:{
-    fontSize:50,
-    marginRight:20,
+    fontSize:50,  //The goal' index size cover the entire row
+    marginRight:20, //space between the index and statement
   },
   goalBody:{
-    fontSize:30,
+    fontSize:30,  //text size
   }
 });
