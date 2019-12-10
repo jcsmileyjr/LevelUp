@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import GoalScreen from './screens/GoalScreen.js';
 
 export default function App() {
+
   return (
     <AppContainer />
   );

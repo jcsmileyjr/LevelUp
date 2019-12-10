@@ -2,13 +2,24 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppLoading } from 'expo';
-import { Container, Text, Header, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
+import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
-  
+  state = { isReady: false };
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
+    });
+    this.setState({isReady:true});
+  }
+
   render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
 
     return (
       <Container>
@@ -22,17 +33,18 @@ export default class Goal extends React.Component {
                 </Button>
               </Right>
           </Header>
-          <View>
+          <Content>
             {/**Display a goal's index and statement */}
-          <Card transparent>
-            <CardItem>
-              <Body style={styles.goalStyle}>
-                <Text style={[styles.goalText, styles.goalIndex]}>1</Text>
-                <Text style={[styles.goalText, styles.goalBody]}>Learn React.js (Web development)</Text>
-              </Body>
-            </CardItem>
-          </Card>
-          </View>
+            <Card transparent>
+              <CardItem>
+                <Body style={styles.goalStyle}>
+                  <Text style={[styles.goalText, styles.goalIndex]}>1</Text>
+                  <Text style={[styles.goalText, styles.goalBody]}>Learn React.js (Web development)</Text>
+                </Body>
+              </CardItem>
+            </Card>
+            <Button><Text>ADD GOAL</Text></Button>
+          </Content>
           
       </Container>
     );
@@ -41,7 +53,8 @@ export default class Goal extends React.Component {
 
 const styles = StyleSheet.create({
   headerStyles:{
-    marginTop:10, //add space above the header
+    marginTop:30, //add space above the header
+    marginBottom:30, //add space below the header
     backgroundColor:'#9C08AB', //signature purple background
     color:'white', //white text
     display:'flex', //center the elements
@@ -73,5 +86,9 @@ const styles = StyleSheet.create({
   },
   goalBody:{
     fontSize:30,  //text size
+  },
+  buttonStyle:{
+    backgroundColor:'#9C08AB',
+    color: "white",
   }
 });
