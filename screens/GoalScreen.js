@@ -36,15 +36,21 @@ export default class Goal extends React.Component {
               </Right>
           </Header>
           <Content>
-            {/**Display a goal's index and statement */}
-            <Card transparent>
-              <CardItem>
-                <Body style={styles.goalStyle}>
-                  <Text style={[styles.goalText, styles.goalIndex]}>1</Text>
-                  <Text style={[styles.goalText, styles.goalBody]}>Learn React.js (Web development)</Text>
-                </Body>
-              </CardItem>
-            </Card>
+            {/**Display a user's goal */}
+            {
+              goals.map((goal, id) => {
+                return(
+                  <Card key={id} transparent>
+                    <CardItem>
+                      <Body style={styles.goalStyle}>
+                        <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
+                        <Text style={[styles.goalText, styles.goalBody]}>{goal}</Text>
+                      </Body>
+                    </CardItem>
+                  </Card>                  
+                );
+              })
+            } 
             <View style={styles.buttonContainer}>
               <TouchableNativeFeedback >
                 <View style={styles.buttonStyle}>
@@ -60,7 +66,6 @@ export default class Goal extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   headerStyles:{
@@ -115,8 +120,9 @@ const styles = StyleSheet.create({
     justifyContent:"center",
   },
   buttonText:{
-    color: "white", //text color
+    color: "#ffffff", //text color
     textAlign:"center", //center the text
+    fontWeight:"bold",  //Bigger text
   }, 
   footerStyle:{
     backgroundColor:'#9C08AB',//signature purple color
