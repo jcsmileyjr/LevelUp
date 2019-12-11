@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
   headerText:{
     color:"white",  //white text
     fontWeight:"bold",  //Bigger text
-    fontSize:20,
+    fontSize:20, //size of text
+    textDecorationLine:"underline", //Text is underlined
   },
   headerSection:{
     alignItems:"center",  //help center the text
