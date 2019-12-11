@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 
 import { AppLoading } from 'expo';
-import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
+import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
@@ -25,8 +25,8 @@ export default class Goal extends React.Component {
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
           <Header style={styles.headerStyles}>
-              <Left style={styles.headerContent}><Text style={styles.headerText}>Goals</Text></Left>
-              <Body style={styles.headerContent, styles.headerSection}><Text style={styles.headerText}>Git Push You</Text></Body>
+              <Left style={styles.headerContent}><Text style={styles.headerText}>Git Push You</Text></Left>
+              <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Goals</Text></Body>
               <Right style={styles.headerContent}>
                 <Button transparent>
                     <Icon name='menu' />
@@ -50,7 +50,10 @@ export default class Goal extends React.Component {
                 </View>
               </TouchableNativeFeedback>
             </View>            
-          </Content>          
+          </Content>
+          <Footer style={styles.footerStyle}>
+            <View><Text style={styles.buttonText}>* Click on a Goal to view Milestones for it.</Text></View>
+          </Footer>          
       </Container>
     );
   }
@@ -58,7 +61,7 @@ export default class Goal extends React.Component {
 
 const styles = StyleSheet.create({
   headerStyles:{
-    marginTop:30, //add space above the header
+    marginTop:25, //add space above the header
     marginBottom:30, //add space below the header
     backgroundColor:'#9C08AB', //signature purple background
     color:'white', //white text
@@ -71,13 +74,16 @@ const styles = StyleSheet.create({
   },
   headerText:{
     color:"white",  //white text
-    fontWeight:"bold",  //Bigger text
+    //fontWeight:"bold",  //Bigger text
     fontSize:20, //size of text
-    textDecorationLine:"underline", //Text is underlined
   },
   headerSection:{
     alignItems:"center",  //help center the text
-    justifyContent:"center",
+    justifyContent:"center",    
+  },
+  headerTitle:{
+    textDecorationLine:"underline", //Text is underlined
+    fontWeight:"bold",  //Bigger text
   },
   goalStyle:{
     display:"flex", //Ensure the goal id and statement is in a row
@@ -107,6 +113,12 @@ const styles = StyleSheet.create({
   },
   buttonText:{
     color: "white", //text color
-    textAlign:"center",
+    textAlign:"center", //center the text
+  }, 
+  footerStyle:{
+    backgroundColor:'#9C08AB',//signature purple color
+    display:'flex', //center the elements
+    alignItems:"center", 
+    justifyContent:"center", 
   }
 });
