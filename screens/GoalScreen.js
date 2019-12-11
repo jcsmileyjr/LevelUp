@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 
 import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
@@ -43,9 +43,14 @@ export default class Goal extends React.Component {
                 </Body>
               </CardItem>
             </Card>
-            <Button><Text>ADD GOAL</Text></Button>
-          </Content>
-          
+            <View style={styles.buttonContainer}>
+              <TouchableNativeFeedback >
+                <View style={styles.buttonStyle}>
+                  <Text style={styles.buttonText}>NEW GOAL</Text>
+                </View>
+              </TouchableNativeFeedback>
+            </View>            
+          </Content>          
       </Container>
     );
   }
@@ -88,7 +93,19 @@ const styles = StyleSheet.create({
     fontSize:30,  //text size
   },
   buttonStyle:{
-    backgroundColor:'#9C08AB',
-    color: "white",
+    backgroundColor:'#9C08AB',//signature purple color 
+    padding: 10, //space between button title and border
+    margin: 10, //whitespace between button and other elements
+    width: 250, //width of button
+    borderColor:'#9C08AB',//signature purple color
+    borderRadius: 15, //round the corners    
+  },
+  buttonContainer:{
+    alignItems:"center",  //help center the button
+    justifyContent:"center",
+  },
+  buttonText:{
+    color: "white", //text color
+    textAlign:"center",
   }
 });
