@@ -5,15 +5,17 @@ import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
+const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
+
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
-  state = { isReady: false };
+  state = { isReady: false, goals:[] };
   async componentWillMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
     });
-    this.setState({isReady:true});
+    this.setState({isReady:true, goal:goals});
   }
 
   render() {
@@ -58,6 +60,7 @@ export default class Goal extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   headerStyles:{
