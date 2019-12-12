@@ -6,6 +6,7 @@ import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Ic
 import { Ionicons } from '@expo/vector-icons';
 
 import Nav from '../components/header.js';
+import Foot from '../components/Foot.js';
 
 const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
 
@@ -53,9 +54,7 @@ export default class Goal extends React.Component {
               </TouchableNativeFeedback>
             </View>            
           </Content>
-          <Footer style={styles.footerStyle}>
-            <View><Text style={styles.buttonText}>* Click on a Goal to view Milestones for it.</Text></View>
-          </Footer>          
+          <Foot />         
       </Container>
     );
   }
