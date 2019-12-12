@@ -1,4 +1,4 @@
-[
+const goals = [
 	{
 		"goal":"Learn React.js (Web Development)",
 		"milestones":[
@@ -38,4 +38,6 @@
 			"Kids Ballon Game Mobile App"
 		]
 	}
-]
+];
+
+export default goals;

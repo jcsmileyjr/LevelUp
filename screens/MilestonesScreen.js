@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import { Container, Text, Content, Button, CheckBox, Icon,Input, Item, Card, CardItem, Body } from 'native-base';
 import { AppLoading } from 'expo';
 
-import {userGoals} from '../data/goals.json';
+import {userGoals} from '../data/goals.js';
 import Head from '../components/header.js';
 import Foot from '../components/Foot.js';
 
