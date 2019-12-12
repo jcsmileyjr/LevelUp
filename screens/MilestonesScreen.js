@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import { Container, Text, Content, Button, CheckBox, Icon, Title, Card, CardItem, Body } from 'native-base';
+import { Container, Text, Content, Button, CheckBox, Icon,Input, Item, Card, CardItem, Body } from 'native-base';
 import { AppLoading } from 'expo';
 
 import {userGoals} from '../data/goals.json';
@@ -37,6 +37,10 @@ export default class Milestones extends React.Component {
                             </CardItem>
                         </Card>
                     </View>
+                    <Item>
+                        <Icon active name='add' />
+                        <Input placeholder='Type New Milestone'/>
+                    </Item>
                 </Content>
                 <Foot />
             </Container>
