@@ -4,6 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import GoalScreen from './screens/GoalScreen.js';
+import MilestoneScreen from './screens/MilestonesScreen.js';
 
 export default function App() {
 
@@ -16,7 +17,7 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Goal: GoalScreen},navigationOptions);
+const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen},navigationOptions);
 
 
 const AppContainer = createAppContainer(AppNavigator);

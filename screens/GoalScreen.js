@@ -5,6 +5,10 @@ import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
+import Nav from '../components/header.js';
+import Foot from '../components/Foot.js';
+import {userGoals} from '../data/goals.js';
+
 const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
@@ -26,22 +30,14 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-          <Header style={styles.headerStyles}>
-              <Left style={styles.headerContent}><Text style={styles.headerText}>Git Push You</Text></Left>
-              <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Goals</Text></Body>
-              <Right style={styles.headerContent}>
-                <Button transparent>
-                    <Icon name='menu' />
-                </Button>
-              </Right>
-          </Header>
+          <Nav />
           <Content>
             {/**Display a user's goal */}
             {
               goals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
-                    <CardItem>
+                    <CardItem  button onPress={() => this.props.navigation.navigate("Milestone")}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
                         <Text style={[styles.goalText, styles.goalBody]}>{goal}</Text>
@@ -59,40 +55,13 @@ export default class Goal extends React.Component {
               </TouchableNativeFeedback>
             </View>            
           </Content>
-          <Footer style={styles.footerStyle}>
-            <View><Text style={styles.buttonText}>* Click on a Goal to view Milestones for it.</Text></View>
-          </Footer>          
+          <Foot />         
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  headerStyles:{
-    marginTop:25, //add space above the header
-    marginBottom:30, //add space below the header
-    backgroundColor:'#9C08AB', //signature purple background
-    color:'white', //white text
-    display:'flex', //center the elements
-    alignItems:"center", 
-    justifyContent:"center"
-  },
-  headerContent:{
-    flex:1, //equal space among 3 elements
-  },
-  headerText:{
-    color:"white",  //white text
-    //fontWeight:"bold",  //Bigger text
-    fontSize:20, //size of text
-  },
-  headerSection:{
-    alignItems:"center",  //help center the text
-    justifyContent:"center",    
-  },
-  headerTitle:{
-    textDecorationLine:"underline", //Text is underlined
-    fontWeight:"bold",  //Bigger text
-  },
   goalStyle:{
     display:"flex", //Ensure the goal id and statement is in a row
     flexDirection:"row",
@@ -123,11 +92,5 @@ const styles = StyleSheet.create({
     color: "#ffffff", //text color
     textAlign:"center", //center the text
     fontWeight:"bold",  //Bigger text
-  }, 
-  footerStyle:{
-    backgroundColor:'#9C08AB',//signature purple color
-    display:'flex', //center the elements
-    alignItems:"center", 
-    justifyContent:"center", 
   }
 });
