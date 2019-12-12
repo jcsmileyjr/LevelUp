@@ -61,31 +61,6 @@ export default class Goal extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  headerStyles:{
-    marginTop:25, //add space above the header
-    marginBottom:30, //add space below the header
-    backgroundColor:'#9C08AB', //signature purple background
-    color:'white', //white text
-    display:'flex', //center the elements
-    alignItems:"center", 
-    justifyContent:"center"
-  },
-  headerContent:{
-    flex:1, //equal space among 3 elements
-  },
-  headerText:{
-    color:"white",  //white text
-    //fontWeight:"bold",  //Bigger text
-    fontSize:20, //size of text
-  },
-  headerSection:{
-    alignItems:"center",  //help center the text
-    justifyContent:"center",    
-  },
-  headerTitle:{
-    textDecorationLine:"underline", //Text is underlined
-    fontWeight:"bold",  //Bigger text
-  },
   goalStyle:{
     display:"flex", //Ensure the goal id and statement is in a row
     flexDirection:"row",
@@ -116,11 +91,5 @@ const styles = StyleSheet.create({
     color: "#ffffff", //text color
     textAlign:"center", //center the text
     fontWeight:"bold",  //Bigger text
-  }, 
-  footerStyle:{
-    backgroundColor:'#9C08AB',//signature purple color
-    display:'flex', //center the elements
-    alignItems:"center", 
-    justifyContent:"center", 
   }
 });
