@@ -36,7 +36,7 @@ export default class Goal extends React.Component {
               goals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
-                    <CardItem>
+                    <CardItem  button onPress={() => this.props.navigation.navigate("Milestone")}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
                         <Text style={[styles.goalText, styles.goalBody]}>{goal}</Text>

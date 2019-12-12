@@ -17,7 +17,7 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Goal: MilestoneScreen},navigationOptions);
+const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen},navigationOptions);
 
 
 const AppContainer = createAppContainer(AppNavigator);
