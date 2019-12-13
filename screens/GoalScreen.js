@@ -7,9 +7,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import Nav from '../components/header.js';
 import Foot from '../components/Foot.js';
-import {userGoals} from '../data/goals.js';
+import goals from '../data/goals.js';
 
-const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
+//const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
@@ -40,7 +40,7 @@ export default class Goal extends React.Component {
                     <CardItem  button onPress={() => this.props.navigation.navigate("Milestone")}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
-                        <Text style={[styles.goalText, styles.goalBody]}>{goal}</Text>
+                        <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
                       </Body>
                     </CardItem>
                   </Card>                  
