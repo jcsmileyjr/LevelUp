@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 
 import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+//import AsyncStorage from '@react-native-community/async-storage';
 
 import Nav from '../components/header.js';
 import Foot from '../components/Foot.js';
@@ -19,7 +20,36 @@ export default class Goal extends React.Component {
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
     });
-    this.setState({isReady:true, goal:goals});
+    this.initialSetData();
+    this.setState({isReady:true});
+    
+  }
+
+  initialSetData = async () => {
+    try {
+      this.getData();
+      if(this.state.goal === null){
+        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+      }
+    }catch (error){
+      console.log(error);
+    }
+  }
+
+  getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userGoals');
+      if(value !== null) {
+        this.setState({goal:value});
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  setCurrentGoal = id => {
+    AsyncStorage.setItem("currentGoal",JSON.stringify(id));
+    console.log("current goal id is " + id);
   }
 
   render() {
@@ -37,7 +67,7 @@ export default class Goal extends React.Component {
               goals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
-                    <CardItem  button onPress={() => this.props.navigation.navigate("Milestone")}>
+                    <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentGoal(id);}}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
                         <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
