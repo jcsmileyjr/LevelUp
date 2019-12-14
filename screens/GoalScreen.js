@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-n
 import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-//import AsyncStorage from '@react-native-community/async-storage';
+import {getData, initialSetData} from '../js/data-functions.js';
 
 import Nav from '../components/header.js';
 import Foot from '../components/Foot.js';
@@ -20,11 +20,11 @@ export default class Goal extends React.Component {
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
     });
-    this.initialSetData();
+    initialSetData();
     this.setState({isReady:true});
     
   }
-
+/*
   initialSetData = async () => {
     try {
       this.getData();
@@ -46,7 +46,7 @@ export default class Goal extends React.Component {
       console.log(error);
     }
   }
-
+*/
   setCurrentGoal = id => {
     AsyncStorage.setItem("currentGoal",JSON.stringify(id));
     console.log("current goal id is " + id);

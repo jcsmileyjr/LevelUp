@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
+  "devToolsPort": 19003,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 10188,
+  "packagerPid": 7456,
   "expoServerNgrokUrl": "https://jw-tq3.jcsmileyjr.levelup.exp.direct",
   "packagerNgrokUrl": "https://packager.jw-tq3.jcsmileyjr.levelup.exp.direct",
-  "ngrokPid": 11768
+  "ngrokPid": 15172
 }
