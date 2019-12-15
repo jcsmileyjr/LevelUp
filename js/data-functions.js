@@ -28,24 +28,27 @@ const initialSetData = async () => {
 
   const getMilestones = async () =>{
       const listOfGoals = await getData();
+      const winner = {};
       if(listOfGoals !== null){
         const currentGoalID = await AsyncStorage.getItem('currentGoal');
         //console.log("getMilestones id " + currentGoalID);
         if(currentGoalID !== null){
           const list = JSON.parse(listOfGoals);
-          //console.log(listOfGoals);
-          list.filter(function(goal, index){
+          //console.log(list);
+          const steps = list.filter(function(goal, index){
             //console.log(goal.goal + " " + index);
             if(parseInt(currentGoalID) === index){
-              //console.log("goal is " + goal.milestones);
+              console.log("goal is " + goal.milestones);
               //const test = goal;
               //return goal;
-              return goal.milestones[0];
+              return goal;
             }else{
               return null;
             }          
               
           });
+          //console.log(steps);
+          return steps;
         }
       }else {
         console.log("goals is null")

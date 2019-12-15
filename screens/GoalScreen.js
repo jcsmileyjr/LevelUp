@@ -24,74 +24,30 @@ export default class Goal extends React.Component {
     this.storeData();
   }
 
-  initialSetData = async() =>{
-    const test = await this.getData();
-    if(test !== null){
-      this.setState({userGoals:test});
-    }else{
-      this.storeData();
-    }
-  }
-
-  stank = () =>{
-    const boy = this.getData();
-    console.log(boy);
-    this.setState({goals:boy});
-  }
-/*
   storeData = async () => {
     try {
-      await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
-      this.setState({goals:goals});
+      const value = await AsyncStorage.getItem('userGoals');
+      if(value !== null){
+        this.setState({userGoals:JSON.parse(value)});
+        console.log("it works");
+      }else {
+        console.log("It is null");
+        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+        this.setState({userGoals:goals});
+      }
+      
     } catch (e) {
       console.log("it broke");
     }
   }
-*/
 
-storeData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('userGoals');
-    if(value !== null){
-      this.setState({userGoals:JSON.parse(value)});
-    }else {
-      console.log("It is null");
-      await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
-      this.setState({userGoals:goals});
-    }
-    
-  } catch (e) {
-    console.log("it broke");
-  }
-}
-
-  getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('userGoals');
-      if(value !== null) {
-        return JSON.parse(value);
-      }else{
-        console.log("getDAta is brokern");
-      }
-    } catch(e) {
-      console.log("it broke")
-    }
-  }
-
-  testing = async() => {
-    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
-
-    return await AsyncStorage.getItem('userGoals');
-    
-  }
-  
-  setCurrentGoal = id => {
-    AsyncStorage.setItem("currentGoal",JSON.stringify(id));
-    console.log("current goal id is " + id);
+  setCurrentMilestones = goal =>{
+    AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));
+    AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));
   }
 
   render() {
-    if (!this.state.isReady && this.state.goals !== null) {
+    if (!this.state.isReady && this.state.userGoals !== null) {
       return <AppLoading />;
     }
 
@@ -105,7 +61,7 @@ storeData = async () => {
               this.state.userGoals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
-                    <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentGoal(id);}}>
+                    <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
                         <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
