@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import { Container, Text, Content, Button, CheckBox, Icon,Input, Item, Card, CardItem, Body } from 'native-base';
 import { AppLoading } from 'expo';
+import {getMilestones} from '../js/data-functions.js';
 
 import {userGoals} from '../data/goals.js';
 import Head from '../components/header.js';
@@ -15,6 +16,7 @@ export default class Milestones extends React.Component {
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
       });
       this.setState({isReady:true});
+      console.log(getMilestones());
     }
 
     render() {

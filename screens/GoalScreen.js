@@ -10,50 +10,88 @@ import Nav from '../components/header.js';
 import Foot from '../components/Foot.js';
 import goals from '../data/goals.js';
 
-//const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
-  state = { isReady: false, goals:[] };
+  state = { isReady: false, userGoals:[] };
   async componentWillMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
     });
-    initialSetData();
-    this.setState({isReady:true});
     
+    this.setState({isReady:true});
+    this.storeData();
   }
-/*
-  initialSetData = async () => {
-    try {
-      this.getData();
-      if(this.state.goal === null){
-        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
-      }
-    }catch (error){
-      console.log(error);
+
+  initialSetData = async() =>{
+    const test = await this.getData();
+    if(test !== null){
+      this.setState({userGoals:test});
+    }else{
+      this.storeData();
     }
   }
+
+  stank = () =>{
+    const boy = this.getData();
+    console.log(boy);
+    this.setState({goals:boy});
+  }
+/*
+  storeData = async () => {
+    try {
+      await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+      this.setState({goals:goals});
+    } catch (e) {
+      console.log("it broke");
+    }
+  }
+*/
+
+storeData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('userGoals');
+    if(value !== null){
+      this.setState({userGoals:JSON.parse(value)});
+    }else {
+      console.log("It is null");
+      await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+      this.setState({userGoals:goals});
+    }
+    
+  } catch (e) {
+    console.log("it broke");
+  }
+}
 
   getData = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');
       if(value !== null) {
-        this.setState({goal:value});
+        return JSON.parse(value);
+      }else{
+        console.log("getDAta is brokern");
       }
-    } catch(error) {
-      console.log(error);
+    } catch(e) {
+      console.log("it broke")
     }
   }
-*/
+
+  testing = async() => {
+    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+
+    return await AsyncStorage.getItem('userGoals');
+    
+  }
+  
   setCurrentGoal = id => {
     AsyncStorage.setItem("currentGoal",JSON.stringify(id));
     console.log("current goal id is " + id);
   }
 
   render() {
-    if (!this.state.isReady) {
+    if (!this.state.isReady && this.state.goals !== null) {
       return <AppLoading />;
     }
 
@@ -64,7 +102,7 @@ export default class Goal extends React.Component {
           <Content>
             {/**Display a user's goal */}
             {
-              goals.map((goal, id) => {
+              this.state.userGoals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
                     <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentGoal(id);}}>
