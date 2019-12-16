@@ -71,7 +71,7 @@ export default class Goal extends React.Component {
             } 
             {/**Display a button to add a new goal */}
             <View style={styles.buttonContainer}>
-              <TouchableNativeFeedback >
+              <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Planning")} >
                 <View style={styles.buttonStyle}>
                   <Text style={styles.buttonText}>NEW GOAL</Text>
                 </View>
