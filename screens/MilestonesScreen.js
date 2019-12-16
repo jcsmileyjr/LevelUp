@@ -1,27 +1,29 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import { Container, Text, Content, Button, CheckBox, Icon,Input, Item, Card, CardItem, Body } from 'native-base';
-import { AppLoading } from 'expo';
-import { AsyncStorage } from 'react-native';
+import { AppLoading } from 'expo';//Needed to get Native Base to work. 
+import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
-import {goals} from '../data/goals.js';
-import Head from '../components/header.js';
-import Foot from '../components/Foot.js';
+import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
+import Foot from '../components/Foot.js';// Footer displaying instructions
 
+//When a user selects a goal on the GoalScreen, the milestones and title associated with it is displayed here
 export default class Milestones extends React.Component {
-    state = { isReady: false, steps:[]};
+    //isReady is checking if fonts is loaded (needed for NativeBase) & steps/title hold data from local storage
+    state = { isReady: false, steps:[], title:""};
     async componentWillMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
-      });
-      this.setState({isReady:true});
-      this.getMilestones();
+      });//load fonts needed for certain components in NativeBase
+      this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
+      this.getMilestones();//loads data (milestones & title) from local storage into the state
     }
 
+    //Function to load data from local storage (acquired in GoalScreen) into state
     getMilestones = async () => {
-        const milestones = await AsyncStorage.getItem('currentMilestones');
-        const goalTitle = await AsyncStorage.getItem('currentGoalTitle');
+        const milestones = await AsyncStorage.getItem('currentMilestones');//load a array of milestones
+        const goalTitle = await AsyncStorage.getItem('currentGoalTitle');// load a title string
         this.setState({steps:JSON.parse(milestones), title:JSON.parse(goalTitle)});        
     }
 
@@ -32,8 +34,10 @@ export default class Milestones extends React.Component {
 
         return(
             <Container>
-                <Head />
-                <Content>
+                {/*Displays the App's Title, current section, and menu button */}
+                <Head /> 
+                {/*Display the user's selected goal title and milestones */}
+                <Content> 
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
                     {
                         this.state.steps.map((selectedGoal, index) =>{
@@ -51,6 +55,7 @@ export default class Milestones extends React.Component {
                             );
                         })
                     }
+                    {/*Display a input box to create a new milestone */}
                     <Item>
                         <Icon active name='add' />
                         <Input placeholder='Type New Milestone'/>
