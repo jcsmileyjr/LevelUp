@@ -1,29 +1,53 @@
 import React from 'react';
-import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 
 import { AppLoading } from 'expo';
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+import {getData, initialSetData} from '../js/data-functions.js';
 
 import Nav from '../components/header.js';
 import Foot from '../components/Foot.js';
-import {userGoals} from '../data/goals.js';
+import goals from '../data/goals.js';
 
-const goals = ["Learn React.js (Web Development)","Learn React Native (Mobile Development)","Learn Redux for React", "Practice Building Apps"];
 
 //1st Screen the user will see. Allow viewing of overall goals/mission. 
 export default class Goal extends React.Component {
-  state = { isReady: false, goals:[] };
+  state = { isReady: false, userGoals:[] };
   async componentWillMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
     });
-    this.setState({isReady:true, goal:goals});
+    
+    this.setState({isReady:true});
+    this.storeData();
+  }
+
+  storeData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userGoals');
+      if(value !== null){
+        this.setState({userGoals:JSON.parse(value)});
+        console.log("it works");
+      }else {
+        console.log("It is null");
+        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+        this.setState({userGoals:goals});
+      }
+      
+    } catch (e) {
+      console.log("it broke");
+    }
+  }
+
+  setCurrentMilestones = goal =>{
+    AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));
+    AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));
   }
 
   render() {
-    if (!this.state.isReady) {
+    if (!this.state.isReady && this.state.userGoals !== null) {
       return <AppLoading />;
     }
 
@@ -34,13 +58,13 @@ export default class Goal extends React.Component {
           <Content>
             {/**Display a user's goal */}
             {
-              goals.map((goal, id) => {
+              this.state.userGoals.map((goal, id) => {
                 return(
                   <Card key={id} transparent>
-                    <CardItem  button onPress={() => this.props.navigation.navigate("Milestone")}>
+                    <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
                       <Body style={styles.goalStyle}>
                         <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
-                        <Text style={[styles.goalText, styles.goalBody]}>{goal}</Text>
+                        <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
                       </Body>
                     </CardItem>
                   </Card>                  
