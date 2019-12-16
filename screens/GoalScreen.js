@@ -26,13 +26,11 @@ export default class Goal extends React.Component {
   //Loads data from local storage. If that is empty, then loads data from sample learning path.
   storeData = async () => {
     try {
-      const value = await AsyncStorage.getItem('userGoals');
+      const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
       if(value !== null){
         this.setState({userGoals:JSON.parse(value)});
-        console.log("it works");
       }else {
-        console.log("It is null");
-        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
+        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
         this.setState({userGoals:goals});
       }      
     } catch (e) {
