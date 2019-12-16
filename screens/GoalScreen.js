@@ -1,29 +1,29 @@
 import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 
-import { AppLoading } from 'expo';
+import { AppLoading } from 'expo';//Needed to get Native Base to work.
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
-import { Ionicons } from '@expo/vector-icons';
-import {getData, initialSetData} from '../js/data-functions.js';
 
-import Nav from '../components/header.js';
-import Foot from '../components/Foot.js';
-import goals from '../data/goals.js';
+import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
+import Foot from '../components/Foot.js';// Footer displaying instructions
+import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 
 
-//1st Screen the user will see. Allow viewing of overall goals/mission. 
+//1st Screen the user will see. Allow viewing and adding big picture goals. 
 export default class Goal extends React.Component {
+  //isReady is checking if fonts is loaded (needed for NativeBase) & userGoals hold data from local storage
   state = { isReady: false, userGoals:[] };
   async componentWillMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
-    });
+    });//load fonts needed for certain components in NativeBase
     
-    this.setState({isReady:true});
-    this.storeData();
+    this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
+    this.storeData();//loads data from local storage to state
   }
 
+  //Loads data from local storage. If that is empty, then loads data from sample learning path.
   storeData = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');
@@ -34,16 +34,16 @@ export default class Goal extends React.Component {
         console.log("It is null");
         await AsyncStorage.setItem("userGoals",JSON.stringify(goals));
         this.setState({userGoals:goals});
-      }
-      
+      }      
     } catch (e) {
       console.log("it broke");
     }
   }
 
+  //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
   setCurrentMilestones = goal =>{
-    AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));
-    AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));
+    AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));//saves the goal's milestones
+    AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));//saves the goal's title
   }
 
   render() {
@@ -54,9 +54,9 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-          <Nav />
+          <Head />
           <Content>
-            {/**Display a user's goal */}
+            {/**Display a user's goals */}
             {
               this.state.userGoals.map((goal, id) => {
                 return(
@@ -71,6 +71,7 @@ export default class Goal extends React.Component {
                 );
               })
             } 
+            {/**Display a button to add a new goal */}
             <View style={styles.buttonContainer}>
               <TouchableNativeFeedback >
                 <View style={styles.buttonStyle}>

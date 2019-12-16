@@ -1,6 +1,6 @@
 import goals from '../data/goals.js';
 import { AsyncStorage } from 'react-native';
-
+//NONE OF THIS IS BEING USED. MAY BE USED IN THE FUTURE. NOT SURE WHY IT DON'T WORK
 const initialSetData = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');
