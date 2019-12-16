@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import { Container, Text, Content, Button, CheckBox, Icon,Input, Item, Card, CardItem, Body } from 'native-base';
+import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
+import { Container,Content } from 'native-base';
 import { AppLoading } from 'expo';//Needed to get Native Base to work. 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
@@ -28,10 +28,66 @@ export default class Milestones extends React.Component {
             <Container>
                 <Head />
                 <Content>
-                    <Text>Planning Works</Text>
+                    <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
+                    <View style={styles.inputContainter} >
+                        <TextInput placeholder="Type Goal" style={styles.inputStyles} />
+                    </View>
+
+                    <View><Text style={styles.goalTitle}>Add Milestones</Text></View>
+                    <View style={styles.inputContainter} >
+                        <TextInput placeholder="Type Milestones" style={styles.inputStyles} />
+                    </View>
+
+                    {/**Display a button to add a new goal */}
+                    <View style={styles.buttonContainer}>
+                    <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Goal")} >
+                        <View style={styles.buttonStyle}>
+                        <Text style={styles.buttonText}>FINISH</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                    </View> 
                 </Content>
                 <Foot />
             </Container>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    inputStyles: {
+        width: 300,
+        color:'#9C08AB',  //signature purple color
+        textAlign:"center",
+        height:40,
+        borderColor:"grey",
+        borderWidth: 1,
+        elevation: 1,
+        margin: 20,
+    },
+    goalTitle:{
+        textAlign:"center",
+        fontSize:25,
+        color:'#9C08AB',  //signature purple color
+    },
+    inputContainter:{
+        alignItems:"center",  //help center the button
+        justifyContent:"center",
+    },
+    buttonStyle:{
+      backgroundColor:'#9C08AB',//signature purple color 
+      padding: 10, //space between button title and border
+      margin: 10, //whitespace between button and other elements
+      width: 250, //width of button
+      borderColor:'#9C08AB',//signature purple color
+      borderRadius: 15, //round the corners    
+    },
+    buttonContainer:{
+      alignItems:"center",  //help center the button
+      justifyContent:"center",
+    },
+    buttonText:{
+      color: "#ffffff", //text color
+      textAlign:"center", //center the text
+      fontWeight:"bold",  //Bigger text
+    }
+});
