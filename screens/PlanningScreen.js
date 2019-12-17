@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
-import { Container,Content } from 'native-base';
+import { Container,Content, Icon } from 'native-base';
 import { AppLoading } from 'expo';//Needed to get Native Base to work. 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
@@ -35,6 +35,7 @@ export default class Milestones extends React.Component {
 
                     <View><Text style={styles.goalTitle}>Add Milestones</Text></View>
                     <View style={styles.inputContainter} >
+                        <Icon active name='add' />
                         <TextInput placeholder="Type Milestones" style={styles.inputStyles} />
                     </View>
 
@@ -70,6 +71,8 @@ const styles = StyleSheet.create({
         color:'#9C08AB',  //signature purple color
     },
     inputContainter:{
+        display:"flex", //Ensure the goal id and statement is in a row
+        flexDirection:"row",
         alignItems:"center",  //help center the button
         justifyContent:"center",
     },
