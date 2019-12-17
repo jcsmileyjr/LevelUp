@@ -10,13 +10,25 @@ import Foot from '../components/Foot.js';// Footer displaying instructions
 //Allows the user to create a goal with milestones
 export default class Milestones extends React.Component {
     //isReady is checking if fonts is loaded (needed for NativeBase) 
-    state = { isReady: false};
+    state = { isReady: false, newGoalTitle:"", milestoneTitle:"", newMilestones:[]};
     async componentWillMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
       });//load fonts needed for certain components in NativeBase
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
+    }
+
+    //Saves the user inputted milestones to state
+    updateMilestones = () => {
+        if(this.state.milestoneTitle !== ""){
+            let listOfMilestones = this.state.newMilestones;
+            listOfMilestones.push(this.state.milestoneTitle);
+            this.setState({newMilestones:listOfMilestones});
+        }else{
+            console.log("updateMilestones function failed")
+        }
+        
     }
 
     render(){
@@ -30,15 +42,29 @@ export default class Milestones extends React.Component {
                 <Content>
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
-                        <TextInput placeholder="Type Goal" style={styles.inputStyles} />
+                        <TextInput  placeholder="Type Goal" 
+                                    style={styles.inputStyles} 
+                                    onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
-
+                    
                     <View><Text style={styles.goalTitle}>Add Milestones</Text></View>
                     <View style={styles.inputContainter} >
-                        <Icon active name='add' />
-                        <TextInput placeholder="Type Milestones" style={styles.inputStyles} />
+                        <Icon active name='add'onPress={()=> this.updateMilestones()} />
+                        <TextInput placeholder="Type Milestones" 
+                        style={styles.inputStyles} 
+                        onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
 
+                    {
+                        this.state.newMilestones.map((step, index) =>{
+                            return(
+                                <View key={index}>
+                                    <Text style={styles.newMilestoneStyle}>{step}</Text>
+                                </View>
+                            );
+                        })
+                    }
+                    
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
                     <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Goal")} >
@@ -68,6 +94,11 @@ const styles = StyleSheet.create({
     goalTitle:{
         textAlign:"center",
         fontSize:25,
+        color:'#9C08AB',  //signature purple color
+    },
+    newMilestoneStyle:{
+        textAlign:"center",
+        fontSize:20,
         color:'#9C08AB',  //signature purple color
     },
     inputContainter:{
