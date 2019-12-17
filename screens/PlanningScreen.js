@@ -10,7 +10,7 @@ import Foot from '../components/Foot.js';// Footer displaying instructions
 //Allows the user to create a goal with milestones
 export default class Milestones extends React.Component {
     //isReady is checking if fonts is loaded (needed for NativeBase) 
-    state = { isReady: false, newGoalTitle:"", milestoneTitle:"", newMilestones:[]};
+    state = { isReady: false, newGoalTitle:"", milestoneTitle:"", newMilestones:[], userGoals:[]};
     async componentWillMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
@@ -27,8 +27,22 @@ export default class Milestones extends React.Component {
             this.setState({newMilestones:listOfMilestones});
         }else{
             console.log("updateMilestones function failed")
+        }        
+    }
+
+    //Update the old list of goals/milestones with new user inputted information
+    updateGoals = async () =>{
+        if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
+            const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
+            if(value !== null){
+                let userGoals = JSON.parse(value); //get old array of goals/milestones
+                const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
+                userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
+                await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
+            }
+        }else{
+            console.log("Missing information to update user Goals in Planning screen");
         }
-        
     }
 
     render(){
@@ -67,7 +81,7 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                    <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Goal")} >
+                    <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals();}} >
                         <View style={styles.buttonStyle}>
                         <Text style={styles.buttonText}>FINISH</Text>
                         </View>
