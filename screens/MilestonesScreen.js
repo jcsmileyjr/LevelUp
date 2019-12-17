@@ -11,7 +11,7 @@ import Foot from '../components/Foot.js';// Footer displaying instructions
 export default class Milestones extends React.Component {
     //isReady is checking if fonts is loaded (needed for NativeBase) & steps/title hold data from local storage
     state = { isReady: false, steps:[], title:""};
-    async componentWillMount() {
+    async componentDidMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
