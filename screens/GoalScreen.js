@@ -88,7 +88,7 @@ export default class Goal extends React.Component {
               </TouchableNativeFeedback>
             </View>            
           </Content>
-          <Foot />         
+          <Foot title="* Click on a Goal to view Milestones for it." />         
       </Container>
     );
   }

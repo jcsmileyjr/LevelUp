@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Footer} from 'native-base';
 
-const Foot = () =>{
+const Foot = (props) =>{
     return(
         <Footer style={styles.footerStyle}>
-            <View><Text style={styles.footText}>* Click on a Goal to view Milestones for it.</Text></View>
+            <View><Text style={styles.footText}>{props.title}</Text></View>
         </Footer>
     );
 }

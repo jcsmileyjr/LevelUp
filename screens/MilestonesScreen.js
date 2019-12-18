@@ -111,7 +111,7 @@ export default class Milestones extends React.Component {
                         })
                     }
                 </Content>
-                <Foot />
+                <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
         );
     }

@@ -94,7 +94,7 @@ export default class Milestones extends React.Component {
                     </TouchableNativeFeedback>
                     </View> 
                 </Content>
-                <Foot />
+                <Foot title="*Creat SMART goals" />
             </Container>
         );
     }
