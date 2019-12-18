@@ -78,7 +78,7 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head /> 
+                <Head title="Milestones" /> 
                 <Content> 
                     {/*Display the user's selected goal title */}
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
