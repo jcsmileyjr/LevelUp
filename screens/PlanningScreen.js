@@ -50,7 +50,7 @@ export default class Milestones extends React.Component {
     clearText = () => { this.setState({milestoneTitle:""})};
 
     render(){
-        if (!this.state.isReady && !this.state.steps === null) {
+        if (!this.state.isReady) {
             return <AppLoading />;
         }
 

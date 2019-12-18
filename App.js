@@ -6,6 +6,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import GoalScreen from './screens/GoalScreen.js';
 import MilestoneScreen from './screens/MilestonesScreen.js';
 import PlanningScreen from './screens/PlanningScreen.js';
+import AchievementScreen from './screens/AcheivementScreen.js';
 
 export default function App() {
 
@@ -18,7 +19,7 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen},navigationOptions);
+const AppNavigator = createStackNavigator({Progress:AchievementScreen},navigationOptions);
 
 
 const AppContainer = createAppContainer(AppNavigator);
