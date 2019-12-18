@@ -25,6 +25,8 @@ export default class Milestones extends React.Component {
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
             listOfMilestones.push(this.state.milestoneTitle);//update with current user input
             this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
+            this.textInput.clear();
+            
         }else{
             console.log("updateMilestones function failed")
         }        
@@ -45,6 +47,8 @@ export default class Milestones extends React.Component {
         }
     }
 
+    clearText = () => { this.setState({milestoneTitle:""})};
+
     render(){
         if (!this.state.isReady && !this.state.steps === null) {
             return <AppLoading />;
@@ -57,6 +61,7 @@ export default class Milestones extends React.Component {
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
                         <TextInput  placeholder="Type Goal" 
+                                    autoFocus={true}
                                     style={styles.inputStyles} 
                                     onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
@@ -66,6 +71,7 @@ export default class Milestones extends React.Component {
                         <Icon active name='add'onPress={()=> this.updateMilestones()} />
                         <TextInput placeholder="Type Milestones" 
                         style={styles.inputStyles} 
+                        ref={input => {this.textInput = input}} 
                         onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
 

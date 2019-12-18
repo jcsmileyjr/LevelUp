@@ -44,7 +44,7 @@ export default class Milestones extends React.Component {
                     goal.milestones = currentMilestones;
                 }
             });
-
+            //this.textInput.clear();
             await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage
         }else{
             console.log("MilestoneScreen: userGoal local storgae is empty")
@@ -87,7 +87,7 @@ export default class Milestones extends React.Component {
                     <View style={styles.inputContainter} >
                         <Icon active name='add'onPress={()=> this.addMilestone()} />
                         <TextInput placeholder="Add Milestone" 
-                        style={styles.inputStyles} 
+                        style={styles.inputStyles}             
                         onChangeText={(newMilestone)=>this.setState({newMilestone})} />
                     </View>
                                         
@@ -99,8 +99,7 @@ export default class Milestones extends React.Component {
                                     <Card transparent >
                                         <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
                                             <CheckBox   checked={false} 
-                                                        style={styles.checkboxStyle}
-                                                         
+                                                        style={styles.checkboxStyle}                                                         
                                                         color='#9C08AB' />
                                             <Body>
                                                 <Text style={[styles.checkboxText]}>{milestones}</Text>
