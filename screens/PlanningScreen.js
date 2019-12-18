@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         elevation: 1,
         margin: 20,
+        fontSize: 18,
     },
     goalTitle:{
         textAlign:"center",

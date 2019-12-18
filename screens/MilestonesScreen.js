@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         elevation: 1,
         margin: 20,
+        fontSize: 18,
     }, 
     inputContainter:{
         display:"flex", //Ensure the goal id and statement is in a row
