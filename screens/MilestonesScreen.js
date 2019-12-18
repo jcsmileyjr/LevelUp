@@ -20,7 +20,7 @@ export default class Milestones extends React.Component {
       this.getMilestones();//loads data (milestones & title) from local storage into the state
     }
 
-    //Function to load data from local storage (acquired in GoalScreen) into state
+    //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
     getMilestones = async () => {
         const milestones = await AsyncStorage.getItem('currentMilestones');//load a array of milestones
         const goalTitle = await AsyncStorage.getItem('currentGoalTitle');// load a title string

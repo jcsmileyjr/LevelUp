@@ -19,18 +19,18 @@ export default class Milestones extends React.Component {
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
     }
 
-    //Saves the user inputted milestones to state
+    //Saves the user inputted milestones to state when push the "plus" icon
     updateMilestones = () => {
         if(this.state.milestoneTitle !== ""){
-            let listOfMilestones = this.state.newMilestones;
-            listOfMilestones.push(this.state.milestoneTitle);
-            this.setState({newMilestones:listOfMilestones});
+            let listOfMilestones = this.state.newMilestones;//get the current array of milestones
+            listOfMilestones.push(this.state.milestoneTitle);//update with current user input
+            this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
         }else{
             console.log("updateMilestones function failed")
         }        
     }
 
-    //Update the old list of goals/milestones with new user inputted information
+    //Update the old list of goals/milestones with new user inputted information when push the "Finish" button
     updateGoals = async () =>{
         if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
             const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage

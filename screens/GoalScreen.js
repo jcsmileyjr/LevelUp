@@ -25,7 +25,7 @@ export default class Goal extends React.Component {
     //this.resetData(); USE ONLY TO RESET DATA
   }
 
-  //Loads data from local storage. If that is empty, then loads data from sample learning path.
+  //Call during mounting, loads data from local storage. If that is empty, then loads data from sample learning path.
   storeData = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
@@ -46,6 +46,7 @@ export default class Goal extends React.Component {
   }
 */
   //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
+  //Called when a goal is touched by user
   setCurrentMilestones = goal =>{
     AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));//saves the goal's milestones
     AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));//saves the goal's title
