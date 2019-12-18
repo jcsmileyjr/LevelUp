@@ -34,7 +34,6 @@ export default class Milestones extends React.Component {
             const currentMilestones = this.state.steps; //get current array of milestones
             currentMilestones.push(this.state.newMilestone);//update the array of milestones
             this.setState({steps:currentMilestones});//update screen's state array of milestones to update view
-
             
             const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
             let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
@@ -50,6 +49,25 @@ export default class Milestones extends React.Component {
         }else{
             console.log("MilestoneScreen: userGoal local storgae is empty")
         }
+    }
+
+    //Allow a user to delete a milestone
+    deleteMilestone = async(id) => {
+        const listOfMilestones = this.state.steps;//get current list of milestones
+        listOfMilestones.splice(id,1);//remove the selected milestone
+        this.setState({steps:listOfMilestones});//update the screen's state
+
+        const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
+        let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
+        
+        //Search array for selected goal, then update its milestones with updated milestones from state
+        userGoals.forEach((goal) => {
+            if(goal.goal === this.state.title){
+                goal.milestones = listOfMilestones;
+            }
+        });
+
+        await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
     }
 
     render() {
@@ -77,10 +95,13 @@ export default class Milestones extends React.Component {
                     {
                         this.state.steps.map((milestones, index) =>{
                             return(                                  
-                                <View key={index}>
-                                    <Card transparent>
-                                        <CardItem style={styles.milestoneStyle}>
-                                            <CheckBox checked={false} style={styles.checkboxStyle} color='#9C08AB' />
+                                <View key={index} >
+                                    <Card transparent >
+                                        <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
+                                            <CheckBox   checked={false} 
+                                                        style={styles.checkboxStyle}
+                                                         
+                                                        color='#9C08AB' />
                                             <Body>
                                                 <Text style={[styles.checkboxText]}>{milestones}</Text>
                                             </Body>
