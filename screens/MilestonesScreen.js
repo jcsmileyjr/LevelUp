@@ -44,7 +44,7 @@ export default class Milestones extends React.Component {
                     goal.milestones = currentMilestones;
                 }
             });
-            //this.textInput.clear();
+            
             await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage
         }else{
             console.log("MilestoneScreen: userGoal local storgae is empty")
@@ -69,6 +69,7 @@ export default class Milestones extends React.Component {
                 goal.milestones = listOfMilestones;
             }
             if(goal.goal === this.state.title && listOfMilestones.length <= 0){
+                this.updateAchievement(goal.goal);
                 userGoals.splice(index,1);
             }
         });
@@ -76,8 +77,8 @@ export default class Milestones extends React.Component {
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
     }
 
+    //Update array of achievements with finished goals/milestones
     updateAchievement = async (milestone) => {
-console.log("updateAchievements ran");
         try {
             const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
             let achievements = [];
@@ -87,7 +88,7 @@ console.log("updateAchievements ran");
             }else {
               achievements.push(milestone)                     
             }
-console.log(achievements);
+
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
           } catch (e) {
             console.log("Failed to update acheivements local storage in Milestone screen");
