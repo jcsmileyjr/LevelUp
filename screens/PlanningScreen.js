@@ -39,6 +39,7 @@ export default class Milestones extends React.Component {
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
                 await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
+                this.textInput.clear();
             }
         }else{
             console.log("Missing information to update user Goals in Planning screen");
@@ -57,6 +58,7 @@ export default class Milestones extends React.Component {
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
                         <TextInput  placeholder="Type Goal" 
+                                    autoFocus={true}
                                     style={styles.inputStyles} 
                                     onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
@@ -66,6 +68,7 @@ export default class Milestones extends React.Component {
                         <Icon active name='add'onPress={()=> this.updateMilestones()} />
                         <TextInput placeholder="Type Milestones" 
                         style={styles.inputStyles} 
+                        ref={input => {this.textInput = input}}
                         onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
 
