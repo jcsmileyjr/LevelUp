@@ -33,7 +33,7 @@ export default class Goal extends React.Component {
         this.setState({userGoals:JSON.parse(value)});
       }else {
         await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
-        this.setState({userGoals:goals});
+        this.setState({userGoals:goals});       
       }      
     } catch (e) {
       console.log("it broke");
