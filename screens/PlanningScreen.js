@@ -25,6 +25,8 @@ export default class Milestones extends React.Component {
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
             listOfMilestones.push(this.state.milestoneTitle);//update with current user input
             this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
+            this.textInput.clear();
+            
         }else{
             console.log("updateMilestones function failed")
         }        
@@ -39,12 +41,13 @@ export default class Milestones extends React.Component {
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
                 await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
-                this.textInput.clear();
             }
         }else{
             console.log("Missing information to update user Goals in Planning screen");
         }
     }
+
+    clearText = () => { this.setState({milestoneTitle:""})};
 
     render(){
         if (!this.state.isReady && !this.state.steps === null) {
@@ -68,7 +71,7 @@ export default class Milestones extends React.Component {
                         <Icon active name='add'onPress={()=> this.updateMilestones()} />
                         <TextInput placeholder="Type Milestones" 
                         style={styles.inputStyles} 
-                        ref={input => {this.textInput = input}}
+                        ref={input => {this.textInput = input}} 
                         onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
 
