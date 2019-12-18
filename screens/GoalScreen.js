@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
+import {NavigationEvents} from 'react-navigation';
 
 import { AppLoading } from 'expo';//Needed to get Native Base to work.
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
@@ -13,7 +14,7 @@ import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample 
 export default class Goal extends React.Component {
   //isReady is checking if fonts is loaded (needed for NativeBase) & userGoals hold data from local storage
   state = { isReady: false, userGoals:[] };
-  async componentWillMount() {
+  async componentDidMount() {
     await Expo.Font.loadAsync({
       'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
@@ -21,9 +22,10 @@ export default class Goal extends React.Component {
     
     this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
     this.storeData();//loads data from local storage to state
+    //this.resetData(); USE ONLY TO RESET DATA
   }
 
-  //Loads data from local storage. If that is empty, then loads data from sample learning path.
+  //Call during mounting, loads data from local storage. If that is empty, then loads data from sample learning path.
   storeData = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
@@ -31,14 +33,20 @@ export default class Goal extends React.Component {
         this.setState({userGoals:JSON.parse(value)});
       }else {
         await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
-        this.setState({userGoals:goals});
+        this.setState({userGoals:goals});       
       }      
     } catch (e) {
       console.log("it broke");
     }
   }
-
+/* USE ONLY TO RESET DATA
+  resetData = async () => {
+    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
+    this.setState({userGoals:goals});
+  }
+*/
   //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
+  //Called when a goal is touched by user
   setCurrentMilestones = goal =>{
     AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones));//saves the goal's milestones
     AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal));//saves the goal's title
@@ -53,6 +61,8 @@ export default class Goal extends React.Component {
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
           <Head />
+          {/*Refresh data */}
+          <NavigationEvents onDidFocus={() => this.storeData()} /> 
           <Content>
             {/**Display a user's goals */}
             {

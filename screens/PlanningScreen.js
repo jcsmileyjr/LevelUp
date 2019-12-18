@@ -11,7 +11,7 @@ import Foot from '../components/Foot.js';// Footer displaying instructions
 export default class Milestones extends React.Component {
     //isReady is checking if fonts is loaded (needed for NativeBase) 
     state = { isReady: false, newGoalTitle:"", milestoneTitle:"", newMilestones:[], userGoals:[]};
-    async componentWillMount() {
+    async componentDidMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
@@ -19,23 +19,23 @@ export default class Milestones extends React.Component {
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
     }
 
-    //Saves the user inputted milestones to state
+    //Saves the user inputted milestones to state when push the "plus" icon
     updateMilestones = () => {
         if(this.state.milestoneTitle !== ""){
-            let listOfMilestones = this.state.newMilestones;
-            listOfMilestones.push(this.state.milestoneTitle);
-            this.setState({newMilestones:listOfMilestones});
+            let listOfMilestones = this.state.newMilestones;//get the current array of milestones
+            listOfMilestones.push(this.state.milestoneTitle);//update with current user input
+            this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
         }else{
             console.log("updateMilestones function failed")
         }        
     }
 
-    //Update the old list of goals/milestones with new user inputted information
+    //Update the old list of goals/milestones with new user inputted information when push the "Finish" button
     updateGoals = async () =>{
         if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
-            const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
-            if(value !== null){
-                let userGoals = JSON.parse(value); //get old array of goals/milestones
+            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
+            if(savedGoals !== null){
+                let userGoals = JSON.parse(savedGoals); //get old array of goals/milestones
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
                 await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         elevation: 1,
         margin: 20,
+        fontSize: 18,
     },
     goalTitle:{
         textAlign:"center",
