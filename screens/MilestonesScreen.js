@@ -54,13 +54,14 @@ export default class Milestones extends React.Component {
     //Allow a user to delete a milestone
     deleteMilestone = async(id) => {
         const listOfMilestones = this.state.steps;//get current list of milestones
+        this.updateAchievement(listOfMilestones[id]);//update array of acheivements with milestone being deleted
         listOfMilestones.splice(id,1);//remove the selected milestone
         this.setState({steps:listOfMilestones});//update the screen's state
 
         const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
         let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
         
-        //Search array for selected goal, 
+        //To update the current array of goals/milestones in local storage we search array for selected goal, 
         //If there is atleast 1 milestone, then update its milestones with updated milestones from state
         //if there is 0 milestones, then delete goal
         userGoals.forEach((goal, index) => {
@@ -73,6 +74,24 @@ export default class Milestones extends React.Component {
         });
         
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
+    }
+
+    updateAchievement = async (milestone) => {
+console.log("updateAchievements ran");
+        try {
+            const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
+            let achievements = [];
+            if(arrayOfAchievements !== null){
+              achievements = JSON.parse(arrayOfAchievements);
+              achievements.push(milestone);
+            }else {
+              achievements.push(milestone)                     
+            }
+console.log(achievements);
+            await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
+          } catch (e) {
+            console.log("Failed to update acheivements local storage in Milestone screen");
+          }
     }
 
     render() {

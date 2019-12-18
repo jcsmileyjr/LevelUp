@@ -19,7 +19,7 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Progress:AchievementScreen},navigationOptions);
+const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen, Progress:AchievementScreen},navigationOptions);
 
 
 const AppContainer = createAppContainer(AppNavigator);
