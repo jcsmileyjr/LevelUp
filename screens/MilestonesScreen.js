@@ -90,6 +90,7 @@ export default class Milestones extends React.Component {
             }
 
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
+            this.props.navigation.navigate("Progress");
           } catch (e) {
             console.log("Failed to update acheivements local storage in Milestone screen");
           }
