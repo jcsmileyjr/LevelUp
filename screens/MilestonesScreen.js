@@ -77,16 +77,20 @@ export default class Milestones extends React.Component {
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
     }
 
-    //Update array of achievements with finished goals/milestones
+    //Update array of achievements with objects of finished goals/milestones
     updateAchievement = async (milestone) => {
         try {
             const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
             let achievements = [];
+            let progress = {};
+            progress.title = milestone;//save milestone as title
+            progress.date = this.getDate();//save today's date
+
             if(arrayOfAchievements !== null){
-              achievements = JSON.parse(arrayOfAchievements);
-              achievements.push(milestone);
+              achievements = JSON.parse(arrayOfAchievements);//parse string into an array of objects              
+              achievements.push(progress);//update array with new objet
             }else {
-              achievements.push(milestone)                     
+              achievements.push(milestone)//create a new array with first object                     
             }
 
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
@@ -95,6 +99,20 @@ export default class Milestones extends React.Component {
             console.log("Failed to update acheivements local storage in Milestone screen");
           }
     }
+
+    getDate = ()=>{
+        const day = new Date().getDate();
+        const month = new Date().getMonth();
+        const year = new Date().getFullYear();
+        return day + "/" + month + "/" + year;
+    }
+
+/* USE ONLY TO RESET DATA
+  resetData = async () => {
+    const testing = []
+    await AsyncStorage.setItem("achievements",JSON.stringify(testing));
+  }
+*/
 
     render() {
         if (!this.state.isReady && !this.state.steps === null) {
