@@ -60,13 +60,18 @@ export default class Milestones extends React.Component {
         const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
         let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
         
-        //Search array for selected goal, then update its milestones with updated milestones from state
-        userGoals.forEach((goal) => {
-            if(goal.goal === this.state.title){
+        //Search array for selected goal, 
+        //If there is atleast 1 milestone, then update its milestones with updated milestones from state
+        //if there is 0 milestones, then delete goal
+        userGoals.forEach((goal, index) => {
+            if(goal.goal === this.state.title && listOfMilestones.length > 0){
                 goal.milestones = listOfMilestones;
             }
+            if(goal.goal === this.state.title && listOfMilestones.length <= 0){
+                userGoals.splice(index,1);
+            }
         });
-
+        
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
     }
 
@@ -78,7 +83,7 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head /> 
+                <Head title="Milestones" /> 
                 <Content> 
                     {/*Display the user's selected goal title */}
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
@@ -111,7 +116,7 @@ export default class Milestones extends React.Component {
                         })
                     }
                 </Content>
-                <Foot />
+                <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
         );
     }

@@ -3,13 +3,13 @@ import { StyleSheet, View } from 'react-native';
 
 import { Container, Text, Header, Content, Left, Body, Right, Button, Icon} from 'native-base';
 
-const Head = () => {
+const Head = (props) => {
     return(
         <View>
         {/*Displays the App's Title, current section, and menu button */}
             <Header style={styles.headerStyles}>
                 <Left style={styles.headerContent}><Text style={styles.headerText}>Git Push You</Text></Left>
-                <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Goals</Text></Body>
+                <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
                 <Right style={styles.headerContent}>
                     <Button transparent>
                         <Icon name='menu' />

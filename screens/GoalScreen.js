@@ -60,7 +60,7 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-          <Head />
+          <Head title="Goals" />
           {/*Refresh data */}
           <NavigationEvents onDidFocus={() => this.storeData()} /> 
           <Content>
@@ -88,7 +88,7 @@ export default class Goal extends React.Component {
               </TouchableNativeFeedback>
             </View>            
           </Content>
-          <Foot />         
+          <Foot title="* Click on a Goal to view Milestones for it." />         
       </Container>
     );
   }
