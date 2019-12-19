@@ -75,6 +75,7 @@ export default class Milestones extends React.Component {
         });
         
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
+        this.props.navigation.navigate("Progress");
     }
 
     //Update array of achievements with objects of finished goals/milestones
@@ -94,7 +95,6 @@ export default class Milestones extends React.Component {
             }
 
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
-            this.props.navigation.navigate("Progress");
           } catch (e) {
             console.log("Failed to update acheivements local storage in Milestone screen");
           }
@@ -144,7 +144,7 @@ export default class Milestones extends React.Component {
                                         <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
                                             <CheckBox   checked={false} 
                                                         style={styles.checkboxStyle}                                                         
-                                                        color='#9C08AB' />
+                                                        color='navy' />
                                             <Body>
                                                 <Text style={[styles.checkboxText]}>{milestones}</Text>
                                             </Body>
