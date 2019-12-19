@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
   },
   goalText:{
-    color:'#9C08AB',  //signature purple color        
+    color:'navy',  //signature purple color        
   },
   goalIndex:{
     fontSize:50,  //The goal' index size cover the entire row
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
     fontSize:30,  //text size
   },
   buttonStyle:{
-    backgroundColor:'#9C08AB',//signature purple color 
+    backgroundColor:'navy',//signature purple color 
     padding: 10, //space between button title and border
     margin: 10, //whitespace between button and other elements
     width: 250, //width of button
-    borderColor:'#9C08AB',//signature purple color
+    borderColor:'green',//signature purple color
     borderRadius: 15, //round the corners    
   },
   buttonContainer:{

@@ -50,7 +50,7 @@ export default class Milestones extends React.Component {
     clearText = () => { this.setState({milestoneTitle:""})};
 
     render(){
-        if (!this.state.isReady && !this.state.steps === null) {
+        if (!this.state.isReady) {
             return <AppLoading />;
         }
 
@@ -103,7 +103,7 @@ export default class Milestones extends React.Component {
 const styles = StyleSheet.create({
     inputStyles: {
         width: 300,
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",
@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
     goalTitle:{
         textAlign:"center",
         fontSize:25,
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
     },
     newMilestoneStyle:{
         textAlign:"center",
         fontSize:20,
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
     },
     inputContainter:{
         display:"flex", //Ensure the goal id and statement is in a row
@@ -129,11 +129,11 @@ const styles = StyleSheet.create({
         justifyContent:"center",
     },
     buttonStyle:{
-      backgroundColor:'#9C08AB',//signature purple color 
+      backgroundColor:'navy',//signature purple color 
       padding: 10, //space between button title and border
       margin: 10, //whitespace between button and other elements
       width: 250, //width of button
-      borderColor:'#9C08AB',//signature purple color
+      borderColor:'navy',//signature purple color
       borderRadius: 15, //round the corners    
     },
     buttonContainer:{

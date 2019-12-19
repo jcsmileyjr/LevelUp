@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     headerStyles:{
         marginTop:25, //add space above the header
         marginBottom:30, //add space below the header
-        backgroundColor:'#9C08AB', //signature purple background
+        backgroundColor:'navy', //signature purple background
         color:'white', //white text
         display:'flex', //center the elements
         alignItems:"center", 
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
       },
       headerText:{
         color:"white",  //white text
-        //fontWeight:"bold",  //Bigger text
         fontSize:20, //size of text
       },
       headerSection:{

@@ -44,7 +44,7 @@ export default class Milestones extends React.Component {
                     goal.milestones = currentMilestones;
                 }
             });
-            //this.textInput.clear();
+            
             await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage
         }else{
             console.log("MilestoneScreen: userGoal local storgae is empty")
@@ -54,13 +54,14 @@ export default class Milestones extends React.Component {
     //Allow a user to delete a milestone
     deleteMilestone = async(id) => {
         const listOfMilestones = this.state.steps;//get current list of milestones
+        this.updateAchievement(listOfMilestones[id]);//update array of acheivements with milestone being deleted
         listOfMilestones.splice(id,1);//remove the selected milestone
         this.setState({steps:listOfMilestones});//update the screen's state
 
         const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
         let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
         
-        //Search array for selected goal, 
+        //To update the current array of goals/milestones in local storage we search array for selected goal, 
         //If there is atleast 1 milestone, then update its milestones with updated milestones from state
         //if there is 0 milestones, then delete goal
         userGoals.forEach((goal, index) => {
@@ -68,12 +69,50 @@ export default class Milestones extends React.Component {
                 goal.milestones = listOfMilestones;
             }
             if(goal.goal === this.state.title && listOfMilestones.length <= 0){
+                this.updateAchievement(goal.goal);
                 userGoals.splice(index,1);
             }
         });
         
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
     }
+
+    //Update array of achievements with objects of finished goals/milestones
+    updateAchievement = async (milestone) => {
+        try {
+            const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
+            let achievements = [];
+            let progress = {};
+            progress.title = milestone;//save milestone as title
+            progress.date = this.getDate();//save today's date
+
+            if(arrayOfAchievements !== null){
+              achievements = JSON.parse(arrayOfAchievements);//parse string into an array of objects              
+              achievements.push(progress);//update array with new objet
+            }else {
+              achievements.push(milestone)//create a new array with first object                     
+            }
+
+            await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
+            this.props.navigation.navigate("Progress");
+          } catch (e) {
+            console.log("Failed to update acheivements local storage in Milestone screen");
+          }
+    }
+
+    getDate = ()=>{
+        const day = new Date().getDate();
+        const month = new Date().getMonth();
+        const year = new Date().getFullYear();
+        return day + "/" + month + "/" + year;
+    }
+
+/* USE ONLY TO RESET DATA
+  resetData = async () => {
+    const testing = []
+    await AsyncStorage.setItem("achievements",JSON.stringify(testing));
+  }
+*/
 
     render() {
         if (!this.state.isReady && !this.state.steps === null) {
@@ -128,7 +167,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
       },
     checkboxText:{
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
         fontSize:30,  //text size        
       },
     checkboxStyle:{
@@ -140,11 +179,11 @@ const styles = StyleSheet.create({
           textAlign:"center",
           fontSize:35,
           fontWeight:"bold",  //Bigger text
-          color:'#9C08AB',  //signature purple color
+          color:'navy',  //signature purple color
       },
       inputStyles: {
         width: 300,
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",
