@@ -36,7 +36,7 @@ export default class Goal extends React.Component {
         this.setState({userGoals:goals});       
       }      
     } catch (e) {
-      console.log("it broke");
+      console.log("StoreData() in GoalScreen not working");
     }
   }
 /* USE ONLY TO RESET DATA
