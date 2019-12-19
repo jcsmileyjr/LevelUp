@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
       },
     checkboxText:{
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
         fontSize:30,  //text size        
       },
     checkboxStyle:{
@@ -179,11 +179,11 @@ const styles = StyleSheet.create({
           textAlign:"center",
           fontSize:35,
           fontWeight:"bold",  //Bigger text
-          color:'#9C08AB',  //signature purple color
+          color:'navy',  //signature purple color
       },
       inputStyles: {
         width: 300,
-        color:'#9C08AB',  //signature purple color
+        color:'navy',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",

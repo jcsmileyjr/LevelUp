@@ -68,13 +68,13 @@ export default class Achievements extends React.Component {
 
 const styles = StyleSheet.create({
 textStyle:{
-    color:'#9C08AB',  //signature purple color
+    color:'navy',  //signature purple color
     fontSize:25,  //text size
     marginLeft:5,
     marginBottom:10,
 },
 dateStyle:{
-    color:'#9C08AB',  //signature purple color
+    color:'navy',  //signature purple color
     fontSize:20,  //text size
     textAlign:"center",
     marginBottom:10, 
