@@ -2,13 +2,12 @@ import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import {NavigationEvents} from 'react-navigation';
 
-import { AppLoading } from 'expo';//Needed to get Native Base to work.
 import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
 import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
-
+import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //1st Screen the user will see. Allow viewing and adding big picture goals. 
 export default class Goal extends React.Component {
@@ -54,7 +53,7 @@ export default class Goal extends React.Component {
 
   render() {
     if (!this.state.isReady && this.state.userGoals !== null) {
-      return <AppLoading />;
+      return <PageLoad />;
     }
 
     return (

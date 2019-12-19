@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import { Container,Content, Icon, Grid, Col, Row } from 'native-base';
-import { AppLoading } from 'expo';//Needed to get Native Base to work. 
+import { Container,Content, Icon, Grid, Col, Row } from 'native-base'; 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
+import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //Allows the user to see completed goals/milestones
 export default class Achievements extends React.Component {
@@ -35,7 +35,7 @@ export default class Achievements extends React.Component {
 
     render(){
         if (!this.state.isReady && this.state.achievements !== null) {
-            return <AppLoading />;
+            return <PageLoad />;
           }
 
         return(

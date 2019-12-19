@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body } from 'native-base';
-import { AppLoading } from 'expo';//Needed to get Native Base to work. 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
+import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //When a user selects a goal on the GoalScreen, the milestones and title associated with it is displayed here
 export default class Milestones extends React.Component {
@@ -115,8 +115,8 @@ export default class Milestones extends React.Component {
 */
 
     render() {
-        if (!this.state.isReady && !this.state.steps === null) {
-          return <AppLoading />;
+        if (!this.state.isReady && this.state.steps !== null) {
+          return <PageLoad />;
         }
 
         return(
