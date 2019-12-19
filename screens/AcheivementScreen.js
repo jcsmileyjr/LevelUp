@@ -68,7 +68,7 @@ export default class Achievements extends React.Component {
 
 const styles = StyleSheet.create({
 textStyle:{
-    color:'navy',  //signature purple color
+    color:'#2B65EC',  //signature purple color
     fontSize:25,  //text size
     marginLeft:5,
     marginBottom:10,

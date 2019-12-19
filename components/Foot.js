@@ -14,7 +14,7 @@ export default Foot;
 
 const styles = StyleSheet.create({
     footerStyle:{
-        backgroundColor:'navy',//signature purple color
+        backgroundColor:'#00009C',//signature purple color
         display:'flex', //center the elements
         alignItems:"center", 
         justifyContent:"center", 

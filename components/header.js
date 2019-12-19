@@ -8,7 +8,7 @@ const Head = (props) => {
         <View>
         {/*Displays the App's Title, current section, and menu button */}
             <Header style={styles.headerStyles}>
-                <Left style={styles.headerContent}><Text style={styles.headerText}>Git Push You</Text></Left>
+                <Left style={styles.headerContent}><Text style={styles.headerText}>Level Up</Text></Left>
                 <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
                 <Right style={styles.headerContent}>
                     <Button transparent>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     headerStyles:{
         marginTop:25, //add space above the header
         marginBottom:30, //add space below the header
-        backgroundColor:'navy', //signature purple background
+        backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
         display:'flex', //center the elements
         alignItems:"center", 

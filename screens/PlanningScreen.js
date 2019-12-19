@@ -103,7 +103,7 @@ export default class Milestones extends React.Component {
 const styles = StyleSheet.create({
     inputStyles: {
         width: 300,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     newMilestoneStyle:{
         textAlign:"center",
         fontSize:20,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
     },
     inputContainter:{
         display:"flex", //Ensure the goal id and statement is in a row

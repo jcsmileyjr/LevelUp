@@ -144,7 +144,7 @@ export default class Milestones extends React.Component {
                                         <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
                                             <CheckBox   checked={false} 
                                                         style={styles.checkboxStyle}                                                         
-                                                        color='navy' />
+                                                        color='#2B65EC' />
                                             <Body>
                                                 <Text style={[styles.checkboxText]}>{milestones}</Text>
                                             </Body>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
       },
     checkboxText:{
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         fontSize:30,  //text size        
       },
     checkboxStyle:{
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
       },
       inputStyles: {
         width: 300,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",

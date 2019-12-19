@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
   },
   goalText:{
-    color:'navy',  //signature purple color        
+    color:'#2B65EC',  //signature purple color        
   },
   goalIndex:{
     fontSize:50,  //The goal' index size cover the entire row
