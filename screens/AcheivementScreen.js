@@ -40,7 +40,7 @@ export default class Achievements extends React.Component {
 
         return(
             <Container>
-                <Head />
+                <Head title="Progress" />
                 <Content>
                     <Grid >
                         {
@@ -60,7 +60,7 @@ export default class Achievements extends React.Component {
                     </Grid> 
                     
                 </Content>
-                <Foot />
+                <Foot title="The essence of strategy is to choose what not to do" />
             </Container>
         );
     }
