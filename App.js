@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import {Root} from "native-base";
 
 import GoalScreen from './screens/GoalScreen.js';
 import MilestoneScreen from './screens/MilestonesScreen.js';
@@ -11,7 +12,10 @@ import AchievementScreen from './screens/AcheivementScreen.js';
 export default function App() {
 
   return (
-    <AppContainer />
+    <Root>
+      <AppContainer />
+    </Root>
+    
   );
 }
 

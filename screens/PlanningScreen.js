@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
-import { Container,Content, Icon } from 'native-base';
+import { Container,Content, Icon, Toast } from 'native-base';
 import { AppLoading } from 'expo';//Needed to get Native Base to work. 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
@@ -21,13 +21,13 @@ export default class Milestones extends React.Component {
 
     //Saves the user inputted milestones to state when push the "plus" icon
     updateMilestones = () => {
-        if(this.state.milestoneTitle !== ""){
+        if(this.state.milestoneTitle !== "" && this.state.newGoalTitle !== ""){
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
             listOfMilestones.push(this.state.milestoneTitle);//update with current user input
-            this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
+            this.setState({newMilestones:listOfMilestones, milestoneTitle:""});// update the state with new array of milestones
             this.textInput.clear();
-            
         }else{
+            Toast.show({text:"Must enter a title for a Goal", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
             console.log("updateMilestones function failed")
         }        
     }
