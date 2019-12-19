@@ -8,9 +8,9 @@ import Head from '../components/header.js';// Nav bar displaying app's title, se
 import Foot from '../components/Foot.js';// Footer displaying instructions
 
 //Allows the user to see completed goals/milestones
-export default class Milestones extends React.Component {
-    //isReady is checking if fonts is loaded (needed for NativeBase) 
-    state = { isReady: false};
+export default class Achievements extends React.Component {
+    //isReady is checking if fonts is loaded (needed for NativeBase) & achievements is progress recorded over time
+    state = {isReady: false, achievements:[]};
 
     async componentDidMount() {
       await Expo.Font.loadAsync({
@@ -18,10 +18,23 @@ export default class Milestones extends React.Component {
         'Roboto_medium': require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),     
       });//load fonts needed for certain components in NativeBase
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
+      this.loadData();
     }
 
+    //load the users completed milestones/goals saved to local storage
+    loadData = async () => {
+        try {
+            const savedAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
+            if(savedAchievements !== null){
+              this.setState({achievements:JSON.parse(savedAchievements)});//load saved achievements to state             
+            }    
+          } catch (e) {
+            console.log("Error while loading data on Achievement Screen");
+          }
+    }   
+
     render(){
-        if (!this.state.isReady) {
+        if (!this.state.isReady && this.state.achievements !== null) {
             return <AppLoading />;
           }
 
@@ -29,13 +42,23 @@ export default class Milestones extends React.Component {
             <Container>
                 <Head />
                 <Content>
-                    <Grid>
-                        <Row>
-                            <Col style={styles.progressSectionStyle} size={77}><Text></Text></Col>
-                            <Col style={styles.timelineBar} size={3}><Text></Text></Col>
-                            <Col style={styles.timeStampSection} size={20}><Text></Text></Col>
-                        </Row>
+                    <Grid >
+                        {
+                            this.state.achievements.map((success, index) =>{
+                                return(
+                                    
+                                    <Row key={index}>
+                                        <Col size={60}><Text style={styles.textStyle}>{success.title}</Text></Col>
+                                        <Col style={styles.timelineBar} size={3}><Text></Text></Col>
+                                        <Col size={37}><Text style={styles.dateStyle}>{success.date}</Text></Col>
+                                    </Row>
+                                    
+                                );
+
+                            })
+                        }
                     </Grid> 
+                    
                 </Content>
                 <Foot />
             </Container>
@@ -44,16 +67,22 @@ export default class Milestones extends React.Component {
 }
 
 const styles = StyleSheet.create({
-progressSectionStyle:{
-    backgroundColor:"pink",
+textStyle:{
+    color:'#9C08AB',  //signature purple color
+    fontSize:25,  //text size
+    marginLeft:5,
+    marginBottom:10,
+},
+dateStyle:{
+    color:'#9C08AB',  //signature purple color
+    fontSize:20,  //text size
+    textAlign:"center",
+    marginBottom:10, 
 },
 timelineBar:{
     borderColor:"grey",
     borderWidth:2,
     borderStyle:"solid",
     backgroundColor:"grey",
-},
-timeStampSection:{
-    backgroundColor:"orange",
 }
 });
