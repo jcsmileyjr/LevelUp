@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body } from 'native-base';
-import { AppLoading } from 'expo';//Needed to get Native Base to work. 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
+import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //When a user selects a goal on the GoalScreen, the milestones and title associated with it is displayed here
 export default class Milestones extends React.Component {
@@ -44,7 +44,7 @@ export default class Milestones extends React.Component {
                     goal.milestones = currentMilestones;
                 }
             });
-            
+            this.textInput.clear();
             await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage
         }else{
             console.log("MilestoneScreen: userGoal local storgae is empty")
@@ -75,6 +75,7 @@ export default class Milestones extends React.Component {
         });
         
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
+        this.props.navigation.navigate("Progress");
     }
 
     //Update array of achievements with objects of finished goals/milestones
@@ -94,7 +95,6 @@ export default class Milestones extends React.Component {
             }
 
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
-            this.props.navigation.navigate("Progress");
           } catch (e) {
             console.log("Failed to update acheivements local storage in Milestone screen");
           }
@@ -115,8 +115,8 @@ export default class Milestones extends React.Component {
 */
 
     render() {
-        if (!this.state.isReady && !this.state.steps === null) {
-          return <AppLoading />;
+        if (!this.state.isReady && this.state.steps !== null) {
+          return <PageLoad />;
         }
 
         return(
@@ -131,7 +131,8 @@ export default class Milestones extends React.Component {
                     <View style={styles.inputContainter} >
                         <Icon active name='add'onPress={()=> this.addMilestone()} />
                         <TextInput placeholder="Add Milestone" 
-                        style={styles.inputStyles}             
+                        style={styles.inputStyles}
+                        ref={input => {this.textInput = input}}              
                         onChangeText={(newMilestone)=>this.setState({newMilestone})} />
                     </View>
                                         
@@ -144,7 +145,7 @@ export default class Milestones extends React.Component {
                                         <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
                                             <CheckBox   checked={false} 
                                                         style={styles.checkboxStyle}                                                         
-                                                        color='#9C08AB' />
+                                                        color='#2B65EC' />
                                             <Body>
                                                 <Text style={[styles.checkboxText]}>{milestones}</Text>
                                             </Body>
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
       },
     checkboxText:{
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         fontSize:30,  //text size        
       },
     checkboxStyle:{
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
       },
       inputStyles: {
         width: 300,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",

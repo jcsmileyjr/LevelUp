@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
-import { Container,Content, Icon } from 'native-base';
-import { AppLoading } from 'expo';//Needed to get Native Base to work. 
+import { Container,Content, Icon, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
+import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //Allows the user to create a goal with milestones
 export default class Milestones extends React.Component {
@@ -21,13 +21,13 @@ export default class Milestones extends React.Component {
 
     //Saves the user inputted milestones to state when push the "plus" icon
     updateMilestones = () => {
-        if(this.state.milestoneTitle !== ""){
+        if(this.state.milestoneTitle !== "" && this.state.newGoalTitle !== ""){
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
             listOfMilestones.push(this.state.milestoneTitle);//update with current user input
-            this.setState({newMilestones:listOfMilestones});// update the state with new array of milestones
+            this.setState({newMilestones:listOfMilestones, milestoneTitle:""});// update the state with new array of milestones
             this.textInput.clear();
-            
         }else{
+            Toast.show({text:"Must enter a title for a Goal", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
             console.log("updateMilestones function failed")
         }        
     }
@@ -51,7 +51,7 @@ export default class Milestones extends React.Component {
 
     render(){
         if (!this.state.isReady) {
-            return <AppLoading />;
+            return <PageLoad />;
         }
 
         return(
@@ -103,7 +103,7 @@ export default class Milestones extends React.Component {
 const styles = StyleSheet.create({
     inputStyles: {
         width: 300,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
         textAlign:"center",
         height:40,
         borderColor:"grey",
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     newMilestoneStyle:{
         textAlign:"center",
         fontSize:20,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature purple color
     },
     inputContainter:{
         display:"flex", //Ensure the goal id and statement is in a row
