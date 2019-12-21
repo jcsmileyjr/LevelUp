@@ -14,34 +14,35 @@ const Head = (props) => {
                 <Left style={styles.headerContent}><Text style={styles.headerText}>Level Up</Text></Left>
                 <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
                 <Right style={styles.headerContent}>
-                    <Button transparent onPress={() => setModalVisble(true)}>
+                    <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
                     </Button>
                 </Right>
             </Header>
-            <Modal  animationType="slide" 
-                    visible={isVisible}
-                    transparent={true}>
-                <Container>
-                  <Grid>
-                    <Row>
-                      <Col><Text>1</Text></Col>
-                      <Col><Text>1</Text></Col>
-                      <Col><Text>1</Text></Col>
-                    </Row>
-                    <Row >
-                      <Col style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
-                          <View style={styles.buttonStyle}>
-                            <Text style={styles.buttonText}>Close</Text>
-                          </View>
-                        </TouchableNativeFeedback>
-                      </Col>
-                    </Row>
-                  </Grid>
-                </Container>
-              
-            </Modal>            
+            <View style={styles.modalStyle}>
+              <Modal  animationType="slide" 
+                      visible={isVisible}
+                      transparent={true}>
+                  <View style={styles.modalContentStyle}>
+                    <Grid>
+                      <Row>
+                        <Col><Text style={styles.modalText}>19090</Text></Col>
+                        <Col><Text style={styles.modalText}>8881</Text></Col>
+                        <Col><Text style={styles.modalText}>14444</Text></Col>
+                      </Row>
+                      <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
+                            <View style={styles.buttonStyle}>
+                              <Text style={styles.buttonText}>Close</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>
+                    </Grid>
+                  </View>              
+              </Modal>
+            </View>            
         </View>
     );
 }
@@ -89,5 +90,21 @@ const styles = StyleSheet.create({
         color: "#ffffff", //text color
         textAlign:"center", //center the text
         fontWeight:"bold",  //Bigger text
+      },
+      modalStyle:{
+        alignContent:"center", 
+        justifyContent:"center",
+      },
+      modalContentStyle:{
+        justifyContent:"center", 
+        alignItems:"center", 
+        marginTop:80, 
+        marginLeft:40, 
+        backgroundColor:"navy",
+        height:300, 
+        width:"80%"
+      }, 
+      modalText:{
+        color:"white",
       }      
 });
