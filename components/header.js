@@ -96,12 +96,10 @@ const styles = StyleSheet.create({
         justifyContent:"center",
       },
       modalContentStyle:{
-        justifyContent:"center", 
-        alignItems:"center", 
         marginTop:80, 
         marginLeft:40, 
         backgroundColor:"navy",
-        height:300, 
+        height:400, 
         width:"80%"
       }, 
       modalText:{
