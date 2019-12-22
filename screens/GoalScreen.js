@@ -70,7 +70,7 @@ export default class Goal extends React.Component {
                   <Card key={id} transparent>
                     <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
                       <Body style={styles.goalStyle}>
-                        <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}</Text>
+                        <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}.</Text>
                         <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
                       </Body>
                     </CardItem>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     color:'#2B65EC',  //signature purple color        
   },
   goalIndex:{
-    fontSize:50,  //The goal' index size cover the entire row
+    fontSize:30,  //The goal' index size cover the entire row
     marginRight:20, //space between the index and statement
   },
   goalBody:{
