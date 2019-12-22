@@ -26,10 +26,15 @@ const Head = (props) => {
                   <View style={styles.modalContentStyle}>
                     <Grid>
                       <Row>
-                        <Col><Text style={styles.modalText}>19090</Text></Col>
-                        <Col><Text style={styles.modalText}>8881</Text></Col>
-                        <Col><Text style={styles.modalText}>14444</Text></Col>
+                        <Col><Icon name="home" style={styles.iconStyle} /></Col>
+                        <Col><Icon name="add" style={styles.iconStyle} /></Col>
+                        <Col><Icon name="md-trophy" style={styles.iconStyle} /></Col>
                       </Row>
+                      <Row>
+                        <Col><Text style={styles.iconText}>View Goals</Text></Col>
+                        <Col><Col><Text style={styles.iconText}>New Goals</Text></Col></Col>
+                        <Col><Col><Text style={styles.iconText}>View Progress</Text></Col></Col>
+                      </Row>                      
                       <Row >
                         <Col style={styles.buttonContainer}>
                           <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
@@ -96,13 +101,22 @@ const styles = StyleSheet.create({
         justifyContent:"center",
       },
       modalContentStyle:{
-        marginTop:80, 
-        marginLeft:40, 
-        backgroundColor:"navy",
-        height:400, 
+        marginTop:150, //help center the modal
+        marginLeft:40,  //help center the modal
+        backgroundColor:"lightgrey",
+        height:200, 
         width:"80%"
       }, 
       modalText:{
         color:"white",
+      },
+      iconStyle:{       //Style the icons in the modal for the menu
+        color:"#2B65EC",
+        fontSize:70,
+        textAlign:"center",
+      },
+      iconText:{
+        fontSize:16,
+        color:"navy"
       }      
 });
