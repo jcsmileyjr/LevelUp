@@ -1,9 +1,12 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TouchableNativeFeedback, Modal, Alert } from 'react-native';
 
-import { Container, Text, Header, Content, Left, Body, Right, Button, Icon} from 'native-base';
+import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
+
+  const changeModalVisible = () => { setModalVisble(!isVisible)};
+  const [isVisible, setModalVisble] = useState(false);
     return(
         <View>
         {/*Displays the App's Title, current section, and menu button */}
@@ -11,11 +14,40 @@ const Head = (props) => {
                 <Left style={styles.headerContent}><Text style={styles.headerText}>Level Up</Text></Left>
                 <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
                 <Right style={styles.headerContent}>
-                    <Button transparent>
+                    <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
                     </Button>
                 </Right>
-            </Header>            
+            </Header>
+            <View style={styles.modalStyle}>
+              <Modal  animationType="slide" 
+                      visible={isVisible}
+                      transparent={true}>
+                  <View style={styles.modalContentStyle}>
+                    <Grid>
+                      <Row>
+                        <Col><Icon name="home" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Goal"); setModalVisble(false);}} /></Col>
+                        <Col><Icon name="add" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Planning"); setModalVisble(false);}} /></Col>
+                        <Col><Icon name="md-trophy" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Progress"); setModalVisble(false);}} /></Col>
+                      </Row>
+                      <Row>
+                        <Col><Text style={styles.iconText}>View Goals</Text></Col>
+                        <Col><Col><Text style={styles.iconText}>New Goals</Text></Col></Col>
+                        <Col><Col><Text style={styles.iconText}>View Progress</Text></Col></Col>
+                      </Row>                      
+                      <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
+                            <View style={styles.buttonStyle}>
+                              <Text style={styles.buttonText}>Close</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>
+                    </Grid>
+                  </View>              
+              </Modal>
+            </View>            
         </View>
     );
 }
@@ -47,4 +79,45 @@ const styles = StyleSheet.create({
         textDecorationLine:"underline", //Text is underlined
         fontWeight:"bold",  //Bigger text
       },
+      buttonStyle:{
+        backgroundColor:'navy',//signature purple color 
+        padding: 10, //space between button title and border
+        margin: 10, //whitespace between button and other elements
+        width: 250, //width of button
+        borderColor:'navy',//signature purple color
+        borderRadius: 15, //round the corners    
+      },
+      buttonContainer:{
+        alignItems:"center",  //help center the button
+        justifyContent:"center",
+      },
+      buttonText:{
+        color: "#ffffff", //text color
+        textAlign:"center", //center the text
+        fontWeight:"bold",  //Bigger text
+      },
+      modalStyle:{
+        alignContent:"center", 
+        justifyContent:"center",
+      },
+      modalContentStyle:{
+        marginTop:150, //help center the modal
+        marginLeft:40,  //help center the modal
+        backgroundColor:"lightgrey",
+        height:200, 
+        width:"80%"
+      }, 
+      modalText:{
+        color:"white",
+      },
+      iconStyle:{       //Style the icons in the modal for the menu
+        color:"#2B65EC",
+        fontSize:70,
+        textAlign:"center",
+      },
+      iconText:{
+        fontSize:16,
+        color:"navy",
+        textAlign:"center",
+      }      
 });
