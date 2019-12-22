@@ -105,7 +105,7 @@ export default class Milestones extends React.Component {
         const month = new Date().getMonth();
         const year = new Date().getFullYear();
         return day + "/" + month + "/" + year;
-    }
+    }   
 
 /* USE ONLY TO RESET DATA
   resetData = async () => {

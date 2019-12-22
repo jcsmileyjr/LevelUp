@@ -47,7 +47,7 @@ export default class Milestones extends React.Component {
         }
     }
 
-    clearText = () => { this.setState({milestoneTitle:""})};
+    clearText = () => { this.setState({milestoneTitle:""})};  
 
     render(){
         if (!this.state.isReady) {
@@ -56,7 +56,7 @@ export default class Milestones extends React.Component {
 
         return(
             <Container>
-                <Head title="Planning" />
+                <Head navigation={this.props.navigation} title="Planning" />
                 <Content>
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >

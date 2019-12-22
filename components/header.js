@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, Modal, Alert } from 'react-native';
 
 import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
-//onClick={() => setCount(count + 1)}
+
 const Head = (props) => {
 
   const changeModalVisible = () => { setModalVisble(!isVisible)};
@@ -26,9 +26,9 @@ const Head = (props) => {
                   <View style={styles.modalContentStyle}>
                     <Grid>
                       <Row>
-                        <Col><Icon name="home" style={styles.iconStyle} /></Col>
-                        <Col><Icon name="add" style={styles.iconStyle} /></Col>
-                        <Col><Icon name="md-trophy" style={styles.iconStyle} /></Col>
+                        <Col><Icon name="home" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Goal"); setModalVisble(false);}} /></Col>
+                        <Col><Icon name="add" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Planning"); setModalVisble(false);}} /></Col>
+                        <Col><Icon name="md-trophy" style={styles.iconStyle} onPress={()=> {props.navigation.navigate("Progress"); setModalVisble(false);}} /></Col>
                       </Row>
                       <Row>
                         <Col><Text style={styles.iconText}>View Goals</Text></Col>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
       },
       iconText:{
         fontSize:16,
-        color:"navy"
+        color:"navy",
+        textAlign:"center",
       }      
 });

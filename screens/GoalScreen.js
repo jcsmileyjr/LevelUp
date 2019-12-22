@@ -59,7 +59,7 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-          <Head title="Goals" />
+          <Head navigation={this.props.navigation} title="Goals" />
           {/*Refresh data */}
           <NavigationEvents onDidFocus={() => this.storeData()} /> 
           <Content>
