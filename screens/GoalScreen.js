@@ -21,7 +21,7 @@ export default class Goal extends React.Component {
     
     this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
     this.storeData();//loads data from local storage to state
-    //this.resetData(); USE ONLY TO RESET DATA
+    //this.resetData(); //USE ONLY TO RESET DATA
   }
 
   //Call during mounting, loads data from local storage. If that is empty, then loads data from sample learning path.

@@ -18,6 +18,7 @@ export default class Milestones extends React.Component {
       });//load fonts needed for certain components in NativeBase
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
       this.getMilestones();//loads data (milestones & title) from local storage into the state
+      //this.resetData();
     }
 
     //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
@@ -104,7 +105,7 @@ export default class Milestones extends React.Component {
         const day = new Date().getDate();
         const month = new Date().getMonth();
         const year = new Date().getFullYear();
-        return day + "/" + month + "/" + year;
+        return month + "/" + day + "/" + year;
     }   
 
 /* USE ONLY TO RESET DATA
@@ -122,7 +123,7 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head title="Milestones" /> 
+                <Head  navigation={this.props.navigation} title="Milestones" /> 
                 <Content> 
                     {/*Display the user's selected goal title */}
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
