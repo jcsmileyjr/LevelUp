@@ -56,7 +56,7 @@ export default class Milestones extends React.Component {
 
         return(
             <Container>
-                <Head navigation={this.props.navigation} title="Planning" />
+                <Head navigation={this.props.navigation} title="Create your Learning Path" />
                 <Content>
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
