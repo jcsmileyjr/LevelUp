@@ -40,7 +40,7 @@ export default class Achievements extends React.Component {
 
         return(
             <Container>
-                <Head navigation={this.props.navigation} title="Progress" />
+                <Head navigation={this.props.navigation} title="Timeline of Successes" />
                 <Content>
                     <Grid >
                         {

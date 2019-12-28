@@ -11,9 +11,9 @@ const Head = (props) => {
         <View>
         {/*Displays the App's Title, current section, and menu button */}
             <Header style={styles.headerStyles}>
-                <Left style={styles.headerContent}><Text style={styles.headerText}>Level Up</Text></Left>
-                <Body style={styles.headerContent, styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
-                <Right style={styles.headerContent}>
+                <Left style={styles.appTitle}><Text style={styles.headerText}>Level Up</Text></Left>
+                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
+                <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
                     </Button>
@@ -60,12 +60,12 @@ const styles = StyleSheet.create({
         marginBottom:30, //add space below the header
         backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
-        display:'flex', //center the elements
-        alignItems:"center", 
-        justifyContent:"center"
       },
-      headerContent:{
-        flex:1, //equal space among 3 elements
+      appTitle:{
+        flex:2, //equal space among Left and Right header elements
+      },
+      headerMenu:{
+        flex:1,
       },
       headerText:{
         color:"white",  //white text
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
       },
       headerSection:{
         alignItems:"center",  //help center the text
-        justifyContent:"center",    
+        justifyContent:"center",
+        flex: 5,// Add more space to display text
       },
       headerTitle:{
         textDecorationLine:"underline", //Text is underlined

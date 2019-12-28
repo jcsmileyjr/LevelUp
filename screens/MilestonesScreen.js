@@ -103,7 +103,7 @@ export default class Milestones extends React.Component {
 
     getDate = ()=>{
         const day = new Date().getDate();
-        const month = new Date().getMonth();
+        const month = (new Date().getMonth()) + 1;
         const year = new Date().getFullYear();
         return month + "/" + day + "/" + year;
     }   
@@ -123,7 +123,7 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head  navigation={this.props.navigation} title="Milestones" /> 
+                <Head  navigation={this.props.navigation} title="Add/Delete Milestones" /> 
                 <Content> 
                     {/*Display the user's selected goal title */}
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
