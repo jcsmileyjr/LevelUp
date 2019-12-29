@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {StyleSheet} from 'react-native';
-import {Container,Content, Grid, Col, Row, Text, H1, Icon} from 'native-base';
+import {Container,Content, Grid, Col, Row, Text, H1, Icon, List, ListItem} from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
@@ -9,13 +9,13 @@ const CongratsNewGoal = () => {
     const [currentMilestones, setMilestones] = useState([]);
  
     useEffect(() =>{
-        this.getMilestones()
+        this.getMilestones();
     });
 
     //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
     getMilestones = async () => {
         setGoal(await AsyncStorage.getItem('currentGoalTitle'));// load a title string 
-        setMilestones(await AsyncStorage.getItem('currentMilestones'));//load a array of milestones 
+        setMilestones(JSON.parse(await AsyncStorage.getItem('currentMilestones')));//load a array of milestones 
     }    
 
     return(
@@ -28,10 +28,18 @@ const CongratsNewGoal = () => {
                     <Row>
                         <Col><Icon name="md-bulb" style={styles.iconStyle} /></Col>
                     </Row>
-                    <Row><H1>{currentGoal}</H1></Row>
+                    <Row><H1 style={styles.goalStyle}>{currentGoal}</H1></Row>
                     <Row>
                         <Col>
-                            <Text>Array of milestones</Text>
+                            <List>
+                                {currentMilestones.map((milestone, id) => {
+                                    return(
+                                        <ListItem key={id}>
+                                            <Text style={styles.milestoneStyle}>{milestone}</Text>
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
                         </Col>
                     </Row>
                 </Grid>
@@ -61,5 +69,11 @@ const styles = StyleSheet.create({
       fontSize:16,
       color:"navy",
       textAlign:"center",
+    },
+    goalStyle:{
+        textAlign:"center",
+    },
+    milestoneStyle:{
+        marginLeft:50,
     }     
 });
