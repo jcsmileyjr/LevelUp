@@ -47,6 +47,12 @@ export default class Milestones extends React.Component {
         }
     }
 
+    //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
+    setCurrentMilestones = () =>{
+        AsyncStorage.setItem("currentMilestones", JSON.stringify(this.state.newMilestones));//saves the goal's milestones
+        AsyncStorage.setItem("currentGoalTitle", JSON.stringify(this.state.newGoalTitle));//saves the goal's title
+    }    
+
     clearText = () => { this.setState({milestoneTitle:""})};  
 
     render(){
@@ -87,7 +93,7 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                    <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals();}} >
+                    <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones()}} >
                         <View style={styles.buttonStyle}>
                         <Text style={styles.buttonText}>FINISH</Text>
                         </View>
