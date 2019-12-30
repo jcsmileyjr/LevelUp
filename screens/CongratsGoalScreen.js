@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableNativeFeedback, View} from 'react-native';
 import {Container,Content, Grid, Col, Row, Text, H1, Icon, List, ListItem} from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
-const CongratsNewGoal = () => {
+const CongratsNewGoal = ({navigation}) => {
     const [currentGoal, setGoal] = useState("");
     const [currentMilestones, setMilestones] = useState([]);
  
@@ -42,6 +42,18 @@ const CongratsNewGoal = () => {
                             </List>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                            {/**Display a button to add a new goal */}
+                            <View style={styles.buttonContainer}>
+                                <TouchableNativeFeedback onPress={() => {navigation.navigate("Goal")} } >
+                                    <View style={styles.buttonStyle}>
+                                        <Text style={styles.buttonText}>Close</Text>
+                                    </View>
+                                </TouchableNativeFeedback>
+                            </View>                         
+                        </Col>
+                    </Row>
                 </Grid>
             </Content>
         </Container>
@@ -75,5 +87,22 @@ const styles = StyleSheet.create({
     },
     milestoneStyle:{
         marginLeft:50,
+    },
+    buttonStyle:{
+      backgroundColor:'navy',//signature purple color 
+      padding: 10, //space between button title and border
+      margin: 10, //whitespace between button and other elements
+      width: 250, //width of button
+      borderColor:'navy',//signature purple color
+      borderRadius: 15, //round the corners    
+    },
+    buttonContainer:{
+      alignItems:"center",  //help center the button
+      justifyContent:"center",
+    },
+    buttonText:{
+      color: "#ffffff", //text color
+      textAlign:"center", //center the text
+      fontWeight:"bold",  //Bigger text
     }     
 });

@@ -93,11 +93,11 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                    <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones()}} >
-                        <View style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>FINISH</Text>
-                        </View>
-                    </TouchableNativeFeedback>
+                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Congrats"); this.updateGoals(); this.setCurrentMilestones()}} >
+                            <View style={styles.buttonStyle}>
+                                <Text style={styles.buttonText}>FINISH</Text>
+                            </View>
+                        </TouchableNativeFeedback>
                     </View> 
                 </Content>
                 <Foot title="*Creat SMART goals" />
