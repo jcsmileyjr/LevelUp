@@ -17,6 +17,7 @@ const CongratsNewGoal = ({navigation}) => {
         setGoal(await AsyncStorage.getItem('currentGoalTitle'));// load a title string 
         setMilestones(JSON.parse(await AsyncStorage.getItem('currentMilestones')));//load a array of milestones 
     }    
+    /*Possible solution to "Unmounted Component" bug is to check if currentMilestones is here before rendering */
 
     return(
         <Container>
