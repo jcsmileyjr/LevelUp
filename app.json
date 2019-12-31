@@ -4,6 +4,9 @@
     "slug": "LevelUp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
+    "android":{
+      "package":"com.levelup.mobile"
+    },
     "platforms": [
       "ios",
       "android",

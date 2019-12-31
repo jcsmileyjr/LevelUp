@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body } from 'native-base';
+import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -75,6 +75,7 @@ export default class Milestones extends React.Component {
             }
         });
         
+        this.showCongratsToast();
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
         this.props.navigation.navigate("Progress");
     }
@@ -108,6 +109,17 @@ export default class Milestones extends React.Component {
         return month + "/" + day + "/" + year;
     }   
 
+    showCongratsToast = () => {
+        Toast.show({
+            text:"Congrats, you have completed a milestone.",
+            textStyle:{color:"white"},
+            buttonText: "Close",
+            type:"success",
+            position:"bottom",
+            duration: 3000,
+        });
+    }    
+
 /* USE ONLY TO RESET DATA
   resetData = async () => {
     const testing = []
@@ -123,11 +135,11 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head  navigation={this.props.navigation} title="Add/Delete Milestones" /> 
+                <Head  navigation={this.props.navigation}/> 
                 <Content> 
+                    <H1 style={styles.pageTitleStyle}>Milestones</H1>
                     {/*Display the user's selected goal title */}
-                    <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
-
+                    <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
                     {/*Display a input box to create a new milestone */}
                     <View style={styles.inputContainter} >
                         <Icon active name='add'onPress={()=> this.addMilestone()} />
@@ -137,25 +149,18 @@ export default class Milestones extends React.Component {
                         onChangeText={(newMilestone)=>this.setState({newMilestone})} />
                     </View>
                                         
-                    {/*Display the user's selected milestones */}                                        
+                    {/*Display the user's selected milestones */} 
+                    <List>
                     {
                         this.state.steps.map((milestones, index) =>{
-                            return(                                  
-                                <View key={index} >
-                                    <Card transparent >
-                                        <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
-                                            <CheckBox   checked={false} 
-                                                        style={styles.checkboxStyle}                                                         
-                                                        color='#2B65EC' />
-                                            <Body>
-                                                <Text style={[styles.checkboxText]}>{milestones}</Text>
-                                            </Body>
-                                        </CardItem>
-                                    </Card>
-                                </View>                               
+                            return(
+                                <ListItem key={index} onPress={() => {this.deleteMilestone(index)}}>
+                                    <Text style={styles.milestoneText}>{milestones}</Text>
+                                </ListItem>
                             );
                         })
                     }
+                    </List>
                 </Content>
                 <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
@@ -164,22 +169,11 @@ export default class Milestones extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    milestoneStyle:{
-        display:"flex", //Ensure the goal id and statement is in a row
-        flexDirection:"row",
-      },
-    checkboxText:{
+    milestoneText:{
         color:'#2B65EC',  //signature purple color
-        fontSize:30,  //text size        
-      },
-    checkboxStyle:{
-        width: 40, //width of the checkbox
-        height: 40, //height of the checkbox
-        marginRight:20, //space between the index and statement
       },
       milestoneTitle: {
           textAlign:"center",
-          fontSize:35,
           fontWeight:"bold",  //Bigger text
           color:'navy',  //signature purple color
       },
@@ -199,5 +193,9 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",  //help center the button
         justifyContent:"center",
-    }         
+    },
+    pageTitleStyle:{
+        color:"navy",
+        textAlign:"center",
+      },         
 });

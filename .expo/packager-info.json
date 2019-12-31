@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://pm-x34.jcsmileyjr.levelup.exp.direct",
-  "packagerNgrokUrl": "https://packager.pm-x34.jcsmileyjr.levelup.exp.direct",
-  "ngrokPid": 13324,
+  "expoServerNgrokUrl": "https://tr-8dz.jcsmileyjr.levelup.exp.direct",
+  "packagerNgrokUrl": "https://packager.tr-8dz.jcsmileyjr.levelup.exp.direct",
+  "ngrokPid": 22416,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 9184,
+  "packagerPid": 18952,
   "webpackServerPort": null
 }

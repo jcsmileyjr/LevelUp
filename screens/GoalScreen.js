@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import {NavigationEvents} from 'react-navigation';
 
-import { Container, Text, Header, Content, Footer, Left, Body, Right, Button, Icon, Title, Card, CardItem } from 'native-base';
+import { Container, Text,Content, List, ListItem, H1 } from 'native-base';
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
@@ -59,33 +59,23 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-          <Head navigation={this.props.navigation} title="View Current Goals" />
+          <Head navigation={this.props.navigation} />
           {/*Refresh data */}
           <NavigationEvents onDidFocus={() => this.storeData()} /> 
           <Content>
             {/**Display a user's goals */}
+            <H1 style={styles.goalStyle}>Goals</H1>
+            <List>
             {
-              this.state.userGoals.map((goal, id) => {
+              this.state.userGoals.map((goal,id)=>{
                 return(
-                  <Card key={id} transparent>
-                    <CardItem  button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
-                      <Body style={styles.goalStyle}>
-                        <Text style={[styles.goalText, styles.goalIndex]}>{id + 1}.</Text>
-                        <Text style={[styles.goalText, styles.goalBody]}>{goal.goal}</Text>
-                      </Body>
-                    </CardItem>
-                  </Card>                  
+                  <ListItem key={id} button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
+                    <Text style={styles.goalText}>{goal.goal}</Text>
+                  </ListItem>
                 );
               })
-            } 
-            {/**Display a button to add a new goal */}
-            <View style={styles.buttonContainer}>
-              <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Planning")} >
-                <View style={styles.buttonStyle}>
-                  <Text style={styles.buttonText}>NEW GOAL</Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>            
+            }
+            </List>            
           </Content>
           <Foot title="* Click on a Goal to view Milestones for it." />         
       </Container>
@@ -95,34 +85,10 @@ export default class Goal extends React.Component {
 
 const styles = StyleSheet.create({
   goalStyle:{
-    display:"flex", //Ensure the goal id and statement is in a row
-    flexDirection:"row",
+    color:"navy",
+    textAlign:"center",
   },
   goalText:{
     color:'#2B65EC',  //signature purple color        
-  },
-  goalIndex:{
-    fontSize:30,  //The goal' index size cover the entire row
-    marginRight:20, //space between the index and statement
-  },
-  goalBody:{
-    fontSize:30,  //text size
-  },
-  buttonStyle:{
-    backgroundColor:'navy',//signature purple color 
-    padding: 10, //space between button title and border
-    margin: 10, //whitespace between button and other elements
-    width: 250, //width of button
-    borderColor:'green',//signature purple color
-    borderRadius: 15, //round the corners    
-  },
-  buttonContainer:{
-    alignItems:"center",  //help center the button
-    justifyContent:"center",
-  },
-  buttonText:{
-    color: "#ffffff", //text color
-    textAlign:"center", //center the text
-    fontWeight:"bold",  //Bigger text
   }
 });
