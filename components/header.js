@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal, Alert } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
 
-import { Container, Text, Header, Content, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
+import { Container, Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
 
@@ -11,8 +11,13 @@ const Head = (props) => {
         <View>
         {/*Displays the App's Title, current section, and menu button */}
             <Header style={styles.headerStyles}>
-                <Left style={styles.appTitle}><Text style={styles.headerText}>Level Up</Text></Left>
-                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>{props.title}</Text></Body>
+                <Left style={styles.headerAddGoal}>
+                    <Button iconLeft transparent onPress={() => props.navigation.navigate("Planning")}>
+                        <Icon name='md-add' />
+                    </Button>
+                    <Text style={{"color":"white"}}>Create Goal</Text>
+                </Left>
+                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up</Text></Body>
                 <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
@@ -61,20 +66,20 @@ const styles = StyleSheet.create({
         backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
       },
-      appTitle:{
-        flex:2, //equal space among Left and Right header elements
+      headerAddGoal:{
+        flex:4, //equal space among Left and Right header elements
+        flexDirection:"row",//help center the text and add icon
+        alignItems:"center", 
       },
       headerMenu:{
-        flex:1,
+        flex:2,
       },
       headerText:{
         color:"white",  //white text
         fontSize:20, //size of text
       },
       headerSection:{
-        alignItems:"center",  //help center the text
-        justifyContent:"center",
-        flex: 5,// Add more space to display text
+        flex: 4,// Add more space to display text
       },
       headerTitle:{
         textDecorationLine:"underline", //Text is underlined
