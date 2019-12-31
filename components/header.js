@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
 
-import { Container, Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
+import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
-
   const changeModalVisible = () => { setModalVisble(!isVisible)};
   const [isVisible, setModalVisble] = useState(false);
     return(
@@ -65,69 +64,69 @@ const styles = StyleSheet.create({
         marginBottom:30, //add space below the header
         backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
-      },
-      headerAddGoal:{
-        flex:4, //equal space among Left and Right header elements
-        flexDirection:"row",//help center the text and add icon
-        alignItems:"center", 
-      },
-      headerAddGoalText:{
-        color: "white", //text color
-        fontWeight:"bold",  //Bigger text
-      },
-      headerMenu:{
-        flex:2,
-      },
-      headerText:{
-        color:"white",  //white text
-        fontSize:20, //size of text
-      },
-      headerSection:{
-        flex: 4,// Add more space to display text
-      },
-      headerTitle:{
-        textDecorationLine:"underline", //Text is underlined
-        fontWeight:"bold",  //Bigger text
-      },
-      buttonStyle:{
-        backgroundColor:'navy',//signature purple color 
-        padding: 10, //space between button title and border
-        margin: 10, //whitespace between button and other elements
-        width: 250, //width of button
-        borderColor:'navy',//signature purple color
-        borderRadius: 15, //round the corners    
-      },
-      buttonContainer:{
-        alignItems:"center",  //help center the button
-        justifyContent:"center",
-      },
-      buttonText:{
-        color: "#ffffff", //text color
-        textAlign:"center", //center the text
-        fontWeight:"bold",  //Bigger text
-      },
-      modalStyle:{
-        alignContent:"center", 
-        justifyContent:"center",
-      },
-      modalContentStyle:{
-        marginTop:150, //help center the modal
-        marginLeft:40,  //help center the modal
-        backgroundColor:"lightgrey",
-        height:200, 
-        width:"80%"
-      }, 
-      modalText:{
-        color:"white",
-      },
-      iconStyle:{       //Style the icons in the modal for the menu
-        color:"#2B65EC",
-        fontSize:70,
-        textAlign:"center",
-      },
-      iconText:{
-        fontSize:16,
-        color:"navy",
-        textAlign:"center",
-      }      
+    },
+    headerAddGoal:{
+      flex:4, //equal space among Left and Right header elements
+      flexDirection:"row",//help center the text and add icon
+      alignItems:"center", 
+    },
+    headerAddGoalText:{
+      color: "white", //text color
+      fontWeight:"bold",  //Bigger text
+    },
+    headerMenu:{
+      flex:2,
+    },
+    headerText:{
+      color:"white",  //white text
+      fontSize:20, //size of text
+    },
+    headerSection:{
+      flex: 4,// Add more space to display text
+    },
+    headerTitle:{
+      textDecorationLine:"underline", //Text is underlined
+      fontWeight:"bold",  //Bigger text
+    },
+    buttonStyle:{
+      backgroundColor:'navy',//signature purple color 
+      padding: 10, //space between button title and border
+      margin: 10, //whitespace between button and other elements
+      width: 250, //width of button
+      borderColor:'navy',//signature purple color
+      borderRadius: 15, //round the corners    
+    },
+    buttonContainer:{
+      alignItems:"center",  //help center the button
+      justifyContent:"center",
+    },
+    buttonText:{
+      color: "#ffffff", //text color
+      textAlign:"center", //center the text
+      fontWeight:"bold",  //Bigger text
+    },
+    modalStyle:{
+      alignContent:"center", 
+      justifyContent:"center",
+    },
+    modalContentStyle:{
+      marginTop:150, //help center the modal
+      marginLeft:40,  //help center the modal
+      backgroundColor:"lightgrey",
+      height:200, 
+      width:"80%"
+    }, 
+    modalText:{
+      color:"white",
+    },
+    iconStyle:{       //Style the icons in the modal for the menu
+      color:"#2B65EC",
+      fontSize:70,
+      textAlign:"center",
+    },
+    iconText:{
+      fontSize:16,
+      color:"navy",
+      textAlign:"center",
+    }      
 });
