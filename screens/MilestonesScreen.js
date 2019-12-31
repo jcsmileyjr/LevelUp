@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body, Toast } from 'native-base';
+import { Container, Text, Content, CheckBox, Icon, H1, Card, CardItem, Body, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -135,8 +135,9 @@ export default class Milestones extends React.Component {
         return(
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
-                <Head  navigation={this.props.navigation} title="Add/Delete Milestones" /> 
+                <Head  navigation={this.props.navigation}/> 
                 <Content> 
+                    <H1 style={styles.pageTitleStyle}>Milestones</H1>
                     {/*Display the user's selected goal title */}
                     <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
 
@@ -211,5 +212,9 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",  //help center the button
         justifyContent:"center",
-    }         
+    },
+    pageTitleStyle:{
+        color:"navy",
+        textAlign:"center",
+      },         
 });

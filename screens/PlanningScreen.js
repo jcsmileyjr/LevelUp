@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
-import { Container,Content, Icon, Toast } from 'native-base';
+import { Container,Content, Icon, Toast, H1 } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -73,8 +73,9 @@ export default class Milestones extends React.Component {
 
         return(
             <Container>
-                <Head navigation={this.props.navigation} title="Create your Learning Path" />
+                <Head navigation={this.props.navigation} />
                 <Content>
+                    <H1 style={styles.pageTitleStyle}>Planning</H1>
                     <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
                         <TextInput  placeholder="Type Goal" 
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     },
     goalTitle:{
         textAlign:"center",
-        fontSize:25,
+        fontSize:20,
         color:'navy',  //signature purple color
     },
     newMilestoneStyle:{
@@ -161,5 +162,9 @@ const styles = StyleSheet.create({
       color: "#ffffff", //text color
       textAlign:"center", //center the text
       fontWeight:"bold",  //Bigger text
-    }
+    },
+    pageTitleStyle:{
+        color:"navy",
+        textAlign:"center",
+    },
 });

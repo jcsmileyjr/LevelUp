@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
-import { Container,Content, Icon, Grid, Col, Row } from 'native-base'; 
+import { Container,Content, H1, Grid, Col, Row } from 'native-base'; 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -42,6 +42,7 @@ export default class Achievements extends React.Component {
             <Container>
                 <Head navigation={this.props.navigation} title="Timeline of Successes" />
                 <Content>
+                    <H1 style={styles.pageTitleStyle}>Timeline of Successes</H1>
                     <Grid >
                         {
                             this.state.achievements.map((success, index) =>{
@@ -84,5 +85,9 @@ timelineBar:{
     borderWidth:2,
     borderStyle:"solid",
     backgroundColor:"grey",
-}
+},
+pageTitleStyle:{
+    color:"navy",
+    textAlign:"center",
+  },
 });
