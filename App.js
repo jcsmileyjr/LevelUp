@@ -8,7 +8,6 @@ import GoalScreen from './screens/GoalScreen.js';
 import MilestoneScreen from './screens/MilestonesScreen.js';
 import PlanningScreen from './screens/PlanningScreen.js';
 import AchievementScreen from './screens/AcheivementScreen.js';
-import CongratsNewGoal from './screens/CongratsGoalScreen.js';
 
 export default function App() {
 
@@ -24,7 +23,7 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen, Progress:AchievementScreen, Congrats:CongratsNewGoal},navigationOptions);
+const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen, Progress:AchievementScreen},navigationOptions);
 
 
 const AppContainer = createAppContainer(AppNavigator);
