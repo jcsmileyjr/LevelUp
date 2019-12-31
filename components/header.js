@@ -13,9 +13,9 @@ const Head = (props) => {
             <Header style={styles.headerStyles}>
                 <Left style={styles.headerAddGoal}>
                     <Button iconLeft transparent onPress={() => props.navigation.navigate("Planning")}>
-                        <Icon name='md-add' />
+                        <Icon style={{fontSize:30}} name='md-add' />
                     </Button>
-                    <Text style={{"color":"white"}}>Create Goal</Text>
+                    <Text style={styles.headerAddGoalText}>Create Goal</Text>
                 </Left>
                 <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up</Text></Body>
                 <Right style={styles.headerMenu}>
@@ -70,6 +70,10 @@ const styles = StyleSheet.create({
         flex:4, //equal space among Left and Right header elements
         flexDirection:"row",//help center the text and add icon
         alignItems:"center", 
+      },
+      headerAddGoalText:{
+        color: "white", //text color
+        fontWeight:"bold",  //Bigger text
       },
       headerMenu:{
         flex:2,
