@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body } from 'native-base';
+import { Container, Text, Content, Button, CheckBox, Icon, Item, Card, CardItem, Body, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -75,6 +75,7 @@ export default class Milestones extends React.Component {
             }
         });
         
+        this.showCongratsToast();
         await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage        
         this.props.navigation.navigate("Progress");
     }
@@ -107,6 +108,17 @@ export default class Milestones extends React.Component {
         const year = new Date().getFullYear();
         return month + "/" + day + "/" + year;
     }   
+
+    showCongratsToast = () => {
+        Toast.show({
+            text:"Congrats, you have completed a milestone.",
+            textStyle:{color:"white"},
+            buttonText: "Close",
+            type:"success",
+            position:"bottom",
+            duration: 3000,
+        });
+    }    
 
 /* USE ONLY TO RESET DATA
   resetData = async () => {

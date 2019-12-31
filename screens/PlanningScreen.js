@@ -55,6 +55,17 @@ export default class Milestones extends React.Component {
 
     clearText = () => { this.setState({milestoneTitle:""})};  
 
+    showCongratsToast = () => {
+        Toast.show({
+            text:"Fantastic, a new goal.",
+            textStyle:{color:"white"},
+            buttonText: "Close",
+            type:"success",
+            position:"bottom",
+            duration: 3000,
+        });
+    }
+
     render(){
         if (!this.state.isReady) {
             return <PageLoad />;
@@ -93,7 +104,7 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones()}} >
+                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones(); this.showCongratsToast();}} >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.buttonText}>FINISH</Text>
                             </View>
