@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, CheckBox, Icon, H1, List, ListItem, Body, Toast } from 'native-base';
+import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -139,8 +139,7 @@ export default class Milestones extends React.Component {
                 <Content> 
                     <H1 style={styles.pageTitleStyle}>Milestones</H1>
                     {/*Display the user's selected goal title */}
-                    <View><Text style={styles.milestoneTitle}>{this.state.title}</Text></View>
-
+                    <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
                     {/*Display a input box to create a new milestone */}
                     <View style={styles.inputContainter} >
                         <Icon active name='add'onPress={()=> this.addMilestone()} />
@@ -175,7 +174,6 @@ const styles = StyleSheet.create({
       },
       milestoneTitle: {
           textAlign:"center",
-          fontSize:35,
           fontWeight:"bold",  //Bigger text
           color:'navy',  //signature purple color
       },
