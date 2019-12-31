@@ -1,6 +1,6 @@
 const goals = [
 	{
-		"goal":"Learn React.js (Web Development)",
+		"goal":"Learn React.js",
 		"milestones":[
 			"Read Documentation",
 			"Free Code Camp React Program",
@@ -10,7 +10,7 @@ const goals = [
 		]
 	},
 		{
-		"goal":"Learn React Native (Mobile Development)",
+		"goal":"Learn React Native",
 		"milestones":[
 			"Read Documentation",
 			"React Native Udemy Course",
