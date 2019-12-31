@@ -4,7 +4,7 @@ import { Container,Content, Icon, Toast, H1 } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+import PlanningFooter from '../components/PlanningFooter.js';// Footer displaying instructions
 import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //Allows the user to create a goal with milestones
@@ -112,7 +112,7 @@ export default class Milestones extends React.Component {
                         </TouchableNativeFeedback>
                     </View> 
                 </Content>
-                <Foot title="*Creat SMART goals" />
+                <PlanningFooter />
             </Container>
         );
     }
