@@ -75,16 +75,7 @@ export default class Goal extends React.Component {
                 );
               })
             }
-            </List>
-
-            {/**Display a button to add a new goal */}
-            <View style={styles.buttonContainer}>
-              <TouchableNativeFeedback onPress={() => this.props.navigation.navigate("Planning")} >
-                <View style={styles.buttonStyle}>
-                  <Text style={styles.buttonText}>NEW GOAL</Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>            
+            </List>            
           </Content>
           <Foot title="* Click on a Goal to view Milestones for it." />         
       </Container>
@@ -99,22 +90,5 @@ const styles = StyleSheet.create({
   },
   goalText:{
     color:'#2B65EC',  //signature purple color        
-  },
-  buttonStyle:{
-    backgroundColor:'navy',//signature purple color 
-    padding: 10, //space between button title and border
-    margin: 10, //whitespace between button and other elements
-    width: 250, //width of button
-    borderColor:'green',//signature purple color
-    borderRadius: 15, //round the corners    
-  },
-  buttonContainer:{
-    alignItems:"center",  //help center the button
-    justifyContent:"center",
-  },
-  buttonText:{
-    color: "#ffffff", //text color
-    textAlign:"center", //center the text
-    fontWeight:"bold",  //Bigger text
   }
 });

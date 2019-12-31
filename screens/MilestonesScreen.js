@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, CheckBox, Icon, H1, Card, CardItem, Body, Toast } from 'native-base';
+import { Container, Text, Content, CheckBox, Icon, H1, List, ListItem, Body, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -150,25 +150,18 @@ export default class Milestones extends React.Component {
                         onChangeText={(newMilestone)=>this.setState({newMilestone})} />
                     </View>
                                         
-                    {/*Display the user's selected milestones */}                                        
+                    {/*Display the user's selected milestones */} 
+                    <List>
                     {
                         this.state.steps.map((milestones, index) =>{
-                            return(                                  
-                                <View key={index} >
-                                    <Card transparent >
-                                        <CardItem style={styles.milestoneStyle} button onPress={() => {this.deleteMilestone(index)}}>
-                                            <CheckBox   checked={false} 
-                                                        style={styles.checkboxStyle}                                                         
-                                                        color='#2B65EC' />
-                                            <Body>
-                                                <Text style={[styles.checkboxText]}>{milestones}</Text>
-                                            </Body>
-                                        </CardItem>
-                                    </Card>
-                                </View>                               
+                            return(
+                                <ListItem key={index} onPress={() => {this.deleteMilestone(index)}}>
+                                    <Text style={styles.milestoneText}>{milestones}</Text>
+                                </ListItem>
                             );
                         })
                     }
+                    </List>
                 </Content>
                 <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
@@ -177,18 +170,8 @@ export default class Milestones extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    milestoneStyle:{
-        display:"flex", //Ensure the goal id and statement is in a row
-        flexDirection:"row",
-      },
-    checkboxText:{
+    milestoneText:{
         color:'#2B65EC',  //signature purple color
-        fontSize:30,  //text size        
-      },
-    checkboxStyle:{
-        width: 40, //width of the checkbox
-        height: 40, //height of the checkbox
-        marginRight:20, //space between the index and statement
       },
       milestoneTitle: {
           textAlign:"center",
