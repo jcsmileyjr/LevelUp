@@ -32,7 +32,7 @@ This project was used to practice developing with React Native and related libra
 
 ### WireFrame
 
-![Screen-shot of Wireframe in use](assets/WOF-Wireframe.PNG)
+![Screen-shot of Wireframe in use](assets/levelUp-redesign.JPG)
 
 ### This app was built with the following technologies:
 
