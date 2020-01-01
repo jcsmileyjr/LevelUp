@@ -72,20 +72,20 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key:"k1",
-    title:"Guide your Learning Path by planning Goals",
+    title:"Guide your Learning Path by creating Goals",
     backgroundColor: '#2B65EC',
     titleStyle: styles.titleStyle,
     imageStyle: styles.image,
   },
   {
     key:"k2",
-    title:"Break Goals Down Into Milestones to Transform them into your new Reality",
+    title:"Break those Goals Down Into Milestones",
     backgroundColor: '#00009C',
     titleStyle: styles.titleStyle,
   },
   {
     key:"k3",
-    title:"This is a visually reminder of how much you have achieved and what is the next step toward your planned future",
+    title:"Look at a visually reminder of how far you have progress with a timeline of your achievements.",
     backgroundColor:'green',
     titleStyle: styles.titleStyle,
   }
