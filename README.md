@@ -14,6 +14,7 @@
 6. Technologies Used
 
 ### Demo Link: [Level Up](https://exp.host/@jcsmileyjr/LevelUp)
+You will have to sign up for Expo and download its app to view the app.
 
 ### Purpose:
 
