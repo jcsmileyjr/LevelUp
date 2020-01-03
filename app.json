@@ -4,6 +4,7 @@
     "slug": "LevelUp",
     "privacy": "public",
     "sdkVersion": "35.0.0",
+    "description":"A mobile app that focuses on developers guiding their learning path by planning goals,  breaking those goals down into milestones, and displaying a timeline of successes.",
     "android":{
       "package":"com.levelup.mobile"
     },
