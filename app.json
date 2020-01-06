@@ -15,9 +15,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/small-hoodie.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/levelup-hoodie.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
