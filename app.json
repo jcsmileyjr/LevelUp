@@ -6,12 +6,11 @@
     "sdkVersion": "35.0.0",
     "description":"A mobile app that focuses on developers guiding their learning path by planning goals,  breaking those goals down into milestones, and displaying a timeline of successes.",
     "android":{
-      "package":"com.levelup.mobile"
+      "package":"com.levelup.mobile",
+      "permisions":[]
     },
-    "platforms": [
-      "ios",
-      "android",
-      "web"
+    "platforms": [ 
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,7 +24,7 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
     "ios": {
       "supportsTablet": true
