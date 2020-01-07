@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     textAlign:"center",
   },
   goalText:{
-    color:'#2B65EC',  //signature purple color        
+    color:'#2B65EC',  //signature purple color 
+    fontSize:20,
   }
 });
