@@ -21,7 +21,6 @@ export default class Goal extends React.Component {
     
     this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
     this.storeData();//loads data from local storage to state
-    //this.resetData(); //USE ONLY TO RESET DATA
   }
 
   //Call during mounting, loads data from local storage. If that is empty, then loads data from sample learning path.
@@ -38,12 +37,7 @@ export default class Goal extends React.Component {
       console.log("StoreData() in GoalScreen not working");
     }
   }
-/* USE ONLY TO RESET DATA
-  resetData = async () => {
-    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
-    this.setState({userGoals:goals});
-  }
-*/
+
   //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
   //Called when a goal is touched by user
   setCurrentMilestones = goal =>{
@@ -89,6 +83,7 @@ const styles = StyleSheet.create({
     textAlign:"center",
   },
   goalText:{
-    color:'#2B65EC',  //signature purple color        
+    color:'#2B65EC',  //signature purple color 
+    fontSize:20,
   }
 });

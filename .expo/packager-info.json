@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://97-eyq.jcsmileyjr.levelup.exp.direct",
+  "packagerNgrokUrl": "https://packager.97-eyq.jcsmileyjr.levelup.exp.direct",
+  "ngrokPid": 18364,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 21020,
   "webpackServerPort": null
 }

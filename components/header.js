@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, Modal, AsyncStorage } from 'react-native';
+import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
-  const changeModalVisible = () => { setModalVisble(!isVisible)};
   const [isVisible, setModalVisble] = useState(false);
+  const [isSettingVisible, setSettingVisble] = useState(false);
+  const changeModalVisible = () => { setModalVisble(!isVisible)};
+  const changeSettingVisible = () => {setSettingVisble(!isSettingVisible)}
+  
+  resetData = async () => {
+    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
+    const testing = []
+    await AsyncStorage.setItem("achievements",JSON.stringify(testing));
+  }
+  
     return(
         <View>
         {/*Displays the App's Title, current section, and menu button */}
@@ -16,7 +26,7 @@ const Head = (props) => {
                     </Button>
                     <Text style={styles.headerAddGoalText}>Create Goal</Text>
                 </Left>
-                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up</Text></Body>
+                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up Dev</Text></Body>
                 <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
@@ -48,8 +58,44 @@ const Head = (props) => {
                           </TouchableNativeFeedback>
                         </Col>
                       </Row>
+                      <Row>
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => {setSettingVisble(true);setModalVisble(false)} } >
+                            <View style={[styles.buttonStyle, styles.settingButton]}>
+                              <Text style={styles.buttonText}>Setting</Text>
+                            </View>
+                          </TouchableNativeFeedback>                          
+                        </Col>
+                      </Row>
                     </Grid>
                   </View>              
+              </Modal>
+              <Modal animationType="slide" 
+                      visible={isSettingVisible}
+                      transparent={true}>
+                <View style={styles.modalContentStyle}>
+                  <Grid>
+                    <Row><Col><Text style={styles.iconStyle}>Setting</Text></Col></Row>
+                    <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setSettingVisble(false) } >
+                            <View style={styles.buttonStyle}>
+                              <Text style={styles.buttonText}>Close</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                    </Row>                    
+                    <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => {setSettingVisble(false); this.resetData(); props.navigation.push("Goal");} } >
+                            <View style={[styles.buttonStyle, styles.settingButton]}>
+                              <Text style={styles.buttonText}>Clear All Data</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>                    
+                  </Grid>
+                </View>
               </Modal>
             </View>            
         </View>
@@ -88,6 +134,9 @@ const styles = StyleSheet.create({
       textDecorationLine:"underline", //Text is underlined
       fontWeight:"bold",  //Bigger text
     },
+    settingButton:{
+      backgroundColor:"red",
+    },
     buttonStyle:{
       backgroundColor:'navy',//signature purple color 
       padding: 10, //space between button title and border
@@ -113,8 +162,8 @@ const styles = StyleSheet.create({
       marginTop:150, //help center the modal
       marginLeft:40,  //help center the modal
       backgroundColor:"lightgrey",
-      height:200, 
-      width:"80%"
+      height:250,
+      width:"80%",
     }, 
     modalText:{
       color:"white",
