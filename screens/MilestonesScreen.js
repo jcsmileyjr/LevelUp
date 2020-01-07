@@ -18,7 +18,6 @@ export default class Milestones extends React.Component {
       });//load fonts needed for certain components in NativeBase
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
       this.getMilestones();//loads data (milestones & title) from local storage into the state
-      //this.resetData();
     }
 
     //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
@@ -118,14 +117,7 @@ export default class Milestones extends React.Component {
             position:"bottom",
             duration: 3000,
         });
-    }    
-
-/* USE ONLY TO RESET DATA
-  resetData = async () => {
-    const testing = []
-    await AsyncStorage.setItem("achievements",JSON.stringify(testing));
-  }
-*/
+    }  
 
     render() {
         if (!this.state.isReady && this.state.steps !== null) {
