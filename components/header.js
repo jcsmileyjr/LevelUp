@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback, Modal, AsyncStorage } from 'react-native';
+import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
@@ -9,6 +10,11 @@ const Head = (props) => {
   const changeModalVisible = () => { setModalVisble(!isVisible)};
   const changeSettingVisible = () => {setSettingVisble(!isSettingVisible)}
   
+  resetData = async () => {
+    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
+    const testing = []
+    await AsyncStorage.setItem("achievements",JSON.stringify(testing));
+  }
   
     return(
         <View>
@@ -81,7 +87,7 @@ const Head = (props) => {
                     </Row>                    
                     <Row >
                         <Col style={styles.buttonContainer}>
-                          <TouchableNativeFeedback onPress={() => setSettingVisble(false) } >
+                          <TouchableNativeFeedback onPress={() => {setSettingVisble(false); this.resetData(); props.navigation.push("Goal");} } >
                             <View style={[styles.buttonStyle, styles.settingButton]}>
                               <Text style={styles.buttonText}>Clear All Data</Text>
                             </View>
