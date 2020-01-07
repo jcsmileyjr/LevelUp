@@ -4,8 +4,12 @@ import { StyleSheet, View, TouchableNativeFeedback, Modal } from 'react-native';
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
-  const changeModalVisible = () => { setModalVisble(!isVisible)};
   const [isVisible, setModalVisble] = useState(false);
+  const [isSettingVisible, setSettingVisble] = useState(false);
+  const changeModalVisible = () => { setModalVisble(!isVisible)};
+  const changeSettingVisible = () => {setSettingVisble(!isSettingVisible)}
+  
+  
     return(
         <View>
         {/*Displays the App's Title, current section, and menu button */}
@@ -50,7 +54,7 @@ const Head = (props) => {
                       </Row>
                       <Row>
                         <Col style={styles.buttonContainer}>
-                          <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
+                          <TouchableNativeFeedback onPress={() => {setSettingVisble(true);setModalVisble(false)} } >
                             <View style={[styles.buttonStyle, styles.settingButton]}>
                               <Text style={styles.buttonText}>Setting</Text>
                             </View>
@@ -59,6 +63,33 @@ const Head = (props) => {
                       </Row>
                     </Grid>
                   </View>              
+              </Modal>
+              <Modal animationType="slide" 
+                      visible={isSettingVisible}
+                      transparent={true}>
+                <View style={styles.modalContentStyle}>
+                  <Grid>
+                    <Row><Col><Text style={styles.iconStyle}>Setting</Text></Col></Row>
+                    <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setSettingVisble(false) } >
+                            <View style={styles.buttonStyle}>
+                              <Text style={styles.buttonText}>Close</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                    </Row>                    
+                    <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setSettingVisble(false) } >
+                            <View style={[styles.buttonStyle, styles.settingButton]}>
+                              <Text style={styles.buttonText}>Clear All Data</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>                    
+                  </Grid>
+                </View>
               </Modal>
             </View>            
         </View>
