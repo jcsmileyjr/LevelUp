@@ -48,6 +48,15 @@ const Head = (props) => {
                           </TouchableNativeFeedback>
                         </Col>
                       </Row>
+                      <Row>
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
+                            <View style={[styles.buttonStyle, styles.settingButton]}>
+                              <Text style={styles.buttonText}>Setting</Text>
+                            </View>
+                          </TouchableNativeFeedback>                          
+                        </Col>
+                      </Row>
                     </Grid>
                   </View>              
               </Modal>
@@ -88,6 +97,9 @@ const styles = StyleSheet.create({
       textDecorationLine:"underline", //Text is underlined
       fontWeight:"bold",  //Bigger text
     },
+    settingButton:{
+      backgroundColor:"red",
+    },
     buttonStyle:{
       backgroundColor:'navy',//signature purple color 
       padding: 10, //space between button title and border
@@ -113,8 +125,8 @@ const styles = StyleSheet.create({
       marginTop:150, //help center the modal
       marginLeft:40,  //help center the modal
       backgroundColor:"lightgrey",
-      height:200, 
-      width:"80%"
+      height:250,
+      width:"80%",
     }, 
     modalText:{
       color:"white",
