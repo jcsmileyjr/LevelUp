@@ -16,7 +16,7 @@ const Head = (props) => {
                     </Button>
                     <Text style={styles.headerAddGoalText}>Create Goal</Text>
                 </Left>
-                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up</Text></Body>
+                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up Dev</Text></Body>
                 <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />

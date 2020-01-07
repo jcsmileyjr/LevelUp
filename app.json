@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Level Up",
-    "slug": "LevelUp",
+    "name": "Level Up Dev",
+    "slug": "LevelUpDev",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "description":"A mobile app that focuses on developers guiding their learning path by planning goals,  breaking those goals down into milestones, and displaying a timeline of successes.",
     "android":{
       "package":"com.levelup.mobile",
-      "permisions":[]
+      "permissions":[]
     },
     "platforms": [ 
       "android"
