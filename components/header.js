@@ -11,7 +11,8 @@ const Head = (props) => {
   const changeSettingVisible = () => {setSettingVisble(!isSettingVisible)}
   
   resetData = async () => {
-    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
+    const resetGoals = {};
+    await AsyncStorage.setItem("userGoals",JSON.stringify(resetGoals));//Save sample learning path to local storage
     const testing = []
     await AsyncStorage.setItem("achievements",JSON.stringify(testing));
   }
@@ -26,7 +27,7 @@ const Head = (props) => {
                     </Button>
                     <Text style={styles.headerAddGoalText}>Create Goal</Text>
                 </Left>
-                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]}>Level Up Dev</Text></Body>
+                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]} onPress={()=> props.navigation.navigate("Goal")}>Level Up Dev</Text></Body>
                 <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
