@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
-import { Container,Content, Icon, Toast, H1 } from 'native-base';
+import { Container,Content, Icon, Toast, H1, Textarea } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -82,22 +82,25 @@ export default class Milestones extends React.Component {
                 <Head navigation={this.props.navigation} />
                 <Content>
                     <H1 style={styles.pageTitleStyle}>Planning</H1>
-                    <View><Text style={styles.goalTitle}>Set a New goal</Text></View>
                     <View style={styles.inputContainter} >
-                        <TextInput  placeholder="Type Goal" 
+                    <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
+                        <TextInput  placeholder="TYPE A NEW GOAL"
+                                    placeholderTextColor="darkgrey" 
+                                    clearTextOnFocus={true}
                                     autoFocus={true}
                                     style={styles.inputStyles} 
                                     onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
-                    
-                    <View><Text style={styles.goalTitle}>Add Milestones</Text></View>
                     <View style={styles.inputContainter} >
-                        <Icon active name='add'onPress={()=> this.updateMilestones()} />
-                        <TextInput placeholder="Type Milestones" 
-                        style={styles.inputStyles} 
-                        ref={input => {this.textInput = input}} 
-                        onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
+                        <Icon style={[styles.iconStyle, styles.addIconColor]} active name='add'onPress={()=> this.updateMilestones()} />
+                        <TextInput  placeholder="TYPE MILESTONES"
+                                    placeholderTextColor="darkgrey"
+                                    multiline={true}
+                                    style={styles.textAreaStyles} 
+                                    ref={input => {this.textInput = input}} 
+                                    onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
+                    <Text style={styles.pageTitleStyle}>Click the Add icon to create a milestone</Text>
 
                     {
                         this.state.newMilestones.map((step, index) =>{
@@ -125,9 +128,9 @@ export default class Milestones extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    inputStyles: {
-        width: 300,
-        color:'#2B65EC',  //signature purple color
+    inputStyles: {//styles for the goal input text box
+        width: 270,
+        color:'#2B65EC',  //blue text color
         textAlign:"center",
         height:40,
         borderColor:"grey",
@@ -136,24 +139,30 @@ const styles = StyleSheet.create({
         margin: 20,
         fontSize: 18,
     },
-    goalTitle:{
+    textAreaStyles: {//styles for the milestone input text box
+        width: 270,
+        color:'#2B65EC',  //blue text color
+        textAlign:"center",
+        height:100,
+        borderColor:"grey",
+        borderWidth: 1,
+        elevation: 1,
+        margin: 20,
+        fontSize: 18,
+    },
+    newMilestoneStyle:{//styles use when new milestones is create
         textAlign:"center",
         fontSize:20,
-        color:'navy',  //signature purple color
+        color:'#2B65EC',  //signature light blue text color
     },
-    newMilestoneStyle:{
-        textAlign:"center",
-        fontSize:20,
-        color:'#2B65EC',  //signature purple color
-    },
-    inputContainter:{
-        display:"flex", //Ensure the goal id and statement is in a row
+    inputContainter:{//ensure the a icon and input box is on the same row
+        display:"flex", 
         flexDirection:"row",
         alignItems:"center",  //help center the button
         justifyContent:"center",
     },
-    buttonStyle:{
-      backgroundColor:'navy',//signature purple color 
+    buttonStyle:{//style for the finish button
+      backgroundColor:'navy',//signature dark blue color 
       padding: 10, //space between button title and border
       margin: 10, //whitespace between button and other elements
       width: 250, //width of button
@@ -173,4 +182,13 @@ const styles = StyleSheet.create({
         color:"navy",
         textAlign:"center",
     },
+    iconStyle:{
+        fontSize:50,
+    },
+    addIconColor:{
+        color:'#2B65EC',
+    },
+    bulbIconColor:{
+        color:'#2B65EC',  //blue text color
+    }
 });
