@@ -11,7 +11,8 @@ const Head = (props) => {
   const changeSettingVisible = () => {setSettingVisble(!isSettingVisible)}
   
   resetData = async () => {
-    await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
+    const resetGoals = {};
+    await AsyncStorage.setItem("userGoals",JSON.stringify(resetGoals));//Save sample learning path to local storage
     const testing = []
     await AsyncStorage.setItem("achievements",JSON.stringify(testing));
   }

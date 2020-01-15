@@ -29,10 +29,7 @@ export default class Goal extends React.Component {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
       if(value !== null){
         this.setState({userGoals:JSON.parse(value)});
-      }else {
-        await AsyncStorage.setItem("userGoals",JSON.stringify(goals));//Save sample learning path to local storage
-        this.setState({userGoals:goals});       
-      }      
+      }     
     } catch (e) {
       console.log("StoreData() in GoalScreen not working");
     }
@@ -60,7 +57,7 @@ export default class Goal extends React.Component {
             {/**Display a user's goals */}
             <H1 style={styles.goalStyle}>Goals</H1>
             <List>
-            {
+            {this.state.userGoals.length > 0 &&
               this.state.userGoals.map((goal,id)=>{
                 return(
                   <ListItem key={id} button onPress={() => {this.props.navigation.navigate("Milestone"); this.setCurrentMilestones(goal);}}>
