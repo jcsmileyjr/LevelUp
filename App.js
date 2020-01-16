@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {Root} from "native-base";
@@ -11,17 +11,38 @@ import PlanningScreen from './screens/PlanningScreen.js';
 import AchievementScreen from './screens/AcheivementScreen.js';
 
 export default class App extends React.Component{ 
-  state = {show_Main_App:false};
+  //Show_Main_App is use to show or hide the into-slides. FoundGoals is use to automatic hide the intro-slides
+  //if there is a goal.
+  state = {show_Main_App:false, foundGoals:false };
+
+  componentDidMount(){
+    this.checkForGoals();//check if there is a goal, if so then hide the intro-slides
+  }
+
+  //close out the intro-slides
   on_Done_all_slides = () => {
-    this.setState({ show_Main_App: true });
+    this.setState({ show_Main_App: true});
   };
 
+  //allow users to skip the intro-slides
   on_Skip_slides = () => {
     this.setState({ show_Main_App: true });
   };
 
+  //check if there is a goal, if so then hide the intro-slides
+  checkForGoals = async () => {
+    try {
+      const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
+      if(value !== "{}"){
+        this.setState({foundGoals:true});
+      }          
+    } catch (e) {
+      console.log("checkForGoals() in App.js not working");
+    }
+  }
+
   render(){
-    if(this.state.show_Main_App){
+    if(this.state.show_Main_App || this.state.foundGoals){
       return (
         <Root>
           <AppContainer />
@@ -38,12 +59,6 @@ export default class App extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   titleStyle:{
     fontSize:40,
     fontWeight:"bold",
