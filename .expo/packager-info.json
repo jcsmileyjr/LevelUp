@@ -2,9 +2,9 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://97-eyq.jcsmileyjr.levelup.exp.direct",
   "packagerNgrokUrl": "https://packager.97-eyq.jcsmileyjr.levelup.exp.direct",
-  "ngrokPid": 15008,
+  "ngrokPid": 13276,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 8036,
+  "packagerPid": 11240,
   "webpackServerPort": null
 }
