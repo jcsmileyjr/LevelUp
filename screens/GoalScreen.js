@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, AsyncStorage } from 'react-native';
 import {NavigationEvents} from 'react-navigation';
 
-import { Container, Text,Content, List, ListItem, H1 } from 'native-base';
+import { Container, Text,Content, List, ListItem, H1, Icon } from 'native-base';
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
@@ -29,7 +29,7 @@ export default class Goal extends React.Component {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
       if(value !== null){
         this.setState({userGoals:JSON.parse(value)});
-      }     
+      }          
     } catch (e) {
       console.log("StoreData() in GoalScreen not working");
     }
@@ -56,6 +56,13 @@ export default class Goal extends React.Component {
           <Content>
             {/**Display a user's goals */}
             <H1 style={styles.goalStyle}>Goals</H1>
+            {/*Check if the userGoals state has not been updated, then display instructions */}
+            {this.state.userGoals.length === undefined &&
+              
+                <View style={styles.goalInstructionSection}><Text>Press the <Icon style={{fontSize:40, color:"green"}} name='md-add' /> icon in the nav to create a new goal</Text></View>
+              
+
+            }
             <List>
             {this.state.userGoals.length > 0 &&
               this.state.userGoals.map((goal,id)=>{
@@ -66,7 +73,7 @@ export default class Goal extends React.Component {
                 );
               })
             }
-            </List>            
+            </List>           
           </Content>
           <Foot title="* Click on a Goal to view Milestones for it." />         
       </Container>
@@ -82,5 +89,13 @@ const styles = StyleSheet.create({
   goalText:{
     color:'#2B65EC',  //signature purple color 
     fontSize:20,
+  },
+  goalInstructionSection:{
+    height:300,
+    alignItems:"center",  //help center the button
+    justifyContent:"center",
+  },
+  goalInstructions:{
+    color:"gold",
   }
 });
