@@ -83,7 +83,8 @@ export default class Milestones extends React.Component {
                 <Head navigation={this.props.navigation} />
                 <Content>
                     <H1 style={styles.pageTitleStyle}>Planning</H1>
-                    <View style={styles.goalStyleFix} >                    
+                    <View style={styles.inputContainter} >
+                        <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
                         <TextInput  placeholder="TYPE A NEW GOAL"
                                     placeholderTextColor="darkgrey" 
                                     clearTextOnFocus={true}
@@ -189,9 +190,6 @@ const styles = StyleSheet.create({
         color:'#2B65EC',
     },
     bulbIconColor:{
-        color:'#2B65EC',  //blue text color
-    },
-    goalStyleFix:{
-        marginLeft:66,
+        color:'white',  //white color to hide it
     }
 });
