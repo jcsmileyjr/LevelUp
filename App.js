@@ -33,7 +33,8 @@ export default class App extends React.Component{
   checkForGoals = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
-      if(typeof value !== "string"){
+      const convertedValue = JSON.parse(value);//Convert string into a array if has a goal or a object if its empty     
+      if(Array.isArray(convertedValue)){
         this.setState({foundGoals:true});
       }          
     } catch (e) {
