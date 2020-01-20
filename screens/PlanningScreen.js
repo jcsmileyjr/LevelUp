@@ -36,8 +36,8 @@ export default class Milestones extends React.Component {
     //Update the old list of goals/milestones with new user inputted information when push the "Finish" button
     updateGoals = async () =>{
         if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
-            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage           
-            if(typeof (savedGoals) !== "string"){//check if the data saved to local storage is not empty
+            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage                  
+            if(savedGoals !== "{}"){//check if the data saved to local storage is not empty
                 let userGoals = JSON.parse(savedGoals); //get old array of goals/milestones and parse from a string to a array of objects
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
@@ -46,7 +46,7 @@ export default class Milestones extends React.Component {
                 //If there is no saved data, then create a new goal, add to a array, and saved to local storage
                 const newGoal= {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 const newSavedGoals = [];
-                newSavedGoals.push(newGoal);
+                newSavedGoals.push(newGoal);             
                 await AsyncStorage.setItem("userGoals",JSON.stringify(newSavedGoals));//Save updated array of objects to local storage
             }
         }else{
