@@ -7,7 +7,7 @@
     "description":"A mobile app that focuses on developers guiding their learning path by planning goals,  breaking those goals down into milestones, and displaying a timeline of successes.",
     "android":{
       "package":"com.levelup.mobile",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions":[]
     },
     "platforms": [ 
