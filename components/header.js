@@ -107,7 +107,7 @@ export default Head;
 
 const styles = StyleSheet.create({
     headerStyles:{
-        marginTop:25, //add space above the header
+        marginTop:23, //add space above the header
         marginBottom:30, //add space below the header
         backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
