@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback} from 'react-native';
+import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback, Keyboard} from 'react-native';
 import { Container,Content, Icon, Toast, H1, Textarea } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
@@ -26,6 +26,7 @@ export default class Milestones extends React.Component {
             listOfMilestones.push(this.state.milestoneTitle);//update with current user input
             this.setState({newMilestones:listOfMilestones, milestoneTitle:""});// update the state with new array of milestones
             this.textInput.clear();
+            Keyboard.dismiss();
         }else{
             Toast.show({text:"Must enter a title for a Goal", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
             console.log("updateMilestones function failed")
@@ -35,8 +36,8 @@ export default class Milestones extends React.Component {
     //Update the old list of goals/milestones with new user inputted information when push the "Finish" button
     updateGoals = async () =>{
         if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
-            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
-            if(savedGoals !== "{}"){//check if the data saved to local storage is not empty
+            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage           
+            if(typeof (savedGoals) !== "string"){//check if the data saved to local storage is not empty
                 let userGoals = JSON.parse(savedGoals); //get old array of goals/milestones and parse from a string to a array of objects
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
@@ -82,8 +83,7 @@ export default class Milestones extends React.Component {
                 <Head navigation={this.props.navigation} />
                 <Content>
                     <H1 style={styles.pageTitleStyle}>Planning</H1>
-                    <View style={styles.inputContainter} >
-                    <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
+                    <View style={styles.goalStyleFix} >                    
                         <TextInput  placeholder="TYPE A NEW GOAL"
                                     placeholderTextColor="darkgrey" 
                                     clearTextOnFocus={true}
@@ -190,5 +190,8 @@ const styles = StyleSheet.create({
     },
     bulbIconColor:{
         color:'#2B65EC',  //blue text color
+    },
+    goalStyleFix:{
+        marginLeft:66,
     }
 });

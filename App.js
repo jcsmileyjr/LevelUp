@@ -33,7 +33,7 @@ export default class App extends React.Component{
   checkForGoals = async () => {
     try {
       const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
-      if(value !== "{}"){
+      if(typeof value !== "string"){
         this.setState({foundGoals:true});
       }          
     } catch (e) {
