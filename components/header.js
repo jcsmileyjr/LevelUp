@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, Modal, AsyncStorage } from 'react-native';
-import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
