@@ -1,8 +1,6 @@
-# Level Up
+# Level Up Dev
 
-<hr>
-
-![gif of app](./assets/levelUp_7.gif)
+![gif of app](./assets/levelUp_9.gif)
 
 ### Table of Contents
 
@@ -22,7 +20,7 @@ Help developers guide their learning path by planning goals,  breaking those go
 
 ### Motivation:
 
-This project was used to practice developing with React Native and related libraries like Redux, React-navigation, and Native-base.
+This project was used to practice developing with React Native and related libraries like React-navigation and Native-base.
 
 ### Objectives:
 
