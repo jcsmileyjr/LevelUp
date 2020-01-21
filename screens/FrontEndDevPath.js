@@ -19,9 +19,9 @@ export default class Goal extends React.Component {
     render(){
         return(
             <Container>
-                <Header><Head navigation={this.props.navigation} /></Header>
+                <Head navigation={this.props.navigation} />
                 <Content><Text>Test</Text></Content>
-                <Footer><Foot title="Use this as a inspiration for your goals" /></Footer>
+                <Foot title="Use this as a inspiration for your goals" />
             </Container>
         );
     }
