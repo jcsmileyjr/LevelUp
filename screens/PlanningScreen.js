@@ -37,9 +37,10 @@ export default class Milestones extends React.Component {
     updateGoals = async () =>{
         if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
             const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage                  
-            if(savedGoals !== null){//check if the data saved to local storage is not empty                
+            if(savedGoals !== null && Array.isArray(JSON.parse(savedGoals))===true){//check if the data saved to local storage is not empty                
                 let userGoals = JSON.parse(savedGoals); //get old array of goals/milestones and parse from a string to a array of objects              
                 const newGoal = {"goal":this.state.newGoalTitle,"milestones":this.state.newMilestones};//create goal/milestones object
+console.log(userGoals);                
                 userGoals.push(newGoal);//add new goal & milestones to current array of goals/milestones
                 await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
             }else{
