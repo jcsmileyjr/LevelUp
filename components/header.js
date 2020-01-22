@@ -69,7 +69,7 @@ const Head = (props) => {
                       </Row>
                       <Row >
                         <Col style={styles.buttonContainer}>
-                          <TouchableNativeFeedback onPress={() => {setModalVisble(false);props.navigation.navigate("FrontEnd")} } >
+                          <TouchableNativeFeedback onPress={() => {setModalVisble(false);props.navigation.navigate("BackEnd")} } >
                             <View style={[styles.buttonStyle, styles.pathButton]}>
                               <Text style={styles.buttonText}>Back End Developer Path</Text>
                             </View>

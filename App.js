@@ -9,7 +9,8 @@ import GoalScreen from './screens/GoalScreen.js';
 import MilestoneScreen from './screens/MilestonesScreen.js';
 import PlanningScreen from './screens/PlanningScreen.js';
 import AchievementScreen from './screens/AcheivementScreen.js';
-import FrontEndPath from './screens/FrontEndDevPath.js'
+import FrontEndPath from './screens/FrontEndDevPath.js';
+import BackEndPath from './screens/BackEndDevPath.js';
 
 export default class App extends React.Component{ 
   //Show_Main_App is use to show or hide the into-slides. FoundGoals is use to automatic hide the intro-slides
@@ -109,5 +110,5 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen, Progress:AchievementScreen, FrontEnd:FrontEndPath},navigationOptions);
+const AppNavigator = createStackNavigator({Goal:GoalScreen, Milestone:MilestoneScreen, Planning:PlanningScreen, Progress:AchievementScreen, FrontEnd:FrontEndPath, BackEnd: BackEndPath},navigationOptions);
 const AppContainer = createAppContainer(AppNavigator);
