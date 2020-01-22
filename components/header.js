@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, Modal, AsyncStorage } from 'react-native';
-import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
@@ -47,9 +46,9 @@ const Head = (props) => {
                       </Row>
                       <Row>
                         <Col><Text style={styles.iconText}>View Goals</Text></Col>
-                        <Col><Col><Text style={styles.iconText}>New Goals</Text></Col></Col>
-                        <Col><Col><Text style={styles.iconText}>View Progress</Text></Col></Col>
-                      </Row>                      
+                        <Col><Text style={styles.iconText}>New Goals</Text></Col>
+                        <Col><Text style={styles.iconText}>View Progress</Text></Col>
+                      </Row>
                       <Row >
                         <Col style={styles.buttonContainer}>
                           <TouchableNativeFeedback onPress={() => setModalVisble(false) } >
@@ -59,6 +58,24 @@ const Head = (props) => {
                           </TouchableNativeFeedback>
                         </Col>
                       </Row>
+                      <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => {setModalVisble(false);props.navigation.navigate("FrontEnd")} } >
+                            <View style={[styles.buttonStyle, styles.pathButton]}>
+                              <Text style={styles.buttonText}>Front End Developer Path</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>
+                      <Row >
+                        <Col style={styles.buttonContainer}>
+                          <TouchableNativeFeedback onPress={() => {setModalVisble(false);props.navigation.navigate("BackEnd")} } >
+                            <View style={[styles.buttonStyle, styles.pathButton]}>
+                              <Text style={styles.buttonText}>Back End Developer Path</Text>
+                            </View>
+                          </TouchableNativeFeedback>
+                        </Col>
+                      </Row>                                                                  
                       <Row>
                         <Col style={styles.buttonContainer}>
                           <TouchableNativeFeedback onPress={() => {setSettingVisble(true);setModalVisble(false)} } >
@@ -138,6 +155,9 @@ const styles = StyleSheet.create({
     settingButton:{
       backgroundColor:"red",
     },
+    pathButton:{
+      backgroundColor:"#2B65EC",
+    },
     buttonStyle:{
       backgroundColor:'navy',//signature purple color 
       padding: 10, //space between button title and border
@@ -163,7 +183,7 @@ const styles = StyleSheet.create({
       marginTop:150, //help center the modal
       marginLeft:40,  //help center the modal
       backgroundColor:"lightgrey",
-      height:250,
+      height:375,
       width:"80%",
     }, 
     modalText:{

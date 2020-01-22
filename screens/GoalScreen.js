@@ -6,7 +6,6 @@ import { Container, Text,Content, List, ListItem, H1, Icon } from 'native-base';
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
-import goals from '../data/goals.js';// FOR DEVELOPMENT, example list of sample learning path
 import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //1st Screen the user will see. Allow viewing and adding big picture goals. 
