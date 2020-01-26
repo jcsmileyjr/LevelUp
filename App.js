@@ -98,7 +98,7 @@ const slides = [
   },
   {
     key:"k3",
-    title:"Look at a visually reminder of how far you have progress with a timeline of your achievements.",
+    title:"View a visually reminder of how far you have progress with a timeline of your achievements.",
     backgroundColor:'green',
     titleStyle: styles.titleStyle,
     //imageStyles: styles.image,

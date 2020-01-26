@@ -11,8 +11,7 @@
 5. Wireframe
 6. Technologies Used
 
-### Demo Link: [Level Up](https://exp.host/@jcsmileyjr/LevelUp)
-You will have to sign up for Expo and download its app to view the app.
+### Click to install Android app from the Google Play Store: [Level Up](https://play.google.com/store/apps/details?id=com.levelup.mobile)
 
 ### Purpose:
 
