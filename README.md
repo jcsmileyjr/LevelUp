@@ -1,6 +1,6 @@
 # Level Up Dev
 
-![gif of app](./assets/levelUp_9.gif)
+![gif of app](./assets/levelUp_10a.gif)
 
 ### Table of Contents
 
