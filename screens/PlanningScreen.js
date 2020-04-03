@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         width: 270,
         color:'#2B65EC',  //blue text color
         textAlign:"center",
-        height:100,
+        height:50,
         borderColor:"grey",
         borderWidth: 1,
         elevation: 1,
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
         color:'#2B65EC',
     },
     bulbIconColor:{
-        color:'white',  //white color to hide it
+        color:'white',  //white color to hide it. This help keeps the format
     }
 });
