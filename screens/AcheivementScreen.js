@@ -49,9 +49,13 @@ export default class Achievements extends React.Component {
                                 return(
                                     
                                     <Row key={index}>
-                                        <Col size={60}><Text style={styles.textStyle}>{success.title}</Text></Col>
+                                        <Col style={styles.contentStyle} size={77}>
+                                            <Text style={styles.goalStyle}>{success.goal}</Text>
+                                            <Text style={styles.milestoneStyle}>{success.title}</Text>
+                                            <Text style={styles.descriptionStyle}>{success.description}</Text>
+                                        </Col>
                                         <Col style={styles.timelineBar} size={3}><Text></Text></Col>
-                                        <Col size={37}><Text style={styles.dateStyle}>{success.date}</Text></Col>
+                                        <Col size={20}><Text style={styles.dateStyle}>{success.date}</Text></Col>
                                     </Row>
                                     
                                 );
@@ -69,7 +73,7 @@ export default class Achievements extends React.Component {
 
 const styles = StyleSheet.create({
 textStyle:{
-    color:'#2B65EC',  //signature purple color
+    color:'#2B65EC',  //signature light blue color
     //fontSize:25,  //text size
     marginLeft:5,
     marginBottom:10,
@@ -90,4 +94,19 @@ pageTitleStyle:{
     color:"navy",
     textAlign:"center",
   },
+goalStyle:{
+    color:'#2B65EC',  //signature light blue 
+    textDecorationLine:"underline",
+},
+milestoneStyle:{
+    color: "navy",
+    fontSize:20,
+},
+descriptionStyle:{
+    color:"#707070",
+    fontSize:12,
+},
+contentStyle: {
+    marginLeft: 10,
+}
 });
