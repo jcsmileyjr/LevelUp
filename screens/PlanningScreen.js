@@ -51,6 +51,7 @@ export default class Milestones extends React.Component {
                 newSavedGoals.push(newGoal);             
                 await AsyncStorage.setItem("userGoals",JSON.stringify(newSavedGoals));//Save updated array of objects to local storage
             }
+            this.showCongratsToast();
         }else{
             console.log("Missing information to update user Goals in Planning screen");
         }
@@ -126,7 +127,7 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones(); this.showCongratsToast();}} >
+                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones();}} >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.buttonText}>FINISH</Text>
                             </View>
