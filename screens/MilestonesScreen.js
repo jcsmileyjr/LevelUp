@@ -130,8 +130,6 @@ export default class Milestones extends React.Component {
                 <Head  navigation={this.props.navigation}/> 
                 <Content> 
                     <H1 style={styles.pageTitleStyle}>Milestones</H1>
-                    {/*Display the user's selected goal title */}
-                    <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
                     {/*Display a input box to create a new milestone */}
                     <View style={styles.inputContainter} >
                         <Icon active name='add'onPress={()=> this.addMilestone()} />
@@ -140,14 +138,18 @@ export default class Milestones extends React.Component {
                         ref={input => {this.textInput = input}}              
                         onChangeText={(newMilestone)=>this.setState({newMilestone})} />
                     </View>
+
+                    {/*Display the user's selected goal title */}
+                    <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
                                         
                     {/*Display the user's selected milestones */} 
                     <List>
                     {
-                        this.state.steps.map((milestones, index) =>{
+                        this.state.steps.map((milestone, index) =>{
                             return(
-                                <ListItem key={index} onPress={() => {this.deleteMilestone(index)}}>
-                                    <Text style={styles.milestoneText}>{milestones}</Text>
+                                <ListItem style={styles.contentStyle} key={index} onPress={() => {this.deleteMilestone(index)}}>
+                                    <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>
+                                    <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>
                                 </ListItem>
                             );
                         })
@@ -161,15 +163,25 @@ export default class Milestones extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    milestoneText:{
-        color:'#2B65EC',  //signature purple color
-      },
-      milestoneTitle: {
-          textAlign:"center",
-          fontWeight:"bold",  //Bigger text
-          color:'navy',  //signature purple color
-      },
-      inputStyles: {
+    milestoneTitleStyle:{
+        color:'#2B65EC',  //signature light blue color
+        fontWeight:"bold",
+        width: "80%" //fix bug where goal only showed in center of screen
+    },
+    milestoneDescrStyle:{
+        color:'#707070',  //signature light blue color
+        width: "80%" //fix bug where goal only showed in center of screen
+    },
+    contentStyle:{
+        display:"flex",
+        flexDirection:"column",
+    },
+    milestoneTitle: {
+        textAlign:"center",
+        fontWeight:"bold",  //Bigger text
+        color:'navy',  //signature dark blue color
+    },
+    inputStyles: {
         width: 300,
         color:'#2B65EC',  //signature purple color
         textAlign:"center",
