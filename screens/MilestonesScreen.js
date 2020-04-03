@@ -85,14 +85,16 @@ export default class Milestones extends React.Component {
             const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
             let achievements = [];
             let progress = {};
-            progress.title = milestone;//save milestone as title
+            progress.goal = this.state.title;
+            progress.title = milestone.title;//save milestone's title
+            progress.description = milestone.description;//save milestone's description
             progress.date = this.getDate();//save today's date
 
             if(arrayOfAchievements !== null){
               achievements = JSON.parse(arrayOfAchievements);//parse string into an array of objects              
               achievements.push(progress);//update array with new objet
             }else {
-              achievements.push(milestone)//create a new array with first object                     
+              achievements.push(progress)//create a new array with first object                     
             }
 
             await AsyncStorage.setItem("achievements",JSON.stringify(achievements));//Save array of acheivements to local storage      
