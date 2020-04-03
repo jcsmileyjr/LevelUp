@@ -10,7 +10,7 @@ import PageLoad from '../components/PageLoad.js';//Show spinning top while page 
 //Allows the user to create a goal with milestones
 export default class Milestones extends React.Component {
     //isReady is checking if fonts is loaded (needed for NativeBase) 
-    state = { isReady: false, newGoalTitle:"", milestoneTitle:"", newMilestones:[], userGoals:[]};
+    state = { isReady: false, newGoalTitle:"", milestoneTitle:"", milestoneDesc:"", newMilestones:[], userGoals:[]};
     async componentDidMount() {
       await Expo.Font.loadAsync({
         'Roboto': require('../node_modules/native-base/Fonts/Roboto.ttf'),
@@ -23,9 +23,11 @@ export default class Milestones extends React.Component {
     updateMilestones = () => {
         if(this.state.milestoneTitle !== "" && this.state.newGoalTitle !== ""){
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
-            listOfMilestones.push(this.state.milestoneTitle);//update with current user input
+            let newMilestone = {"title":this.state.milestoneTitle, "description":this.state.milestoneDesc};
+            listOfMilestones.push(newMilestone);//update with current user input
             this.setState({newMilestones:listOfMilestones, milestoneTitle:""});// update the state with new array of milestones
-            this.textInput.clear();
+            this.titleInput.clear();
+            this.descriptionInput.clear();
             Keyboard.dismiss();
         }else{
             Toast.show({text:"Must enter a title for a Goal", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
@@ -93,13 +95,22 @@ export default class Milestones extends React.Component {
                                     onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
                     <View style={styles.inputContainter} >
-                        <Icon style={[styles.iconStyle, styles.addIconColor]} active name='add'onPress={()=> this.updateMilestones()} />
-                        <TextInput  placeholder="TYPE MILESTONES"
+                        <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
+                        <TextInput  placeholder="TYPE MILESTONE TITLE"
                                     placeholderTextColor="darkgrey"
                                     multiline={true}
                                     style={styles.textAreaStyles} 
-                                    ref={input => {this.textInput = input}} 
+                                    ref={input => {this.titleInput = input}} 
                                     onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
+                    </View>
+                    <View style={styles.inputContainter} >
+                        <Icon style={[styles.iconStyle, styles.addIconColor]} active name='add'onPress={()=> this.updateMilestones()} />
+                        <TextInput  placeholder="TYPE MILESTONE DESCRIPTION"
+                                    placeholderTextColor="darkgrey"
+                                    multiline={true}
+                                    style={styles.textAreaStyles} 
+                                    ref={input => {this.descriptionInput = input}} 
+                                    onChangeText={(milestoneDesc)=>this.setState({milestoneDesc})} />
                     </View>
                     <Text style={styles.pageTitleStyle}>Click the Add icon to create a milestone</Text>
 
@@ -107,7 +118,7 @@ export default class Milestones extends React.Component {
                         this.state.newMilestones.map((step, index) =>{
                             return(
                                 <View key={index}>
-                                    <Text style={styles.newMilestoneStyle}>{step}</Text>
+                                    <Text style={styles.newMilestoneStyle}>{step.title}</Text>
                                 </View>
                             );
                         })

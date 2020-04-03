@@ -97,7 +97,7 @@ export default class Goal extends React.Component {
                         return (
                           <ListItem noBorder key={index}>
                             <Text style={styles.milestoneStyle}>
-                              {milestones}
+                              {milestones.title}
                             </Text>
                           </ListItem>
                         );
