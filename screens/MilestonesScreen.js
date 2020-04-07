@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast } from 'native-base';
+import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast, Right } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -149,9 +149,12 @@ export default class Milestones extends React.Component {
                     {
                         this.state.steps.map((milestone, index) =>{
                             return(
-                                <ListItem style={styles.contentStyle} key={index} onPress={() => {this.deleteMilestone(index)}}>
-                                    <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>
-                                    <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>
+                                <ListItem style={styles.layoutStyle} key={index} onPress={() => {this.deleteMilestone(index)}}>
+                                    <View style={styles.contentStyle}>
+                                        <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
+                                        <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
+                                    </View>
+                                    <Icon active name="md-brush" android="md-brush" />
                                 </ListItem>
                             );
                         })
@@ -172,11 +175,11 @@ const styles = StyleSheet.create({
     },
     milestoneDescrStyle:{
         color:'#707070',  //signature light blue color
-        width: "80%" //fix bug where goal only showed in center of screen
+        width: "80%", //fix bug where goal only showed in center of screen
     },
     contentStyle:{
-        display:"flex",
-        flexDirection:"column",
+        flex: 1,
+        flexDirection:"column",/*Stack milestone's title and description/icon */
     },
     milestoneTitle: {
         textAlign:"center",
@@ -203,5 +206,13 @@ const styles = StyleSheet.create({
     pageTitleStyle:{
         color:"navy",
         textAlign:"center",
-      },         
+    },
+    iconStyle: {
+        flex: 1,
+    },
+    layoutStyle:{
+        display: "flex",
+        flexDirection:"row",/*organize milestone's description and edit icon side by side*/
+        justifyContent:"space-between",/*push milestone's description and edit icon on opposite ends of view */
+    }        
 });
