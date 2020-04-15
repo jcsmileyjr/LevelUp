@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast, Right } from 'native-base';
+import { Container, Text, Content, Icon, H1, H2, List, ListItem, Toast} from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -18,6 +18,10 @@ export default class Milestones extends React.Component {
       });//load fonts needed for certain components in NativeBase
       this.setState({isReady:true});//When the fonts is loaded, update "isReady" to show the app
       this.getMilestones();//loads data (milestones & title) from local storage into the state
+    }
+
+    openEditMilestoneScreen = () => {
+        this.props.navigation.navigate("EditMilestone");
     }
 
     //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
@@ -154,7 +158,7 @@ export default class Milestones extends React.Component {
                                         <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
                                         <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
                                     </View>
-                                    <Icon active name="md-brush" android="md-brush" />
+                                    <Icon active name="md-brush" android="md-brush" onPress={()=> this.openEditMilestoneScreen()} />
                                 </ListItem>
                             );
                         })
