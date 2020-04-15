@@ -1,35 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {View, StyleSheet, TextInput, TouchableNativeFeedback} from 'react-native';
 import {Text, Container, Content,H1} from 'native-base';
 
+import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
 
 const EditMilestone = (props) => {
 	const [currentTitle, setCurrentTitle] = useState("");
 	const [currentDescr, setCurrentDescr] = useState("");
-	const updateTitle = (text) => {setCurrentTitle(text)};
-	const updateDescri = (text) => {setCurrentDescr(text)};
+	const [currentMilestone, setCurrentMilestone] = useState([]);
+	const [currentGoalTitle, setGoalTitle] = useState("")
+	//const updateCurrentMilestone = (milestone) => {setCurrentMilestone(milestone)}
+	//const updateTitle = (text) => {setCurrentTitle(text)};
+	//const updateDescri = (text) => {setCurrentDescr(text)};
+
+	useEffect(() => {
+		this.getMilestone();
+	},[]);
+
+	//Called during mount, function to load data from local storage (acquired in the Milestone screen) into state
+	getMilestone = async () => {
+		const milestone = await AsyncStorage.getItem('chosenMilestone');//load picked milestone
+		const goalTitle = await AsyncStorage.getItem('currentGoalTitle');// load a title string
+		setGoalTitle(goalTitle);
+		setCurrentMilestone(JSON.parse(milestone));
+		console.log(milestone); 
+		console.log({currentMilestone});      
+	}
 
 	return (
 		<Container>
 			<Head  /> 
 			<Content>
 				<View>
-					<H1 style={styles.layoutStyle1}>Add Milestones</H1>
+					<H1 style={styles.layoutStyle1}>Edit Milestone</H1>
 				</View>
 				<View>
-					<H1 style={[styles.layoutStyle1, styles.goalTitleStyle]}>Original Goal</H1>					
+					<H1 style={[styles.layoutStyle1, styles.goalTitleStyle]}>{currentGoalTitle}</H1>					
 				</View>
 				<View style={styles.inputContainter}>
 					<TextInput 	style={styles.textAreaStyle} 
-											placeholder="Original Milestone Title" 
+											placeholder={currentMilestone.title} 
 											placeholderTextColor="darkgrey"
                       multiline={true}
 											/>
 				
 					<TextInput 	style={styles.textAreaStyle} 
-											placeholder="Original Milestone Description"
+											placeholder={currentMilestone.description}
 											placeholderTextColor="darkgrey"
                       multiline={true}
 											/>

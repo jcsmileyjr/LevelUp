@@ -20,10 +20,6 @@ export default class Milestones extends React.Component {
       this.getMilestones();//loads data (milestones & title) from local storage into the state
     }
 
-    openEditMilestoneScreen = () => {
-        this.props.navigation.navigate("EditMilestone");
-    }
-
     //Called during mount, function to load data from local storage (acquired in GoalScreen) into state
     getMilestones = async () => {
         const milestones = await AsyncStorage.getItem('currentMilestones');//load a array of milestones
@@ -54,6 +50,14 @@ export default class Milestones extends React.Component {
             console.log("MilestoneScreen: userGoal local storgae is empty")
         }
     }
+
+    //Allow user to edit a milestone
+    openEditMilestoneScreen = async(id) => {
+        const listOfMilestones = this.state.steps;//get current list of milestones
+        const chosenMilestone = listOfMilestones[id];
+        await AsyncStorage.setItem("chosenMilestone",JSON.stringify(chosenMilestone));//Save user chosen milestone to local storage
+        this.props.navigation.navigate("EditMilestone");
+    }    
 
     //Allow a user to delete a milestone
     deleteMilestone = async(id) => {
@@ -158,7 +162,7 @@ export default class Milestones extends React.Component {
                                         <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
                                         <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
                                     </View>
-                                    <Icon active name="md-brush" android="md-brush" onPress={()=> this.openEditMilestoneScreen()} />
+                                    <Icon active name="md-brush" android="md-brush" onPress={()=> this.openEditMilestoneScreen(index)} />
                                 </ListItem>
                             );
                         })
