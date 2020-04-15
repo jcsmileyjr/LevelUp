@@ -11,9 +11,7 @@ const EditMilestone = (props) => {
 	const [currentDescr, setCurrentDescr] = useState("");
 	const [currentMilestone, setCurrentMilestone] = useState([]);
 	const [currentGoalTitle, setGoalTitle] = useState("")
-	//const updateCurrentMilestone = (milestone) => {setCurrentMilestone(milestone)}
-	//const updateTitle = (text) => {setCurrentTitle(text)};
-	//const updateDescri = (text) => {setCurrentDescr(text)};
+	//const updateTitle = (text) => {setCurrentTitle(text);console.log(currentTitle)};
 
 	useEffect(() => {
 		this.getMilestone();
@@ -25,8 +23,6 @@ const EditMilestone = (props) => {
 		const goalTitle = await AsyncStorage.getItem('currentGoalTitle');// load a title string
 		setGoalTitle(goalTitle);
 		setCurrentMilestone(JSON.parse(milestone));
-		console.log(milestone); 
-		console.log({currentMilestone});      
 	}
 
 	return (
@@ -43,13 +39,15 @@ const EditMilestone = (props) => {
 					<TextInput 	style={styles.textAreaStyle} 
 											placeholder={currentMilestone.title} 
 											placeholderTextColor="darkgrey"
-                      multiline={true}
+											multiline={true}
+											onChangeText={(milestoneTitle)=>setCurrentTitle(milestoneTitle)}
 											/>
 				
 					<TextInput 	style={styles.textAreaStyle} 
 											placeholder={currentMilestone.description}
 											placeholderTextColor="darkgrey"
-                      multiline={true}
+											multiline={true}
+											onChangeText={(milestoneDescr)=>setCurrentDescr(milestoneDescr)}
 											/>
 				</View>
                     {/**Display a button to add a new goal */}
