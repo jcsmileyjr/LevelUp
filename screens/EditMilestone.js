@@ -102,15 +102,7 @@ const EditMilestone = ({navigation}) => {
 										<Text style={styles.buttonText}>Update Milestone</Text>
 								</View>
 						</TouchableNativeFeedback>
-				</View>
-				{/**Display a button to move milestone to acheivements */}
-				<View style={styles.buttonContainer}>
-						<TouchableNativeFeedback onPress={() => { this.updateMilestone();}} >
-								<View style={styles.buttonStyle}>
-										<Text style={styles.buttonText}>Move to Acheivements</Text>
-								</View>
-						</TouchableNativeFeedback>
-				</View>				
+				</View>			
 			</Content>
 			<Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
 		</Container>

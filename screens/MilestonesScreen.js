@@ -160,11 +160,12 @@ export default class Milestones extends React.Component {
                     {
                         this.state.steps.map((milestone, index) =>{
                             return(
-                                <ListItem style={styles.layoutStyle} key={index} onPress={() => this.openEditMilestoneScreen(index)}>
+                                <ListItem style={styles.layoutStyle} key={index}>
                                     <View style={styles.contentStyle}>
                                         <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
                                         <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
                                     </View>
+                                    <Icon style={styles.trophyStyle} active name="md-trophy" android="md-trophy" onPress={()=> this.deleteMilestone(index)} />
                                     <Icon active name="md-brush" android="md-brush" onPress={()=> this.openEditMilestoneScreen(index)} />
                                 </ListItem>
                             );
@@ -196,6 +197,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
         fontWeight:"bold",  //Bigger text
         color:'navy',  //signature dark blue color
+        textDecorationLine: "underline",
     },
     inputStyles: {
         width: 300,
@@ -225,5 +227,9 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection:"row",/*organize milestone's description and edit icon side by side*/
         justifyContent:"space-between",/*push milestone's description and edit icon on opposite ends of view */
+    },
+    trophyStyle:{
+        color:"gold",
+        marginRight: 25,
     }        
 });
