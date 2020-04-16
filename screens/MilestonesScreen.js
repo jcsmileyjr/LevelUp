@@ -160,7 +160,7 @@ export default class Milestones extends React.Component {
                     {
                         this.state.steps.map((milestone, index) =>{
                             return(
-                                <ListItem style={styles.layoutStyle} key={index} onPress={() => {this.deleteMilestone(index)}}>
+                                <ListItem style={styles.layoutStyle} key={index} onPress={() => this.openEditMilestoneScreen(index)}>
                                     <View style={styles.contentStyle}>
                                         <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
                                         <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
