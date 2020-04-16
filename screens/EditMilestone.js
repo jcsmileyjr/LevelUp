@@ -52,6 +52,15 @@ const EditMilestone = ({navigation}) => {
 		const listOfGoals = JSON.parse(downloadedGoals);		
 		const goalLocation = findGoalIndex(listOfGoals);
 		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);
+		
+		let newMilestone = {};
+		newMilestone.title = currentTitle;
+		newMilestone.description = currentDescr;
+
+		//replace old milestone with new milestone
+		listOfGoals[goalLocation].milestones[milestoneLocation] = newMilestone;
+		
+
 		//listOfGoals[goalLocation].milestones[milestoneLocation].title = currentTitle;
 		//listOfGoals[goalLocation].milestones[milestoneLocation].description = currentDescr;
 		//const userGoals = JSON.stringify(listOfGoals);
