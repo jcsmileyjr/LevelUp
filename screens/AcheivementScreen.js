@@ -93,6 +93,8 @@ timelineBar:{
 pageTitleStyle:{
     color:"navy",
     textAlign:"center",
+    textDecorationLine:"underline",
+    marginBottom:15,
   },
 goalStyle:{
     color:'#2B65EC',  //signature light blue 

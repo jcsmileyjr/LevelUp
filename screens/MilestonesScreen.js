@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
-import { Container, Text, Content, CheckBox, Icon, H1, H2, List, ListItem, Body, Toast } from 'native-base';
+import {View, StyleSheet, TextInput, TouchableNativeFeedback} from 'react-native';
+import { Container, Text, Content, Icon, H1, H2, List, ListItem, Toast} from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
+import { NavigationEvents } from "react-navigation";
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
@@ -27,6 +28,7 @@ export default class Milestones extends React.Component {
         this.setState({steps:JSON.parse(milestones), title:JSON.parse(goalTitle), newMilestone:""});        
     }
 
+    //NO LONGER USED
     //When user press "plus" sign, the milestone the user inputted is added to the goal selected.
     addMilestone = async () => {
         const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
@@ -50,6 +52,14 @@ export default class Milestones extends React.Component {
             console.log("MilestoneScreen: userGoal local storgae is empty")
         }
     }
+
+    //Allow user to edit a milestone
+    openEditMilestoneScreen = async(id) => {
+        const listOfMilestones = this.state.steps;//get current list of milestones
+        const chosenMilestone = listOfMilestones[id];
+        await AsyncStorage.setItem("chosenMilestone",JSON.stringify(chosenMilestone));//Save user chosen milestone to local storage
+        this.props.navigation.navigate("EditMilestone");
+    }    
 
     //Allow a user to delete a milestone
     deleteMilestone = async(id) => {
@@ -130,16 +140,10 @@ export default class Milestones extends React.Component {
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
                 <Head  navigation={this.props.navigation}/> 
+                {/*Refresh data */}
+                <NavigationEvents onDidFocus={() => this.getMilestones()} />
                 <Content> 
                     <H1 style={styles.pageTitleStyle}>Milestones</H1>
-                    {/*Display a input box to create a new milestone */}
-                    <View style={styles.inputContainter} >
-                        <Icon active name='add'onPress={()=> this.addMilestone()} />
-                        <TextInput placeholder="Add Milestone" 
-                        style={styles.inputStyles}
-                        ref={input => {this.textInput = input}}              
-                        onChangeText={(newMilestone)=>this.setState({newMilestone})} />
-                    </View>
 
                     {/*Display the user's selected goal title */}
                     <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
@@ -149,14 +153,26 @@ export default class Milestones extends React.Component {
                     {
                         this.state.steps.map((milestone, index) =>{
                             return(
-                                <ListItem style={styles.contentStyle} key={index} onPress={() => {this.deleteMilestone(index)}}>
-                                    <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>
-                                    <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>
+                                <ListItem style={styles.layoutStyle} key={index}>
+                                    <View style={styles.contentStyle}>
+                                        <Text style={styles.milestoneTitleStyle}>{milestone.title}</Text>                                    
+                                        <Text style={styles.milestoneDescrStyle}>{milestone.description}</Text>                                        
+                                    </View>
+                                    <Icon style={styles.trophyStyle} active name="md-trophy" android="md-trophy" onPress={()=> this.deleteMilestone(index)} />
+                                    <Icon active name="md-brush" android="md-brush" onPress={()=> this.openEditMilestoneScreen(index)} />
                                 </ListItem>
                             );
                         })
                     }
                     </List>
+                    {/**Display a button to navigate to the ADD Milestone page */}
+                    <View style={styles.buttonContainer}>
+                            <TouchableNativeFeedback onPress={() => { this.props.navigation.navigate("EditMilestone")}} >
+                                    <View style={styles.buttonStyle}>
+                                            <Text style={styles.buttonText}>Add Milestone</Text>
+                                    </View>
+                            </TouchableNativeFeedback>
+                    </View>	
                 </Content>
                 <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
@@ -172,16 +188,17 @@ const styles = StyleSheet.create({
     },
     milestoneDescrStyle:{
         color:'#707070',  //signature light blue color
-        width: "80%" //fix bug where goal only showed in center of screen
+        width: "80%", //fix bug where goal only showed in center of screen
     },
     contentStyle:{
-        display:"flex",
-        flexDirection:"column",
+        flex: 1,
+        flexDirection:"column",/*Stack milestone's title and description/icon */
     },
     milestoneTitle: {
         textAlign:"center",
         fontWeight:"bold",  //Bigger text
         color:'navy',  //signature dark blue color
+        textDecorationLine: "underline",
     },
     inputStyles: {
         width: 300,
@@ -203,5 +220,35 @@ const styles = StyleSheet.create({
     pageTitleStyle:{
         color:"navy",
         textAlign:"center",
-      },         
+    },
+    iconStyle: {
+        flex: 1,
+    },
+    layoutStyle:{
+        display: "flex",
+        flexDirection:"row",/*organize milestone's description and edit icon side by side*/
+        justifyContent:"space-between",/*push milestone's description and edit icon on opposite ends of view */
+    },
+    trophyStyle:{
+        color:"gold",
+        marginRight: 25,
+    },
+    buttonStyle:{//style for the finish button
+        backgroundColor:'navy',//signature dark blue color 
+        padding: 10, //space between button title and border
+        margin: 10, //whitespace between button and other elements
+        width: 250, //width of button
+        borderColor:'navy',//signature purple color
+        borderRadius: 15, //round the corners   
+    },
+    buttonContainer:{
+        alignItems:"center",  //help center the button
+        justifyContent:"center",
+        marginTop:25, //whitespace above button 
+    },
+    buttonText:{
+        color: "#ffffff", //text color
+        textAlign:"center", //center the text
+        fontWeight:"bold",  //Bigger text
+    },        
 });
