@@ -55,8 +55,10 @@ const EditMilestone = ({navigation}) => {
 		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);//search the current array of milestones for the current milestone
 		
 		let newMilestone = {};//create a new milestone from user's input
-		newMilestone.title = currentTitle;
-		newMilestone.description = currentDescr;
+
+		//create a new milestone from user's input. If nothing has change, use old data
+		currentTitle === ""?newMilestone.title = currentMilestone.title: newMilestone.title = currentTitle;
+		currentDescr ===""? newMilestone.description = currentMilestone.description: newMilestone.description = currentDescr;
 
 		//replace old milestone with new milestone
 		listOfGoals[goalLocation].milestones[milestoneLocation] = newMilestone;
