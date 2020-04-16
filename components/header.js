@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
       flex: 4,// Add more space to display text
     },
     headerTitle:{
-      textDecorationLine:"underline", //Text is underlined
       fontWeight:"bold",  //Bigger text
     },
     settingButton:{

@@ -117,7 +117,8 @@ export default class Goal extends React.Component {
 const styles = StyleSheet.create({
   goalStyle: {
     color: "navy",
-    textAlign: "center"
+    textAlign: "center",
+    textDecorationLine:"underline",
   },
   goalText: {
     color: "#2B65EC", //signature purple color
