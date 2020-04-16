@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, TouchableNativeFeedback} from 'react-native';
 import { Container, Text, Content, Icon, H1, H2, List, ListItem, Toast} from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import { NavigationEvents } from "react-navigation";
@@ -28,6 +28,7 @@ export default class Milestones extends React.Component {
         this.setState({steps:JSON.parse(milestones), title:JSON.parse(goalTitle), newMilestone:""});        
     }
 
+    //NO LONGER USED
     //When user press "plus" sign, the milestone the user inputted is added to the goal selected.
     addMilestone = async () => {
         const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
@@ -143,14 +144,6 @@ export default class Milestones extends React.Component {
                 <NavigationEvents onDidFocus={() => this.getMilestones()} />
                 <Content> 
                     <H1 style={styles.pageTitleStyle}>Milestones</H1>
-                    {/*Display a input box to create a new milestone */}
-                    <View style={styles.inputContainter} >
-                        <Icon active name='add'onPress={()=> this.addMilestone()} />
-                        <TextInput placeholder="Add Milestone" 
-                        style={styles.inputStyles}
-                        ref={input => {this.textInput = input}}              
-                        onChangeText={(newMilestone)=>this.setState({newMilestone})} />
-                    </View>
 
                     {/*Display the user's selected goal title */}
                     <H2 style={styles.milestoneTitle}>{this.state.title}</H2>
@@ -172,6 +165,14 @@ export default class Milestones extends React.Component {
                         })
                     }
                     </List>
+                    {/**Display a button to navigate to the ADD Milestone page */}
+                    <View style={styles.buttonContainer}>
+                            <TouchableNativeFeedback onPress={() => { this.props.navigation.navigate("EditMilestone")}} >
+                                    <View style={styles.buttonStyle}>
+                                            <Text style={styles.buttonText}>Add Milestone</Text>
+                                    </View>
+                            </TouchableNativeFeedback>
+                    </View>	
                 </Content>
                 <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
             </Container>
@@ -231,5 +232,23 @@ const styles = StyleSheet.create({
     trophyStyle:{
         color:"gold",
         marginRight: 25,
-    }        
+    },
+    buttonStyle:{//style for the finish button
+        backgroundColor:'navy',//signature dark blue color 
+        padding: 10, //space between button title and border
+        margin: 10, //whitespace between button and other elements
+        width: 250, //width of button
+        borderColor:'navy',//signature purple color
+        borderRadius: 15, //round the corners   
+    },
+    buttonContainer:{
+        alignItems:"center",  //help center the button
+        justifyContent:"center",
+        marginTop:25, //whitespace above button 
+    },
+    buttonText:{
+        color: "#ffffff", //text color
+        textAlign:"center", //center the text
+        fontWeight:"bold",  //Bigger text
+    },        
 });
