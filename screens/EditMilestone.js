@@ -72,7 +72,7 @@ const EditMilestone = ({navigation}) => {
 
 	return (
 		<Container>
-			<Head  /> 
+			<Head navigation={navigation} /> 
 			<Content>
 				<View>
 					<H1 style={styles.layoutStyle1}>Edit Milestone</H1>
