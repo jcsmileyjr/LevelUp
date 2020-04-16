@@ -6,12 +6,11 @@ import { AsyncStorage } from 'react-native';//Function to allow saving and readi
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
 
-const EditMilestone = (props) => {
+const EditMilestone = ({navigation}) => {
 	const [currentTitle, setCurrentTitle] = useState("");
 	const [currentDescr, setCurrentDescr] = useState("");
 	const [currentMilestone, setCurrentMilestone] = useState([]);
 	const [currentGoalTitle, setGoalTitle] = useState("")
-	//const updateTitle = (text) => {setCurrentTitle(text);console.log(currentTitle)};
 
 	useEffect(() => {
 		this.getMilestone();
@@ -23,6 +22,43 @@ const EditMilestone = (props) => {
 		const goalTitle = await AsyncStorage.getItem('currentGoalTitle');// load a title string
 		setGoalTitle(goalTitle);
 		setCurrentMilestone(JSON.parse(milestone));
+	}
+
+	//compare each goal's title with the current goal title and return current index location
+	findGoalIndex = (arrayOfGoals) => {		
+		let goalLocation = -1;
+		arrayOfGoals.forEach((goal,index) => {
+			const convertedTitle = JSON.stringify(goal.goal);//convert goal title into a string			
+			if(convertedTitle === currentGoalTitle){//compare converted goal title with current goal tilte
+				goalLocation = index
+			}
+		});
+		return goalLocation;
+	}
+
+	//search an array of milestones for a milestone object whose title matches the current milestone title
+	findMilestoneIndex = (arrayOfMilestones) => {
+		let milestoneLocation = -1;		
+		arrayOfMilestones.forEach((milestone, index) => {
+			if(milestone.title === currentMilestone.title){
+				milestoneLocation = index;
+			}
+		});
+		return milestoneLocation;
+	}
+
+	updateMilestone = async () => {
+		const downloadedGoals = await AsyncStorage.getItem("userGoals"); //get saved goals from local storage
+		const listOfGoals = JSON.parse(downloadedGoals);		
+		const goalLocation = findGoalIndex(listOfGoals);
+		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);
+		//listOfGoals[goalLocation].milestones[milestoneLocation].title = currentTitle;
+		//listOfGoals[goalLocation].milestones[milestoneLocation].description = currentDescr;
+		//const userGoals = JSON.stringify(listOfGoals);
+		//await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
+		//AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones)); //saves the goal's milestones
+    //AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal)); //saves the goal's title
+		navigation.navigate("Milestone");
 	}
 
 	return (
@@ -52,7 +88,7 @@ const EditMilestone = (props) => {
 				</View>
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones();}} >
+                        <TouchableNativeFeedback onPress={() => { this.updateMilestone();}} >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.buttonText}>FINISH</Text>
                             </View>
