@@ -47,27 +47,27 @@ const EditMilestone = ({navigation}) => {
 		return milestoneLocation;
 	}
 
+	//Update the current selected milestone with new information and return user to Milestone screen
 	updateMilestone = async () => {
 		const downloadedGoals = await AsyncStorage.getItem("userGoals"); //get saved goals from local storage
-		const listOfGoals = JSON.parse(downloadedGoals);		
-		const goalLocation = findGoalIndex(listOfGoals);
-		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);
+		const listOfGoals = JSON.parse(downloadedGoals);//convert saved user goals into a json file		
+		const goalLocation = findGoalIndex(listOfGoals);//search list of goals for the current goal
+		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);//search the current array of milestones for the current milestone
 		
-		let newMilestone = {};
+		let newMilestone = {};//create a new milestone from user's input
 		newMilestone.title = currentTitle;
 		newMilestone.description = currentDescr;
 
 		//replace old milestone with new milestone
 		listOfGoals[goalLocation].milestones[milestoneLocation] = newMilestone;
 		
-
-		//listOfGoals[goalLocation].milestones[milestoneLocation].title = currentTitle;
-		//listOfGoals[goalLocation].milestones[milestoneLocation].description = currentDescr;
-		//const userGoals = JSON.stringify(listOfGoals);
-		//await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of objects to local storage
-		//AsyncStorage.setItem("currentMilestones", JSON.stringify(goal.milestones)); //saves the goal's milestones
-    //AsyncStorage.setItem("currentGoalTitle", JSON.stringify(goal.goal)); //saves the goal's title
-		navigation.navigate("Milestone");
+		//Save updated list of goals to local storage
+		AsyncStorage.setItem("userGoals",JSON.stringify(listOfGoals));//Save updated array of objects to local storage
+		
+		//Save current milestone to local storage
+		AsyncStorage.setItem("currentMilestones", JSON.stringify(listOfGoals[goalLocation].milestones)); //saves the goal's milestones
+    
+		navigation.navigate("Milestone");//return user to Milestone screen
 	}
 
 	return (

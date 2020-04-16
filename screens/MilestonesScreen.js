@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 import { Container, Text, Content, Icon, H1, H2, List, ListItem, Toast} from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
+import { NavigationEvents } from "react-navigation";
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
@@ -138,6 +139,8 @@ export default class Milestones extends React.Component {
             <Container>
                 {/*Displays the App's Title, current section, and menu button */}
                 <Head  navigation={this.props.navigation}/> 
+                {/*Refresh data */}
+                <NavigationEvents onDidFocus={() => this.getMilestones()} />
                 <Content> 
                     <H1 style={styles.pageTitleStyle}>Milestones</H1>
                     {/*Display a input box to create a new milestone */}
