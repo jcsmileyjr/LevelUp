@@ -62,8 +62,7 @@ export default class Achievements extends React.Component {
                                 );
                             })
                         }
-                    </Grid> 
-                    
+                    </Grid>                     
                 </Content>
                 <FooterWithButton   text="Manually Add Completed Milestone" 
                                     nav="ManualAddProgress" 
@@ -74,44 +73,42 @@ export default class Achievements extends React.Component {
 }
 
 const styles = StyleSheet.create({
-textStyle:{
-    color:'#2B65EC',  //signature light blue color
-    marginLeft:5,
-    marginBottom:10,
-},
-dateStyle:{
-    color:'navy',  //signature purple color
-    textAlign:"center",
-    marginBottom:10, 
-},
-timelineBar:{
-    borderColor:"grey",
-    borderWidth:2,
-    borderStyle:"solid",
-    backgroundColor:"grey",
-},
-pageTitleStyle:{
-    color:"navy",
-    textAlign:"center",
-    textDecorationLine:"underline",
-    marginBottom:15,
-  },
-goalStyle:{
-    color:'#2B65EC',  //signature light blue 
-    textDecorationLine:"underline",
-},
-milestoneStyle:{
-    color: "navy",
-    fontSize:20,
-},
-descriptionStyle:{
-    color:"#707070",
-    fontSize:12,
-},
-contentStyle: {
-    marginLeft: 10,
-},
-rowStyle:{
-    marginBottom:10,//whitespace between successes
-}
+    textStyle:{
+        color:'#2B65EC',  //signature light blue color
+        marginLeft:5,
+        marginBottom:10,
+    },
+    dateStyle:{
+        color:'navy',  //signature purple color
+        textAlign:"center",
+        marginBottom:10, 
+    },
+    timelineBar:{
+        borderColor:"grey",
+        borderWidth:2,
+        borderStyle:"solid",
+        backgroundColor:"grey",
+    },
+    pageTitleStyle:{
+        color:"navy",
+        textAlign:"center",
+        textDecorationLine:"underline",
+        marginBottom:15,
+    },
+    goalStyle:{
+        color:'#2B65EC',  //signature light blue 
+        textDecorationLine:"underline",
+    },
+    milestoneStyle:{
+        color: "navy",
+        fontSize:20,
+    },
+    descriptionStyle:{
+        color:"#707070",
+        fontSize:12,
+    },
+    contentStyle: {
+        marginLeft: 10,
+        marginBottom:10,//whitespace between successes
+    },
 });
