@@ -88,8 +88,8 @@ const ManualAddProgress = ({ navigation }) => {
 						animationType={"fade"}
 						androidMode={"default"}
 						placeHolderText="Select date"
-						textStyle={{ color: "green" }}
-						placeHolderTextStyle={{ color: "#d3d3d3" }}
+						textStyle={{ color: "black" }}
+						placeHolderTextStyle={{ color: "black" }}
 						onDateChange={(date) => setUserPickedDate(date)}
 						disabled={false}
 					/>
@@ -117,10 +117,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		height: 100,
 	},
-	pageTitleStyle: {
-		textAlign: "center",
-		marginBottom: 20,
-	},
 	goalTitleStyle: {
 		textDecorationLine: "underline",
 	},
@@ -128,6 +124,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 20,
 		color: "navy",
+		marginTop:15,//whitespace between page title and header
 	},
 	textAreaStyle: {//styles for the milestone input text box
 		width: 270,

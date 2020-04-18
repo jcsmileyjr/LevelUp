@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text, TouchableNativeFeedback, Keyboard} from 'react-native';
-import { Container,Content, Icon, Toast, H1, Textarea } from 'native-base';
+import { Container,Content, Toast, H1, Textarea } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -83,7 +83,6 @@ export default class Milestones extends React.Component {
                 <Content>
                     <H1 style={styles.pageTitleStyle}>Planning</H1>
                     <View style={styles.inputContainter} >
-                        <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
                         <TextInput  placeholder="TYPE A NEW GOAL"
                                     placeholderTextColor="darkgrey" 
                                     clearTextOnFocus={true}
@@ -92,7 +91,6 @@ export default class Milestones extends React.Component {
                                     onChangeText={(newGoalTitle)=>this.setState({newGoalTitle})} />
                     </View>
                     <View style={styles.inputContainter} >
-                        <Icon style={[styles.iconStyle, styles.bulbIconColor]} active name='bulb' />
                         <TextInput  placeholder="TYPE MILESTONE TITLE"
                                     placeholderTextColor="darkgrey"
                                     multiline={true}
@@ -101,7 +99,6 @@ export default class Milestones extends React.Component {
                                     onChangeText={(milestoneTitle)=>this.setState({milestoneTitle})} />
                     </View>
                     <View style={styles.inputContainter} >
-                        <Icon style={[styles.iconStyle, styles.addIconColor]} active name='add'onPress={()=> this.updateMilestones()} />
                         <TextInput  placeholder="TYPE MILESTONE DESCRIPTION"
                                     placeholderTextColor="darkgrey"
                                     multiline={true}
@@ -109,8 +106,7 @@ export default class Milestones extends React.Component {
                                     ref={input => {this.descriptionInput = input}} 
                                     onChangeText={(milestoneDesc)=>this.setState({milestoneDesc})} />
                     </View>
-                    <Text style={styles.pageTitleStyle}>Click the Add icon to create a milestone</Text>
-
+                    
                     {
                         this.state.newMilestones.map((step, index) =>{
                             return(
@@ -121,6 +117,15 @@ export default class Milestones extends React.Component {
                         })
                     }
                     
+                    {/**Display a button to add a new goal */}
+                    <View style={[styles.buttonContainer, styles.milestoneButton]}>
+                        <TouchableNativeFeedback onPress={() => {this.updateMilestones();}} >
+                            <View style={styles.buttonStyle}>
+                                <Text style={styles.buttonText}>ADD MILESTONE</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                    </View> 
+
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
                         <TouchableNativeFeedback onPress={() => {this.updateGoals();}} >
@@ -191,13 +196,7 @@ const styles = StyleSheet.create({
         color:"navy",
         textAlign:"center",
     },
-    iconStyle:{
-        fontSize:50,
-    },
-    addIconColor:{
-        color:'#2B65EC',
-    },
-    bulbIconColor:{
-        color:'white',  //white color to hide it. This help keeps the format
+    milestoneButton:{
+        marginBottom:15,
     }
 });
