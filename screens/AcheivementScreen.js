@@ -2,9 +2,10 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import { Container,Content, H1, Grid, Col, Row } from 'native-base'; 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
+import { NavigationEvents } from "react-navigation";
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+import FooterWithButton from '../components/FooterWithButton.js'//Footer with a button to add a completed milestone
 import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //Allows the user to see completed goals/milestones
@@ -21,7 +22,7 @@ export default class Achievements extends React.Component {
       this.loadData();
     }
 
-    //load the users completed milestones/goals saved to local storage
+    //load the users's past achievements saved to local storage
     loadData = async () => {
         try {
             const savedAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
@@ -41,13 +42,14 @@ export default class Achievements extends React.Component {
         return(
             <Container>
                 <Head navigation={this.props.navigation} title="Timeline of Successes" />
+                {/*Refresh data */}
+                <NavigationEvents onDidFocus={() => this.loadData()} />
                 <Content>
                     <H1 style={styles.pageTitleStyle}>Timeline of Successes</H1>
                     <Grid >
                         {
                             this.state.achievements.map((success, index) =>{
-                                return(
-                                    
+                                return(                                    
                                     <Row key={index}>
                                         <Col style={styles.contentStyle} size={77}>
                                             <Text style={styles.goalStyle}>{success.goal}</Text>
@@ -56,16 +58,14 @@ export default class Achievements extends React.Component {
                                         </Col>
                                         <Col style={styles.timelineBar} size={3}><Text></Text></Col>
                                         <Col size={20}><Text style={styles.dateStyle}>{success.date}</Text></Col>
-                                    </Row>
-                                    
+                                    </Row>                                    
                                 );
-
                             })
                         }
                     </Grid> 
                     
                 </Content>
-                <Foot title="The essence of strategy is to choose what not to do" />
+                <FooterWithButton navigation={this.props.navigation} />
             </Container>
         );
     }

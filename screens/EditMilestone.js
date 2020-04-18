@@ -142,28 +142,28 @@ const styles = StyleSheet.create({
 		elevation: 1,
 		margin: 20,
 		fontSize: 18,
-},
-inputContainter:{//ensure the a icon and input box is on the same row
-	display:"flex", 
-	//flexDirection:"row",
-	alignItems:"center",  //help center the button
-	justifyContent:"center",
-},
-buttonStyle:{//style for the finish button
-	backgroundColor:'navy',//signature dark blue color 
-	padding: 10, //space between button title and border
-	margin: 10, //whitespace between button and other elements
-	width: 250, //width of button
-	borderColor:'navy',//signature purple color
-	borderRadius: 15, //round the corners    
-},
-buttonContainer:{
-	alignItems:"center",  //help center the button
-	justifyContent:"center",
-},
-buttonText:{
-	color: "#ffffff", //text color
-	textAlign:"center", //center the text
-	fontWeight:"bold",  //Bigger text
-},
-	});
+	},
+	inputContainter:{//ensure the a icon and input box is on the same row
+		display:"flex", 
+		//flexDirection:"row",
+		alignItems:"center",  //help center the button
+		justifyContent:"center",
+	},
+	buttonStyle:{//style for the finish button
+		backgroundColor:'navy',//signature dark blue color 
+		padding: 10, //space between button title and border
+		margin: 10, //whitespace between button and other elements
+		width: 250, //width of button
+		borderColor:'navy',//signature purple color
+		borderRadius: 15, //round the corners    
+	},
+	buttonContainer:{
+		alignItems:"center",  //help center the button
+		justifyContent:"center",
+	},
+	buttonText:{
+		color: "#ffffff", //text color
+		textAlign:"center", //center the text
+		fontWeight:"bold",  //Bigger text
+	},
+});
