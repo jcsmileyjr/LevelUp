@@ -7,12 +7,12 @@ const FooterWithButton = (props) =>{
         <Footer style={styles.footerStyle}>
           {/**Display a button to add a new goal */}
 					<View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => props.navigation.navigate("ManualAddProgress")} >
-                            <View style={styles.buttonStyle}>
-                                <Text style={styles.buttonText}>Manually Add Completed Milestone</Text>
-                            </View>
-                        </TouchableNativeFeedback>
-                    </View>  
+						<TouchableNativeFeedback onPress={() => props.navigation.navigate(props.nav)} >
+								<View style={styles.buttonStyle}>
+										<Text style={styles.buttonText}>{props.text}</Text>
+								</View>
+						</TouchableNativeFeedback>
+          </View>  
         </Footer>
     );
 }
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
       },
 			buttonStyle:{//style for the finish button
 				backgroundColor:'white',//signature dark blue color 
-				padding: 10, //space between button title and border
+				paddingTop: 8, //space between button title and border
+				paddingBottom: 8, //space between button title and border
 				margin: 10, //whitespace between button and other elements
 				width: 250, //width of button
 				borderColor:'white',//signature purple color

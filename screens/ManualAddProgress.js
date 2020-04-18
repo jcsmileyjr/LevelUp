@@ -103,7 +103,7 @@ const ManualAddProgress = ({ navigation }) => {
 					</TouchableNativeFeedback>
 				</View>
 			</Content>
-			<Foot title="Update the milestone's title or description." />
+			<Foot title="Update the goal't title, milestone's title and description." />
 		</Container>
 	);
 }

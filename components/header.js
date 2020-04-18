@@ -19,14 +19,10 @@ const Head = (props) => {
     return(
         <View>
         {/*Displays the App's Title, current section, and menu button */}
-            <Header style={styles.headerStyles}>
-                <Left style={styles.headerAddGoal}>
-                    <Button iconLeft transparent onPress={() => props.navigation.navigate("Planning")}>
-                        <Icon style={{fontSize:30}} name='md-add' />
-                    </Button>
-                    <Text style={styles.headerAddGoalText}>Create Goal</Text>
+            <Header style={styles.headerStyles}>              
+                <Left style={styles.headerSection}> 
+                  <Text style={[styles.headerText, styles.headerTitle]} onPress={()=> props.navigation.navigate("Goal")}>Level Up Dev</Text>                    
                 </Left>
-                <Body style={ styles.headerSection}><Text style={[styles.headerText, styles.headerTitle]} onPress={()=> props.navigation.navigate("Goal")}>Level Up Dev</Text></Body>
                 <Right style={styles.headerMenu}>
                     <Button transparent onPress={() => setModalVisble(!isVisible)}>
                         <Icon name='menu' />
@@ -125,7 +121,7 @@ export default Head;
 const styles = StyleSheet.create({
     headerStyles:{
         marginTop:23, //add space above the header
-        marginBottom:30, //add space below the header
+        //marginBottom:30, //add space below the header
         backgroundColor:'#00009C', //signature purple background
         color:'white', //white text
     },
@@ -197,5 +193,31 @@ const styles = StyleSheet.create({
       fontSize:16,
       color:"navy",
       textAlign:"center",
-    }      
+    },
+    headerButtonStyle:{//style for the finish button
+      backgroundColor:'white',//signature dark blue color 
+      padding: 10, //space between button title and border
+      margin: 1, //whitespace between button and other elements
+      width: 110, //width of button
+      borderColor:'white',//signature purple color
+      borderRadius: 15, //round the corners
+      flexDirection:"row",//align the icon and text
+      justifyContent:"center",//center the icon and text
+      alignItems:"center",//center the icon and text    
+    },
+    headerButtonContainer:{
+      alignItems:"center",  //help center the button
+      justifyContent:"center",
+      margin:20,
+    },
+    headerButtonText:{
+      color: "navy", //text color
+      textAlign:"center", //center the text
+      fontWeight:"bold",  //Bigger text
+    },
+    headerIcon:{
+      color:"navy",//color of header icon
+      marginRight:5,
+      fontSize:30,
+    }     
 });
