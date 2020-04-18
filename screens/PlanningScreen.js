@@ -21,7 +21,7 @@ export default class Milestones extends React.Component {
 
     //Saves the user inputted milestones to state when push the "plus" icon
     updateMilestones = () => {
-        if(this.state.milestoneTitle !== "" && this.state.newGoalTitle !== ""){
+        if(this.state.milestoneTitle !== "" && this.state.newGoalTitle !== "" && this.state.milestoneDesc !==""){
             let listOfMilestones = this.state.newMilestones;//get the current array of milestones
             let newMilestone = {"title":this.state.milestoneTitle, "description":this.state.milestoneDesc};
             listOfMilestones.push(newMilestone);//update with current user input
@@ -30,14 +30,14 @@ export default class Milestones extends React.Component {
             this.descriptionInput.clear();
             Keyboard.dismiss();
         }else{
-            Toast.show({text:"Must enter a title for a Goal", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
+            Toast.show({text:"Missing Information", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
             console.log("updateMilestones function failed")
         }        
     }
 
     //Update the old list of goals/milestones with new user inputted information when push the "Finish" button
     updateGoals = async () =>{
-        if(this.state.newGoalTitle !== "" && this.state.newMilestones !== null){
+        if(this.state.newGoalTitle !== "" && this.state.newMilestones.length > 0){
             const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage                  
             if(savedGoals !== null && Array.isArray(JSON.parse(savedGoals))===true){//check if the data saved to local storage is not empty                
                 let userGoals = JSON.parse(savedGoals); //get old array of goals/milestones and parse from a string to a array of objects              
@@ -52,17 +52,19 @@ export default class Milestones extends React.Component {
                 await AsyncStorage.setItem("userGoals",JSON.stringify(newSavedGoals));//Save updated array of objects to local storage
             }
             this.showCongratsToast();
+            this.props.navigation.navigate("Goal");
         }else{
-            console.log("Missing information to update user Goals in Planning screen");
+            Toast.show({text:"Must enter a title for a Goal or fail to add a Milestone", buttonText:"Try Again", position:"top", type:"warning", duration:2000});
+            console.log("No goal title or milestones added to update user Goals in Planning screen");
         }
     }
-
+/*
     //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
     setCurrentMilestones = () =>{
         AsyncStorage.setItem("currentMilestones", JSON.stringify(this.state.newMilestones));//saves the goal's milestones
         AsyncStorage.setItem("currentGoalTitle", JSON.stringify(this.state.newGoalTitle));//saves the goal's title
     }    
-
+*/
     clearText = () => { this.setState({milestoneTitle:""})};  
 
     showCongratsToast = () => {
@@ -127,7 +129,7 @@ export default class Milestones extends React.Component {
                     
                     {/**Display a button to add a new goal */}
                     <View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => {this.props.navigation.navigate("Goal"); this.updateGoals(); this.setCurrentMilestones();}} >
+                        <TouchableNativeFeedback onPress={() => {this.updateGoals();}} >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.buttonText}>FINISH</Text>
                             </View>

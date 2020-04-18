@@ -106,7 +106,7 @@ const EditMilestone = ({navigation}) => {
 						</TouchableNativeFeedback>
 				</View>			
 			</Content>
-			<Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
+			<Foot title="Update the milestone's title or description." />
 		</Container>
 	);
 }
