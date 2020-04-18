@@ -108,7 +108,7 @@ const AddMilestone = ({ navigation }) => {
 					</TouchableNativeFeedback>
 				</View>
 			</Content>
-			<FooterWithButton   text="Create New Goal" 
+			<FooterWithButton   text="New Goal" 
                                     nav="Planning" 
                                     navigation={navigation} />
 		</Container>

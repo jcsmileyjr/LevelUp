@@ -109,7 +109,7 @@ export default class Goal extends React.Component {
           </List>
           <Text style={styles.instructions}>*Click on a Goal's Title to view milestones for it*</Text>
         </Content>
-        <FooterWithButton   text="Create New Goal" 
+        <FooterWithButton   text="New Goal" 
                                     nav="Planning" 
                                     navigation={this.props.navigation} />
       </Container>

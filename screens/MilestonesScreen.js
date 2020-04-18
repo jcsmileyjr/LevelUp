@@ -150,7 +150,7 @@ export default class Milestones extends React.Component {
                             </TouchableNativeFeedback>
                     </View>	
                 </Content>
-                <FooterWithButton   text="Create New Goal" 
+                <FooterWithButton   text="New Goal" 
                                     nav="Planning" 
                                     navigation={this.props.navigation} />
             </Container>
