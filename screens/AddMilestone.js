@@ -69,7 +69,6 @@ const AddMilestone = ({ navigation }) => {
 	
 			navigation.navigate("Milestone");//return user to Milestone screen
 		}else{
-			//this.showWarningToast();
 			MissingInformationWarning();
 			console.log("Missing information to create new milestone on AddMilestone Screen");
 		}

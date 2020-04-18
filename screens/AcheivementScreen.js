@@ -49,8 +49,7 @@ export default class Achievements extends React.Component {
                     <Grid >
                         {
                             this.state.achievements.map((success, index) =>{
-                                return(
-                                    
+                                return(                                    
                                     <Row key={index}>
                                         <Col style={styles.contentStyle} size={77}>
                                             <Text style={styles.goalStyle}>{success.goal}</Text>

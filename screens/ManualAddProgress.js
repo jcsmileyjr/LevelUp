@@ -1,46 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, TouchableNativeFeedback } from 'react-native';
-import { Text, Container, Content, H1 } from 'native-base';
+import { Text, Container, Content, H1, DatePicker } from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
 import Foot from '../components/Foot.js';// Footer displaying instructions
+import MissingInformationWarning from '../components/WarningToast.js';//Warning Toast for missing information
 
+//Screen to add an achievement to the achievement page without formally createing one on the planning screen
 const ManualAddProgress = ({ navigation }) => {
-	const [milestoneTitle, setMilestoneTitle] = useState("");
-	const [milestoneDescr, setMilestoneDescr] = useState("");
-	const [currentProgress, setCurrentProgress] = useState([]);
-	const [currentGoalTitle, setGoalTitle] = useState("")
+	const [milestoneTitle, setMilestoneTitle] = useState("");//saves user inputted milesone title
+	const [milestoneDescr, setMilestoneDescr] = useState("");//saves user inputted milesone description
+	const [userPickedDate, setUserPickedDate] = useState("");//saves user inputted date from date picker
+	const [currentGoalTitle, setGoalTitle] = useState("");//saves user inputted goal title
+	
 
 	//Create an achievement and add it to array of achievements in local storage
 	createAchievement = async () => {
 		try {
-			const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
-			let achievements = [];
-			let progress = {};
-			progress.goal = currentGoalTitle;
-			progress.title = milestoneTitle;
-			progress.description = milestoneDescr
-			progress.date = this.getDate();//save today's date
-
-			if (arrayOfAchievements !== null) {
-				achievements = JSON.parse(arrayOfAchievements);//parse string into an array of objects              
-				achievements.push(progress);//update array with new objet
-			} else {
-				achievements.push(progress)//create a new array with first object                     
+			if(currentGoalTitle !== "" && milestoneTitle !=="" && milestoneDescr !=="" && userPickedDate !==""){
+				const arrayOfAchievements = await AsyncStorage.getItem('achievements');//get saved achievements from local storage
+				let achievements = [];
+				let progress = {};
+				progress.goal = currentGoalTitle;
+				progress.title = milestoneTitle;
+				progress.description = milestoneDescr
+				progress.date = this.getDate(userPickedDate);
+			
+				if (arrayOfAchievements !== null) {
+					achievements = JSON.parse(arrayOfAchievements);//parse string into an array of objects              
+					achievements.push(progress);//update array with new objet
+				} else {
+					achievements.push(progress)//create a new array with first object                     
+				}
+	
+				await AsyncStorage.setItem("achievements", JSON.stringify(achievements));//Save array of acheivements to local storage      
+				navigation.navigate("Progress");
+			}else{
+				MissingInformationWarning();
+				console.log("Missing information to create new milestone on AddMilestone Screen");
 			}
 
-			await AsyncStorage.setItem("achievements", JSON.stringify(achievements));//Save array of acheivements to local storage      
-			navigation.navigate("Progress");
 		} catch (e) {
 			console.log("Failed to update acheivements local storage in Milestone screen");
 		}
 	}
 
-	getDate = () => {
-		const day = new Date().getDate();
-		const month = (new Date().getMonth()) + 1;
-		const year = new Date().getFullYear();
+	//Format user chosen date into a string to be displayed on Achievement Screen
+	getDate = (chosenDate) => {
+		const formatDate = new Date(chosenDate);
+		const day = formatDate.getDate();
+		const month = (formatDate.getMonth()) + 1;
+		const year = formatDate.getFullYear();
 		return month + "/" + day + "/" + year;
 	}
 
@@ -70,6 +81,17 @@ const ManualAddProgress = ({ navigation }) => {
 						placeholderTextColor="darkgrey"
 						multiline={true}
 						onChangeText={(milestoneDescr) => setMilestoneDescr(milestoneDescr)}
+					/>
+					<DatePicker
+						defaultDate={new Date(2020, 4, 4)}
+						modalTransparent={false}
+						animationType={"fade"}
+						androidMode={"default"}
+						placeHolderText="Select date"
+						textStyle={{ color: "green" }}
+						placeHolderTextStyle={{ color: "#d3d3d3" }}
+						onDateChange={(date) => setUserPickedDate(date)}
+						disabled={false}
 					/>
 				</View>
 				{/**Display a button to update milestone */}
