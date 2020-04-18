@@ -118,7 +118,7 @@ export default class Milestones extends React.Component {
                     }
                     
                     {/**Display a button to add a new goal */}
-                    <View style={styles.buttonContainer}>
+                    <View style={[styles.buttonContainer, styles.milestoneButton]}>
                         <TouchableNativeFeedback onPress={() => {this.updateMilestones();}} >
                             <View style={styles.buttonStyle}>
                                 <Text style={styles.buttonText}>ADD MILESTONE</Text>
@@ -195,5 +195,8 @@ const styles = StyleSheet.create({
     pageTitleStyle:{
         color:"navy",
         textAlign:"center",
+    },
+    milestoneButton:{
+        marginBottom:15,
     }
 });
