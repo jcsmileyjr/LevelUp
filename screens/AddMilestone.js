@@ -4,7 +4,7 @@ import { Text, Container, Content, H1, Toast } from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+import FooterWithButton from '../components/FooterWithButton.js';// Footer displaying instructions
 import MissingInformationWarning from '../components/WarningToast.js';//Warning Toast for missing information
 
 const AddMilestone = ({ navigation }) => {
@@ -108,7 +108,9 @@ const AddMilestone = ({ navigation }) => {
 					</TouchableNativeFeedback>
 				</View>
 			</Content>
-			<Foot title="Create a new Milestone." />
+			<FooterWithButton   text="Create New Goal" 
+                                    nav="Planning" 
+                                    navigation={navigation} />
 		</Container>
 	);
 }

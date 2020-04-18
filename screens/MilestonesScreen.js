@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native';//Function to allow saving and readi
 import { NavigationEvents } from "react-navigation";
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+import FooterWithButton from '../components/FooterWithButton.js';// Footer displaying instructions
 import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //When a user selects a goal on the GoalScreen, the milestones and title associated with it is displayed here
@@ -140,6 +140,7 @@ export default class Milestones extends React.Component {
                         })
                     }
                     </List>
+                    <Text style={styles.instructions}>Click the trophy icon to move the milestone to the acheivement screen or pen icon to edit the milestone.</Text>
                     {/**Display a button to navigate to the ADD Milestone page */}
                     <View style={styles.buttonContainer}>
                             <TouchableNativeFeedback onPress={() => { this.props.navigation.navigate("AddMilestone")}} >
@@ -149,7 +150,9 @@ export default class Milestones extends React.Component {
                             </TouchableNativeFeedback>
                     </View>	
                 </Content>
-                <Foot title="Click the trophy icon to move the milestone to the acheivement screen or pen icon to edit the milestone." />
+                <FooterWithButton   text="Create New Goal" 
+                                    nav="Planning" 
+                                    navigation={this.props.navigation} />
             </Container>
         );
     }
@@ -225,5 +228,8 @@ const styles = StyleSheet.create({
         color: "#ffffff", //text color
         textAlign:"center", //center the text
         fontWeight:"bold",  //Bigger text
-    },        
+    },
+    instructions:{
+        textAlign:"center",
+    }        
 });

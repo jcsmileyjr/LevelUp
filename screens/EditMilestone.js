@@ -4,7 +4,7 @@ import {Text, Container, Content,H1} from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+import FooterWithButton from '../components/FooterWithButton.js';// Footer displaying instructions
 
 const EditMilestone = ({navigation}) => {
 	const [currentTitle, setCurrentTitle] = useState("");
@@ -106,7 +106,9 @@ const EditMilestone = ({navigation}) => {
 						</TouchableNativeFeedback>
 				</View>			
 			</Content>
-			<Foot title="Update the milestone's title or description." />
+			<FooterWithButton   text="Create New Goal" 
+                                    nav="Planning" 
+                                    navigation={navigation} />
 		</Container>
 	);
 }

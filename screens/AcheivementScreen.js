@@ -65,7 +65,9 @@ export default class Achievements extends React.Component {
                     </Grid> 
                     
                 </Content>
-                <FooterWithButton navigation={this.props.navigation} />
+                <FooterWithButton   text="Manually Add Completed Milestone" 
+                                    nav="ManualAddProgress" 
+                                    navigation={this.props.navigation} />
             </Container>
         );
     }

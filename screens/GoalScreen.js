@@ -18,7 +18,7 @@ import {
 } from "native-base";
 
 import Head from "../components/header.js"; // Nav bar displaying app's title, section title, and menu button
-import Foot from "../components/Foot.js"; // Footer displaying instructions
+import FooterWithButton from "../components/FooterWithButton.js"; // Footer displaying instructions
 import PageLoad from "../components/PageLoad.js"; //Show spinning top while page is loading
 
 //1st Screen the user will see. Allow viewing and adding big picture goals.
@@ -62,7 +62,7 @@ export default class Goal extends React.Component {
     return (
       <Container>
         {/*Displays the App's Title, current section, and menu button */}
-        <Head navigation={this.props.navigation} />
+        <Head navigation={this.props.navigation} instructions="* Click on a Goal to view Milestones for it." />
         {/*Refresh data */}
         <NavigationEvents onDidFocus={() => this.storeData()} />
         <Content>
@@ -73,7 +73,7 @@ export default class Goal extends React.Component {
             <View style={styles.goalInstructionSection}>
               <Text>
                 Press the{" "}
-                <Icon style={{ fontSize: 40, color: "green" }} name="md-add" />{" "}
+                <Icon style={{ fontSize: 40, color: "navy" }} name="md-add" />{" "}
                 icon in the nav to create a new goal
               </Text>
             </View>
@@ -107,8 +107,11 @@ export default class Goal extends React.Component {
                 );
               })}
           </List>
+          <Text style={styles.instructions}>*Click on a Goal's Title to view milestones for it*</Text>
         </Content>
-        <Foot title="* Click on a Goal to view Milestones for it." />
+        <FooterWithButton   text="Create New Goal" 
+                                    nav="Planning" 
+                                    navigation={this.props.navigation} />
       </Container>
     );
   }
@@ -139,5 +142,8 @@ const styles = StyleSheet.create({
   },
   milestoneStyle: {
     width: "70%" //fix bug where milestones only showed in center of screen
+  },
+  instructions:{
+    textAlign:"center",
   }
 });
