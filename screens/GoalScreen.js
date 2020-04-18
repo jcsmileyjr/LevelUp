@@ -71,10 +71,8 @@ export default class Goal extends React.Component {
           {/*Check if the userGoals state has not been updated, then display instructions */}
           {this.state.userGoals.length === undefined && (
             <View style={styles.goalInstructionSection}>
-              <Text>
-                Press the{" "}
-                <Icon style={{ fontSize: 40, color: "navy" }} name="md-add" />{" "}
-                icon in the nav to create a new goal
+              <Text style={styles.instructions}>
+                Press the the "New Goal" button at the bottom of the screen create a new goal
               </Text>
             </View>
           )}
@@ -107,7 +105,9 @@ export default class Goal extends React.Component {
                 );
               })}
           </List>
-          <Text style={styles.instructions}>*Click on a Goal's Title to view milestones for it*</Text>
+          {this.state.userGoals.length > 0 &&
+            <Text style={styles.instructions}>*Click on a Goal's Title to view milestones for it*</Text>
+          }
         </Content>
         <FooterWithButton   text="New Goal" 
                                     nav="Planning" 
@@ -147,4 +147,5 @@ const styles = StyleSheet.create({
   instructions:{
     textAlign:"center",
   }
+
 });

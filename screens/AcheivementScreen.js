@@ -50,7 +50,7 @@ export default class Achievements extends React.Component {
                         {
                             this.state.achievements.map((success, index) =>{
                                 return(                                    
-                                    <Row key={index}>
+                                    <Row key={index} style={styles.rowStyle}>
                                         <Col style={styles.contentStyle} size={77}>
                                             <Text style={styles.goalStyle}>{success.goal}</Text>
                                             <Text style={styles.milestoneStyle}>{success.title}</Text>
@@ -76,13 +76,11 @@ export default class Achievements extends React.Component {
 const styles = StyleSheet.create({
 textStyle:{
     color:'#2B65EC',  //signature light blue color
-    //fontSize:25,  //text size
     marginLeft:5,
     marginBottom:10,
 },
 dateStyle:{
     color:'navy',  //signature purple color
-    //fontSize:20,  //text size
     textAlign:"center",
     marginBottom:10, 
 },
@@ -112,5 +110,8 @@ descriptionStyle:{
 },
 contentStyle: {
     marginLeft: 10,
+},
+rowStyle:{
+    marginBottom:10,//whitespace between successes
 }
 });
