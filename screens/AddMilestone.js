@@ -44,21 +44,20 @@ const AddMilestone = ({ navigation }) => {
 		return milestoneLocation;
 	}
 
-	//Update the current selected milestone with new information and return user to Milestone screen
+	//Create a new milestone, save the data to local storage, and return user to the milestone screen
 	createMilestone = async () => {
 		const downloadedGoals = await AsyncStorage.getItem("userGoals"); //get saved goals from local storage
 		const listOfGoals = JSON.parse(downloadedGoals);//convert saved user goals into a json file		
 		const goalLocation = findGoalIndex(listOfGoals);//search list of goals for the current goal
-		const milestoneLocation = findMilestoneIndex(listOfGoals[goalLocation].milestones);//search the current array of milestones for the current milestone
 
 		let newMilestone = {};//create a new milestone from user's input
 
 		//create a new milestone from user's input. If nothing has change, use old data
-		currentTitle === "" ? newMilestone.title = currentMilestone.title : newMilestone.title = currentTitle;
-		currentDescr === "" ? newMilestone.description = currentMilestone.description : newMilestone.description = currentDescr;
+		newMilestone.title = currentTitle;
+		newMilestone.description = currentDescr;
 
 		//replace old milestone with new milestone
-		listOfGoals[goalLocation].milestones[milestoneLocation] = newMilestone;
+		listOfGoals[goalLocation].milestones.push(newMilestone);
 
 		//Save updated list of goals to local storage
 		AsyncStorage.setItem("userGoals", JSON.stringify(listOfGoals));//Save updated array of objects to local storage
