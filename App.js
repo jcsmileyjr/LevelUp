@@ -13,6 +13,7 @@ import FrontEndPath from './screens/FrontEndDevPath.js';
 import BackEndPath from './screens/BackEndDevPath.js';
 import EditMilestoneScreen from './screens/EditMilestone.js';
 import AddMilestoneScreen from './screens/AddMilestone.js';
+import ManualAddProgressScreen from './screens/ManualAddProgress.js';
 
 export default class App extends React.Component {
   //Show_Main_App is use to show or hide the into-slides. FoundGoals is use to automatic hide the intro-slides
@@ -112,5 +113,5 @@ const navigationOptions = {
   headerMode: 'none'
 }
 
-const AppNavigator = createStackNavigator({ Goal: GoalScreen, Milestone: MilestoneScreen, Planning: PlanningScreen, Progress: AchievementScreen, FrontEnd: FrontEndPath, BackEnd: BackEndPath, EditMilestone: EditMilestoneScreen, AddMilestone: AddMilestoneScreen }, navigationOptions);
+const AppNavigator = createStackNavigator({ Goal: GoalScreen, Milestone: MilestoneScreen, Planning: PlanningScreen, Progress: AchievementScreen, FrontEnd: FrontEndPath, BackEnd: BackEndPath, EditMilestone: EditMilestoneScreen, AddMilestone: AddMilestoneScreen, ManualAddProgress:ManualAddProgressScreen }, navigationOptions);
 const AppContainer = createAppContainer(AppNavigator);

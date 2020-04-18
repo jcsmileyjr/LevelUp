@@ -28,31 +28,6 @@ export default class Milestones extends React.Component {
         this.setState({steps:JSON.parse(milestones), title:JSON.parse(goalTitle), newMilestone:""});        
     }
 
-    //NO LONGER USED
-    //When user press "plus" sign, the milestone the user inputted is added to the goal selected.
-    addMilestone = async () => {
-        const value = await AsyncStorage.getItem('userGoals');//get saved goals from local storage
-        if(value !== null){
-            const currentMilestones = this.state.steps; //get current array of milestones
-            currentMilestones.push(this.state.newMilestone);//update the array of milestones
-            this.setState({steps:currentMilestones});//update screen's state array of milestones to update view
-            
-            const savedGoals = await AsyncStorage.getItem('userGoals');//get saved goals from local storage              
-            let userGoals = JSON.parse(savedGoals); //Convert saved goals from a string into a array of objects         
-            
-            //Search array for selected goal, then update its milestones with updated milestones from state
-            userGoals.forEach((goal) => {
-                if(goal.goal === this.state.title){
-                    goal.milestones = currentMilestones;
-                }
-            });
-            this.textInput.clear();
-            await AsyncStorage.setItem("userGoals",JSON.stringify(userGoals));//Save updated array of goals/milestones to local storage
-        }else{
-            console.log("MilestoneScreen: userGoal local storgae is empty")
-        }
-    }
-
     //Allow user to edit a milestone
     openEditMilestoneScreen = async(id) => {
         const listOfMilestones = this.state.steps;//get current list of milestones

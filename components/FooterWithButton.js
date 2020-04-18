@@ -7,9 +7,9 @@ const FooterWithButton = (props) =>{
         <Footer style={styles.footerStyle}>
           {/**Display a button to add a new goal */}
 					<View style={styles.buttonContainer}>
-                        <TouchableNativeFeedback onPress={() => {this.updateGoals();}} >
+                        <TouchableNativeFeedback onPress={() => props.navigation.navigate("ManualAddProgress")} >
                             <View style={styles.buttonStyle}>
-                                <Text style={styles.buttonText}>Manuelly Add Completed Milestone</Text>
+                                <Text style={styles.buttonText}>Manually Add Completed Milestone</Text>
                             </View>
                         </TouchableNativeFeedback>
                     </View>  
