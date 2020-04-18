@@ -167,14 +167,14 @@ export default class Milestones extends React.Component {
                     </List>
                     {/**Display a button to navigate to the ADD Milestone page */}
                     <View style={styles.buttonContainer}>
-                            <TouchableNativeFeedback onPress={() => { this.props.navigation.navigate("EditMilestone")}} >
+                            <TouchableNativeFeedback onPress={() => { this.props.navigation.navigate("AddMilestone")}} >
                                     <View style={styles.buttonStyle}>
                                             <Text style={styles.buttonText}>Add Milestone</Text>
                                     </View>
                             </TouchableNativeFeedback>
                     </View>	
                 </Content>
-                <Foot title="*Check off a milestone when finished. View it on the Acheivement Timeline" />
+                <Foot title="Click the trophy icon to move the milestone to the acheivement screen or pen icon to edit the milestone." />
             </Container>
         );
     }
