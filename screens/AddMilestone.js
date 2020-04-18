@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, TouchableNativeFeedback } from 'react-native';
-import { Text, Container, Content, H1 } from 'native-base';
+import { Text, Container, Content, H1, Toast } from 'native-base';
 
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
@@ -68,10 +68,21 @@ const AddMilestone = ({ navigation }) => {
 	
 			navigation.navigate("Milestone");//return user to Milestone screen
 		}else{
+			this.showWarningToast();
 			console.log("Missing information to create new milestone on AddMilestone Screen");
+		}
 	}
 
-	}
+	showWarningToast = () => {
+		Toast.show({
+				text:"Missing Information",
+				textStyle:{color:"white"},
+				buttonText: "Close",
+				type:"warning",
+				position:"bottom",
+				duration: 3000,
+		});
+}
 
 	return (
 		<Container>
