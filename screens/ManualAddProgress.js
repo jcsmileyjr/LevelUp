@@ -13,7 +13,7 @@ const ManualAddProgress = ({ navigation }) => {
 	const [milestoneDescr, setMilestoneDescr] = useState("");//saves user inputted milesone description
 	const [userPickedDate, setUserPickedDate] = useState("");//saves user inputted date from date picker
 	const [currentGoalTitle, setGoalTitle] = useState("");//saves user inputted goal title
-	
+	const [todayDate] = useState(new Date());
 
 	//Create an achievement and add it to array of achievements in local storage
 	createAchievement = async () => {
@@ -83,7 +83,7 @@ const ManualAddProgress = ({ navigation }) => {
 						onChangeText={(milestoneDescr) => setMilestoneDescr(milestoneDescr)}
 					/>
 					<DatePicker
-						defaultDate={new Date(2020, 4, 4)}
+						defaultDate={new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate())}
 						modalTransparent={false}
 						animationType={"fade"}
 						androidMode={"default"}
