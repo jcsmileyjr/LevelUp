@@ -58,13 +58,7 @@ export default class Milestones extends React.Component {
             console.log("No goal title or milestones added to update user Goals in Planning screen");
         }
     }
-/*
-    //Loads the goal, selected by the user, to local storage to be use on the Milestones screen
-    setCurrentMilestones = () =>{
-        AsyncStorage.setItem("currentMilestones", JSON.stringify(this.state.newMilestones));//saves the goal's milestones
-        AsyncStorage.setItem("currentGoalTitle", JSON.stringify(this.state.newGoalTitle));//saves the goal's title
-    }    
-*/
+    
     clearText = () => { this.setState({milestoneTitle:""})};  
 
     showCongratsToast = () => {
@@ -156,7 +150,7 @@ const styles = StyleSheet.create({
     },
     textAreaStyles: {//styles for the milestone input text box
         width: 270,
-        color:'#2B65EC',  //blue text color
+        color:'#2B65EC',  //signature light blue text color
         textAlign:"center",
         height:50,
         borderColor:"grey",

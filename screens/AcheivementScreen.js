@@ -4,7 +4,8 @@ import { Container,Content, H1, Grid, Col, Row } from 'native-base';
 import { AsyncStorage } from 'react-native';//Function to allow saving and reading from local storage
 
 import Head from '../components/header.js';// Nav bar displaying app's title, section title, and menu button
-import Foot from '../components/Foot.js';// Footer displaying instructions
+//import Foot from '../components/Foot.js';// Footer displaying instructions
+import FooterWithButton from '../components/FooterWithButton.js'//Footer with a button to add a completed milestone
 import PageLoad from '../components/PageLoad.js';//Show spinning top while page is loading
 
 //Allows the user to see completed goals/milestones
@@ -65,7 +66,7 @@ export default class Achievements extends React.Component {
                     </Grid> 
                     
                 </Content>
-                <Foot title="The essence of strategy is to choose what not to do" />
+                <FooterWithButton />
             </Container>
         );
     }
