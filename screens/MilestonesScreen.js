@@ -198,6 +198,8 @@ const styles = StyleSheet.create({
     pageTitleStyle:{
         color:"navy",
         textAlign:"center",
+        marginTop:15,//whitespace between page title and header
+        marginBottom:15,//whitespace between page title and Goal title
     },
     iconStyle: {
         flex: 1,

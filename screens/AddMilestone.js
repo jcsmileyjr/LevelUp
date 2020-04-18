@@ -130,11 +130,12 @@ const styles = StyleSheet.create({
 	},
 	goalTitleStyle: {
 		textDecorationLine: "underline",
+		marginBottom: 20,
 	},
 	layoutStyle1: {
-		textAlign: "center",
-		marginBottom: 20,
+		textAlign: "center",		
 		color: "navy",
+		marginTop:15,//whitespace between page title and header
 	},
 	textAreaStyle: {//styles for the milestone input text box
 		width: 270,

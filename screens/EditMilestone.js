@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
 		textAlign:"center",
 		marginBottom:20,	
 		color:"navy",	
+		marginTop:15,//whitespace between page title and header
 	},
 	textAreaStyle: {//styles for the milestone input text box
 		width: 270,

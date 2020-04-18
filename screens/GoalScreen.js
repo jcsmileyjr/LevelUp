@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     color: "navy",
     textAlign: "center",
     textDecorationLine:"underline",
+    marginTop:15,//whitespace between page title and header
   },
   goalText: {
     color: "#2B65EC", //signature purple color

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 				paddingTop: 8, //space between button title and border
 				paddingBottom: 8, //space between button title and border
 				margin: 10, //whitespace between button and other elements
-				width: 200, //width of button
+				width: 250, //width of button
 				borderColor:'white',//signature purple color
 				borderRadius: 15, //round the corners    
 			},
