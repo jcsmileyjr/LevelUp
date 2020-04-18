@@ -46,26 +46,31 @@ const AddMilestone = ({ navigation }) => {
 
 	//Create a new milestone, save the data to local storage, and return user to the milestone screen
 	createMilestone = async () => {
-		const downloadedGoals = await AsyncStorage.getItem("userGoals"); //get saved goals from local storage
-		const listOfGoals = JSON.parse(downloadedGoals);//convert saved user goals into a json file		
-		const goalLocation = findGoalIndex(listOfGoals);//search list of goals for the current goal
+		if(currentTitle !== "" && currentDescr !== ""){
+			const downloadedGoals = await AsyncStorage.getItem("userGoals"); //get saved goals from local storage
+			const listOfGoals = JSON.parse(downloadedGoals);//convert saved user goals into a json file		
+			const goalLocation = findGoalIndex(listOfGoals);//search list of goals for the current goal
+	
+			let newMilestone = {};//create a new milestone from user's input
+	
+			//create a new milestone from user's input. If nothing has change, use old data
+			newMilestone.title = currentTitle;
+			newMilestone.description = currentDescr;
+	
+			//replace old milestone with new milestone
+			listOfGoals[goalLocation].milestones.push(newMilestone);
+	
+			//Save updated list of goals to local storage
+			AsyncStorage.setItem("userGoals", JSON.stringify(listOfGoals));//Save updated array of objects to local storage
+	
+			//Save current milestone to local storage
+			AsyncStorage.setItem("currentMilestones", JSON.stringify(listOfGoals[goalLocation].milestones)); //saves the goal's milestones
+	
+			navigation.navigate("Milestone");//return user to Milestone screen
+		}else{
+			console.log("Missing information to create new milestone on AddMilestone Screen");
+	}
 
-		let newMilestone = {};//create a new milestone from user's input
-
-		//create a new milestone from user's input. If nothing has change, use old data
-		newMilestone.title = currentTitle;
-		newMilestone.description = currentDescr;
-
-		//replace old milestone with new milestone
-		listOfGoals[goalLocation].milestones.push(newMilestone);
-
-		//Save updated list of goals to local storage
-		AsyncStorage.setItem("userGoals", JSON.stringify(listOfGoals));//Save updated array of objects to local storage
-
-		//Save current milestone to local storage
-		AsyncStorage.setItem("currentMilestones", JSON.stringify(listOfGoals[goalLocation].milestones)); //saves the goal's milestones
-
-		navigation.navigate("Milestone");//return user to Milestone screen
 	}
 
 	return (
