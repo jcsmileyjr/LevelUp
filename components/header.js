@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableNativeFeedback, Modal, AsyncStorage } from 'react-native';
-
+import Constants from 'expo-constants';
 import {Text, Header, Left, Body, Right, Button, Icon, Grid, Row, Col} from 'native-base';
 
 const Head = (props) => {
@@ -120,32 +120,22 @@ export default Head;
 
 const styles = StyleSheet.create({
     headerStyles:{
-        marginTop:23, //add space above the header
-        //marginBottom:30, //add space below the header
-        backgroundColor:'#00009C', //signature purple background
-        color:'white', //white text
-    },
-    headerAddGoal:{
-      flex:4, //equal space among Left and Right header elements
-      flexDirection:"row",//help center the text and add icon
-      alignItems:"center", 
-    },
-    headerAddGoalText:{
-      color: "white", //text color
-      fontWeight:"bold",  //Bigger text
+        paddingTop:(Constants.statusBarHeight - 100),// Bug where status bar covers the header. This push the header below the status bar
+        backgroundColor:'#00009C', //signature blue background
+        color:'white', 
     },
     headerMenu:{
-      flex:2,
+      flex:1,
     },
     headerText:{
-      color:"white",  //white text
-      fontSize:20, //size of text
+      color:"white",  
+      fontSize:20, 
     },
     headerSection:{
-      flex: 4,// Add more space to display text
+      flex: 2,// 
     },
     headerTitle:{
-      fontWeight:"bold",  //Bigger text
+      fontWeight:"bold",  
     },
     settingButton:{
       backgroundColor:"red",
