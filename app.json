@@ -7,13 +7,13 @@
     "description":"A mobile app that focuses on developers guiding their learning path by planning goals,  breaking those goals down into milestones, and displaying a timeline of successes.",
     "android":{
       "package":"com.levelup.mobile",
-      "versionCode": 8,
+      "versionCode": 9,
       "permissions":[]
     },
     "platforms": [ 
       "android"
     ],
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/levelup-hoodie-v2-small.png",
     "splash": {
